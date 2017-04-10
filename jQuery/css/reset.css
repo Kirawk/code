@@ -1,0 +1,48 @@
+/* reset */
+			body {
+				margin: 0;
+				padding: 0 0 12px 0;
+				font-size: 12px;
+				line-height: 22px;
+				font-family: "\5b8b\4f53", "Arial Narrow";
+				background: #fff;
+			}
+			
+			form,
+			ul,
+			li,
+			p,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin: 0;
+				padding: 0;
+			}
+			
+			input,
+			select {
+				font-size: 12px;
+				line-height: 16px;
+			}
+			
+			img {
+				border: 0;
+			}
+			
+			ul,
+			li {
+				list-style-type: none;
+			}
+			
+			a {
+				color: #00007F;
+				text-decoration: none;
+			}
+			
+			a:hover {
+				color: #bd0a01;
+				text-decoration: underline;
+			}

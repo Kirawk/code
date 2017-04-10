@@ -1,0 +1,60 @@
+@box-width:150px;
+@center:0 auto;
+@title-height:28px;
+
+.box{
+    width: @box-width;
+    margin: @center;
+}
+
+.menu{
+    overflow: hidden;
+    border-color:#c4d5df;
+    border-style:solid;
+    border-width:0 1px 1px;
+}
+
+.menu li.level1 a{
+    display: block;
+    height: @title-height;
+    line-height: @title-height;
+    background-color: #ebf3fb;
+    font-weight: 700;
+    text-indent:14px;
+    border-top: 1px solid #C4D5DF;
+}
+.menu li.level1 a:hover{
+    text-decoration: none;
+}
+.menu li.level1 a.current{
+    
+    background-color: #b1d7ef;
+}
+//level2
+.menu li ul{
+    overflow: hidden;
+}
+.menu li ul.level2{display: none;}
+.menu li.level1 a.current {
+  background-color: #b1d7ef;
+}
+.menu li ul {
+  overflow: hidden;
+}
+.menu li ul.level2 {
+display: none;
+}
+.menu li ul.level2 li a{
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    background:#ffffff;
+    font-weight:400;
+    color: #42556B;
+    text-indent: 18px;
+    border-top: 0px solid #ffffff;
+    overflow: hidden;
+}
+.menu li ul.level2 li a:hover{
+    color:#f60;
+}
