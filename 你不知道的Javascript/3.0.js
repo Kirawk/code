@@ -97,3 +97,23 @@ var a=2;
 	console.log(a);//3
 	console.log(global.a);//2
 });
+
+//3.4
+for(var i=0;i<10;i++){
+	console.log(i);
+}
+
+var foo=true;
+if(foo){
+	var bar=foo*2;
+	bar=something(bar);
+	console.log(bar);
+}
+//3.4.3
+var foo=true;
+if(foo){
+	let bar=foo*2;
+	bar=something(bar);
+	console.log(bar);
+}
+console.log(bar)//referenceError
