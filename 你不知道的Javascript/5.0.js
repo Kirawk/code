@@ -159,3 +159,32 @@ var foo=(function CoolModule(id){
 foo.identify();
 foo.change();
 foo.identify();
+
+//现代模块机制
+var MyModules=(function Manager(){
+	var modules={};
+	function define(name,deps,impl){
+		for(var i=0;i<deps.length;i++){
+			deps[i]=modules[deps[i]];
+		}
+		modules[name]=impl.apply(impl,deps);
+	}
+	function get(name){
+		return modules[name];
+	}
+	return {
+		define:define,
+		get:get
+	};
+})();
+
+MyModules.define("bar",[],function(){
+	function hello(who){
+		return "let me introduce:"+who;
+	}
+	return {
+		hello:hello
+	};
+});
+var bar=MyModules.get("bar");
+console.log(bar.hello("wukai"));
