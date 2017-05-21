@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>jquery操作节点</title>
+	</head>
+
+	<body>
+		<p title="选择你最喜欢的水果.">你最喜欢的水果是?</p>
+		<ul>
+			<li title='苹果'>苹果</li>
+			<li title='橘子'>橘子</li>
+			<li title='菠萝'>菠萝</li>
+		</ul>
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var $li = $("ul li:eq(2)");
+			var $li_text = $li.text();
+			console.log($li_text);
+			//获取属性
+			var $para = $("p").attr("title");
+			console.log($para);
+			//添加元素、文本、属性节点；
+			var li_1 = $("<li>香蕉</li>");
+			var li_2 = $("<li title='哈密瓜'>哈密瓜</li>");
+			var $parent = $("ul");
+			$parent.append(li_1);
+			$parent.append(li_2);
+			$("<span>最好吃的：</span>").prependTo($li);
+		</script>
+	</body>
+
+</html>
