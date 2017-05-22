@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>val()用法</title>
+	</head>
+	<body>
+		<input type="text" id="address" value="请输入邮箱地址" />
+		<input type="text" id="password" value="请输入密码"/>
+		<input type="button" value="登录" />
+		<br />
+		
+		<select id="single">
+			<option>选择1号</option>
+			<option>选择2号</option>
+			<option>选择3号</option>
+		</select>
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#address").focus(function(){
+				var text=$(this).val();
+				if(text==this.defaultValue){
+					$(this).val("");
+				}
+			});
+			$("#address").blur(function(){
+				var text=$(this).val();
+				if(text==""){
+					$(this).val(this.defaultValue);
+				}
+			});
+		</script>
+	</body>
+</html>
