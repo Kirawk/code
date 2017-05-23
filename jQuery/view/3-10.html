@@ -15,6 +15,10 @@
 			<option>选择2号</option>
 			<option>选择3号</option>
 		</select>
+		<br />
+		<input type="radio" value="radio1"/>
+		<input type="radio" value="radio2"/>
+		<input type="radio" value="radio3"/>
 		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$("#address").focus(function(){
@@ -29,6 +33,7 @@
 					$(this).val(this.defaultValue);
 				}
 			});
+			$(":radio").val(["radio2"]);
 		</script>
 	</body>
 </html>
