@@ -44,7 +44,7 @@ var obj={
 }
 
 obj.foo();//2
-//隐士丢失
+//隐式丢失
 function foo(){
 	console.log(this.a);
 }
@@ -57,3 +57,16 @@ var obj1={
 	obj2:obj2;
 }
 obj1.obj2.foo();//42
+
+function foo(){
+	console.log(this.a);
+}
+
+var obj={
+	a:2,
+	foo:foo
+};
+
+var bar=obj.foo;
+var a="global";
+bar();//global
