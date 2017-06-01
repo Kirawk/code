@@ -70,3 +70,22 @@ var obj={
 var bar=obj.foo;
 var a="global";
 bar();//global
+
+//回调丢失
+function foo(){
+    console.log(this.a);
+}
+
+function doFoo(fn){
+    var a=3;
+    fn();
+}
+
+var obj={
+    a:2,
+    foo:foo
+}
+var a="global oops";
+obj.foo();//2
+doFoo(obj.foo);//为什么不是3,而是global oops
+setTimeout(obj.foo,3000);//global oops
