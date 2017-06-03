@@ -89,3 +89,27 @@ var a="global oops";
 obj.foo();//2
 doFoo(obj.foo);//为什么不是3,而是global oops
 setTimeout(obj.foo,3000);//global oops
+
+/*显示绑定*/
+function foo(){
+	console.log(this.a);
+}
+var obj={
+	a:2
+}
+foo.call(obj);//2
+
+/*硬绑定-解决丢失绑定问题*/
+function foo(){
+	console.log(this.a);
+}
+var obj={
+	a:2
+}
+var bar=function(){
+	foo.call(obj);
+}
+bar();//2
+setTimeout(bar, 100);//2
+bar.call(window)//2
+
