@@ -113,3 +113,50 @@ bar();//2
 setTimeout(bar, 100);//2
 bar.call(window)//2
 
+/*硬绑定应用场景*/
+function foo(something){
+	console.log(this.a,something);
+	return this.a+something;
+}
+
+var obj={
+	a:2
+};
+var bar=function(){
+	return foo.apply(obj,arguments);
+}
+var b=bar(3);
+console.log(b);
+
+/*辅助绑定函数bind*/
+function foo(something){
+	console.log(this.a,something);
+	return this.a+something;
+
+}
+function bind(fn,obj){
+	return function(){
+     return fn.apply(obj,something);
+	};
+}
+var obj={
+	a:2
+};
+var bar=bind(foo,obj);
+var b=bar(3);
+console.log(b);
+
+/*es5提供了内置方法Function.prototype.bind*/
+function foo(something){
+	console.log(this.a,something);
+	return this.a+something;
+}
+var obj={
+	a:2
+}
+var bar=foo.bind(obj);
+var b=bar(3);
+console.log(b);
+
+
+
