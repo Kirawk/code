@@ -158,5 +158,24 @@ var bar=foo.bind(obj);
 var b=bar(3);
 console.log(b);
 
+/*api调用上下文*/
+function foo(el){
+	console.log(el,this.id);
+}
+
+var obj={
+	id:"awesome"
+};
+[1,2,3].forEach(foo,obj);
+
+/*new 绑定*/
+
+function foo(a){
+	this.a=a;
+}
+var bar=new foo(2);
+cossole.log(bar.a);//2
+
+
 
 
