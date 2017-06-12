@@ -247,6 +247,21 @@ foo.apply(null,[2,3]);//"a：2,b:3"
 var bar=foo.bind(null,2);
 bar(3);//"a：2,b:3"
 
+/*间接引用*/
+function foo(){
+	console.log(this.a);
+}
+var a=2;
+var o={
+	a:3,
+	foo:foo
+};
+var p={
+	a:4
+};
+
+o.foo();//3
+(p.foo=o.foo)();//2
 
 
 
