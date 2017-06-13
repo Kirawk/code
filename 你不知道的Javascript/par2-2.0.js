@@ -263,6 +263,20 @@ var p={
 o.foo();//3
 (p.foo=o.foo)();//2
 
+/*软绑定*/
+function foo(){
+	console.log("name:"+this.name);
+}
+var obj={name:"obj"},
+    obj2={name:"obj2"},
+    obj3={name:"obj3"}
+var fooOBJ=foo.softBind(obj);
+fooOBJ();//name:obj
+obj2.foo=foo.softBind(obj);
+obj2.foo();
+fooOBJ.call(obj3);
+
+
 
 
 
