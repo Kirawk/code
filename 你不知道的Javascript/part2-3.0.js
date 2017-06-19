@@ -29,3 +29,12 @@ function something(wantA){
 }
 something(true);
 console.log(obj[idx]);//2
+
+/*可计算属性*/
+var prefix="foo";
+var obj={
+	[prefix+"bar"]:"hello",
+	[prefix+"baz"]:"world"
+};
+obj["foobar"];//hello
+obj["foobaz"];//world
