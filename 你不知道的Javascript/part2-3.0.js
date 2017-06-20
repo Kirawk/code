@@ -38,3 +38,15 @@ var obj={
 };
 obj["foobar"];//hello
 obj["foobaz"];//world
+
+/*属性与方法*/
+function foo(){
+	console.log("foo");
+}
+var someFoo=foo;
+var obj={
+    someFoo:foo
+};
+console.log(foo);
+console.log(someFoo);
+console.log(obj.someFoo);
