@@ -50,3 +50,12 @@ var obj={
 console.log(foo);
 console.log(someFoo);
 console.log(obj.someFoo);
+
+var obj={
+	foo:function(){
+		console.log("foo");
+	}
+};
+var somefoo=obj.foo;
+console.log(somefoo);
+console.log(obj.foo);
