@@ -59,3 +59,10 @@ var obj={
 var somefoo=obj.foo;
 console.log(somefoo);
 console.log(obj.foo);
+
+/*数组*/
+var array=["a","b","c"];
+array.baz="baz";
+console.log(array.length);//3
+console.log(array.baz);//"baz"
+
