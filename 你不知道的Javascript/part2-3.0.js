@@ -66,3 +66,19 @@ array.baz="baz";
 console.log(array.length);//3
 console.log(array.baz);//"baz"
 
+/*复制对象*/
+function anotherFunction(){
+	console.log("copy object");
+}
+var anotherObject={
+	c:true
+}
+var anotherArray=[];
+var myObject={
+	a:2,
+	b:anotherObject,
+	c:anotherArray,
+	d:anotherFunction
+};
+anotherArray.push(anotherObject,myObject);
+
