@@ -82,3 +82,9 @@ var myObject={
 };
 anotherArray.push(anotherObject,myObject);
 
+var newObj=Object.assign({},myObject);
+newObj.a;
+newObj.b===anotherObject;//true
+newObj.c===anotherArray;//true
+newObj.d===anotherFunction;//true
+
