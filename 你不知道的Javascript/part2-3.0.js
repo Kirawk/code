@@ -88,3 +88,21 @@ newObj.b===anotherObject;//true
 newObj.c===anotherArray;//true
 newObj.d===anotherFunction;//true
 
+var myObject={
+	get a(){
+      return 2;
+	}
+};
+
+Object.defineProperty(
+    myObject,
+    "b",
+    {
+    	get:function(){
+    		return this.a*2;
+    	},
+    	enumerable:true
+    }
+	);
+myObject.a;//2
+myObject.b;//4
