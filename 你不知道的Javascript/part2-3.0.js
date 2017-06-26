@@ -106,3 +106,12 @@ Object.defineProperty(
 	);
 myObject.a;//2
 myObject.b;//4
+
+/*只定义get*/
+var myObject(){
+	get a(){
+		return 2;
+	}
+};
+myObject.a=3;
+myObject.a;//2
