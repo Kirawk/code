@@ -115,3 +115,15 @@ var myObject(){
 };
 myObject.a=3;
 myObject.a;//2
+
+/*定义set*/
+var myObject={
+    get a(){
+    	return this._a_;
+    },
+    set a(val){
+    	this._a_=val*2;
+    }
+};
+myObject.a=2;
+myObject.a;//4
