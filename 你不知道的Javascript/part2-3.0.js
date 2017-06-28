@@ -127,3 +127,10 @@ var myObject={
 };
 myObject.a=2;
 myObject.a;//4
+
+/*存在性*/
+var myObject={
+	a:2
+};
+myObject.hasOwnProperty("a");//true
+myObject.hasOwnProperty("b");//false
