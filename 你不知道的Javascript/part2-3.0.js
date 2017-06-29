@@ -134,3 +134,12 @@ var myObject={
 };
 myObject.hasOwnProperty("a");//true
 myObject.hasOwnProperty("b");//false
+
+/*遍历*/
+ var myArray = [1,2,3];
+ for ( var v of myArray) {
+ 	console.log(v);
+ }
+ //1
+ //2
+ //3
