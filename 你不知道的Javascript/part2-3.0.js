@@ -143,3 +143,8 @@ myObject.hasOwnProperty("b");//false
  //1
  //2
  //3
+
+ /*iterator遍历*/
+ var myArray=[1,3,2];
+ var item=myArray[symbol.iterator]();
+ item.next();
