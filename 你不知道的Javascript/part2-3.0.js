@@ -148,3 +148,18 @@ myObject.hasOwnProperty("b");//false
  var myArray=[1,3,2];
  var item=myArray[symbol.iterator]();
  item.next();
+
+ /*定义iterator*/
+ var myObject={
+ 	a:2,
+ 	b:3
+ }
+ Object.defineProperty(myObject,Symbol.iterator,{
+ 	enumerable: false,
+ 	writable: false,
+ 	configurable: true,
+ 	value: function() {
+ 		var o=this;
+ 		var idx=0;
+ 	}
+ })
