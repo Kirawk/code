@@ -144,16 +144,11 @@ myObject.hasOwnProperty("b");//false
  //2
  //3
 
- /*iterator遍历*/
- var myArray=[1,3,2];
- var item=myArray[symbol.iterator]();
- item.next();
-
  /*定义iterator*/
  var myObject={
  	a:2,
  	b:3
- }
+ };
  Object.defineProperty(myObject,Symbol.iterator,{
  	enumerable: false,
  	writable: false,
@@ -161,5 +156,24 @@ myObject.hasOwnProperty("b");//false
  	value: function() {
  		var o=this;
  		var idx=0;
+ 		var ks=Object.keys( o );
+ 		return {
+ 			next:function (){
+ 				return {
+ 					value:o[ks[idx++]],
+ 					done:(idx>ks.length)
+ 				};
+ 			}
+ 		}		
  	}
- })
+ } );
+ //手动遍历
+ var it=myObject[Symbol.iterator]();
+ console.log(it.next());
+ console.log(it.next());
+ console.log(it.next());
+  for(var v of myObject){
+ 	console.log(v);
+ }
+ //2
+ //3
