@@ -28,3 +28,13 @@ var Car=mixin(Vehicle,{
 	}
 });
 console.log(Car);
+
+/*混合式复制*/
+var Car2=mixin(Vehicle,{});
+mixin({
+	wheels:4,
+	drive: function(){
+		Vehicle.drive.call(this);
+		console.log("Rolling on all"+this.wheels+"wheels!");
+	}
+})
