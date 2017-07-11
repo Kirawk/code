@@ -60,4 +60,51 @@ var a =new Bar("a","obj a");
 a.myName();//a
 a.myLabel();//obj a
 
+/*_proto_的实现*/
+Object.defineProperty(Object.prototype,"_proto_",{
+	get: function(){
+		return Object.getPrototypeOf(this);
+	},
+	set: function(o){
+		Object.setPrototypeOf(this,o);
+		return o;
+	}
+});
+
+/*对象关联*/
+var foo={
+	something: function(){
+
+		console.log("tell me something good");
+	}
+};
+var bar = Object.create(foo);
+bar.something();
+
+var anotherObject = {
+	a:2
+};
+
+var myObejct = Object.create(anotherObject,{
+	b:{
+		enumerable:false,
+		writable: true,
+		configurable:false,
+		value:3
+	},
+	c:{
+		enumerable:false,
+		writable: true,
+		configurable:false,
+		value: 4
+	}
+});
+myObejct.hasOwnProperty("a");//false
+myObejct.hasOwnProperty("b");//true
+myObejct.hasOwnProperty("c");//true
+
+myObejct.a;//2;
+myObejct.b;//3
+myObejct.c;//4
+
 
