@@ -107,4 +107,30 @@ myObejct.a;//2;
 myObejct.b;//3
 myObejct.c;//4
 
+/*自定义Object.create函数*/
+function createAndLinkObject(o){
+
+	function F(){}
+	F.prototype = o;
+	return new F();
+}
+
+var anotherObject = {
+	a:2
+};
+var myObejct=cerateAndLinkObejct(anotherObject);
+myObejct.a;//2
+
+/*委托设计模式*/
+var anotherObject={
+	cool:function(){
+		console.log("cool");
+	}
+};
+var myObejct = Object.create(anotherObject);
+myObejct.doCool =function (){
+	this.cool();
+};
+
+myObejct.doCool();//"cool"
 
