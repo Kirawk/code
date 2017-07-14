@@ -16,3 +16,11 @@ xyz.outputTaskDetails = function(){
 	this.outPutID();
 	console.log(this.label);
 };
+
+/*问题*/
+function Foo(){}
+var a1 = new Foo();
+Foo.prototype.constructor = function Gotcha();
+a1.constructor;
+a1.constructor.name;
+a1;//foo{}
