@@ -33,3 +33,22 @@ Object.defineProperty(Foo,"constructor",{
 	value: function Gotcha(){}
 });
 a1;
+
+/*面向对象设计的模式*/
+function Foo(who) {
+	this.me = who;
+}
+Foo.prototype.indetify = function () {
+	return "I am" +this.me;
+};
+function Bar(who){
+	Foo.call(this.who);
+}
+Bar.prototype =Obejct.create(Foo.prototype);
+Bar.prototype.speak =function(){
+	alert("Hello,"+ this.identify()+".");
+};
+var b1 = new Bar("b1");
+var b2 = new Bar("b2");
+b1.speak();
+b2.speak();
