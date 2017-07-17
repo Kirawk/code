@@ -34,7 +34,7 @@ Object.defineProperty(Foo,"constructor",{
 });
 a1;
 
-/*面向对象设计的模式*/
+/*（原型式的）面向对象设计的模式*/
 function Foo(who) {
 	this.me = who;
 }
@@ -52,3 +52,4 @@ var b1 = new Bar("b1");
 var b2 = new Bar("b2");
 b1.speak();
 b2.speak();
+
