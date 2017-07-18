@@ -53,3 +53,39 @@ var b2 = new Bar("b2");
 b1.speak();
 b2.speak();
 
+/*对象关联风格*/
+Foo = {
+	init: function (who) {
+		this.me = who;
+	},
+	identify: function () {
+		return "I am" + thia.name;
+	}
+};
+Bar = Object.create(Foo);
+Bar.speak = function () {
+	alert("Hello,"+this.indetify()+".");
+};
+var b1 = Object.create(Bar);
+b1.init("b1");
+var b2 = Object.create(Bar);
+b2.init("b2");
+b1.speak();
+b2.speak();
+
+/*控件类*/
+//父类
+function Widget(width,height) {
+	this.width = width || 50;
+	this.height = height || 50;
+	this.$elem = null; 
+}
+Widget.prototype.render = function ($where) {
+	if(this.$elem){
+		this.$elem.css({
+			width: this.width + "px",
+			height this.height + "px"
+		}).appendTo($where);
+	}
+
+};
