@@ -89,3 +89,10 @@ Widget.prototype.render = function ($where) {
 	}
 
 };
+//子类
+function Button(width,height,label) {
+	//调用super
+	Widget.call(this,width,height);
+	this.label = label || "default";
+	this.$elem = $("<button>").text(this.label);
+}
