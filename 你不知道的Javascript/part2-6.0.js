@@ -96,3 +96,22 @@ function Button(width,height,label) {
 	this.label = label || "default";
 	this.$elem = $("<button>").text(this.label);
 }
+
+Button.prototype =Object.create(Widget.prototype);
+//重写render()
+Button.prototype.render = function ($where) {
+
+	//super调用
+	Widget.prototype.render.call(this,$where);
+	this.$elem.click(this.onClick.bind(this));
+};
+BUtton.prototype.onClick = function (evt){
+	console.log("Button"+this.label+"clicked");
+}
+$(document).ready(function(){
+	var $body = $(document.body);
+	var btn1 = new Button(125,30,"hello");
+	var btn2 = new Button(150,40,"world");
+	btn1.render($body);
+	btn2.render($body);
+});
