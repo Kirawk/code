@@ -115,3 +115,20 @@ $(document).ready(function(){
 	btn1.render($body);
 	btn2.render($body);
 });
+
+//es6语法糖
+class  Widget{
+	constructor(width,height){
+		this.width = width || 50;
+		this.height = height || 50;
+		this.$elem = null;
+	}
+	render($where){
+		if(this.$elem){
+			this.$elem.css({
+				width:this.width+"px";
+				height:this.height+"px";
+			}).appendTo($where);
+		}
+	}
+}
