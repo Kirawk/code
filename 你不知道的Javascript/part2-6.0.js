@@ -132,3 +132,17 @@ class  Widget{
 		}
 	}
 }
+ class Button extends Widget{
+ 	constructor(width,height,label){
+ 		super(width,height);
+ 		this.lable = label || "Default";
+ 		this.$elem = $("<button>").text)(this.label);
+ 	}
+ 	render($where){
+ 		super.render($where);
+ 		this.$elem.click(this.onClick.bind(this));
+ 	}
+ 	onClick(evt){
+ 		console.log("Button"+this.label+"clicked!");
+ 	}
+ }
