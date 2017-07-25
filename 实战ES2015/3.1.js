@@ -10,3 +10,13 @@ for(let i =0;i<3;i++){
 	arr3.push(()=>i)
 }
 const arr4 = arr3.map(x=>x())
+
+/*定义常量*/
+const foo = {
+	a:1
+}
+foo.a = 2;
+foo.b = 3;
+
+console.log(foo.a);
+console.log(foo.b);
