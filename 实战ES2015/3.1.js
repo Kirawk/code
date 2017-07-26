@@ -20,3 +20,10 @@ foo.b = 3;
 
 console.log(foo.a);
 console.log(foo.b);
+
+/*定义值不变的对象*/
+const obj = Object.freeze({
+	a: 1,
+	b: 2
+})
+obj.a = 2;//报错
