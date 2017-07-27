@@ -27,3 +27,13 @@ const obj = Object.freeze({
 	b: 2
 })
 obj.a = 2;//报错
+
+const obj2 = Object.freeze({
+	a:{}
+})
+obj2.a.b = 1;
+
+
+
+
+
