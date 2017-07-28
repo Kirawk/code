@@ -33,6 +33,25 @@ const obj2 = Object.freeze({
 })
 obj2.a.b = 1;
 
+/*冻结*/
+Object.deepFreeze = function (obj) {
+	var propNamer = Object.getOwnpropertyNames(obj);
+	propNamer.forEach(function(name){
+		var prop = obj[name]
+		if(typeof prop=='object' && prop != null){
+			Object.deepFreeze(prop);
+		}
+		return Object.freeze(obj)
+	})
+const obj3 = Object.deepFreeze({
+	a : {
+		b : 1
+	}
+})
+obj3.a.c = 2
+
+}
+
 
 
 
