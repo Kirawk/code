@@ -53,6 +53,12 @@ obj3.a.c = 2
 }
 
 
-
+const JSONP = (function(){
+	const global = window;
+	const defaultOptions = {
+		data :{},
+		callback: (data)=>{}
+	}
+})
 
 
