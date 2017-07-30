@@ -59,6 +59,8 @@ const JSONP = (function(){
 		data :{},
 		callback: (data)=>{}
 	}
-})
-
+	function safeEscape(str){
+ 	    return encodeURICompent(str.toString())
+ }
+})()
 
