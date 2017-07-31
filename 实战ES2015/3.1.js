@@ -64,3 +64,14 @@ const JSONP = (function(){
  }
 })()
 
+//const在闭包中的应用
+function outter() {
+	const innerVariable =  'footbar';
+	return function(){
+		return innerVariable;
+	}
+} 
+
+const fn = outter();
+console.log(fn()) //foobar
+
