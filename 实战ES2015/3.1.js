@@ -75,3 +75,9 @@ function outter() {
 const fn = outter();
 console.log(fn()) //foobar
 
+//let、const与循环
+const arr =[1,2,3];
+for(const item of arr){
+	console.log(item);
+}
+
