@@ -81,3 +81,7 @@ for(const item of arr){
 	console.log(item);
 }
 
+//箭头函数
+let array = ["a","b","c"];
+array = array.filter(item=>item.length=>2);
+
