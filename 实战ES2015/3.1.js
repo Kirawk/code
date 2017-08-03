@@ -85,3 +85,7 @@ for(const item of arr){
 let array = ["a","b","c"];
 array = array.filter(item=>item.length=>2);
 
+//排序
+let array = ['a','bc','def','ghij'];
+array = array.sort((a,b)=> a.length<b.length);
+
