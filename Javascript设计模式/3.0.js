@@ -104,3 +104,18 @@ var mult = (function() {
         return cache[args] = calculate.apply(null,arguments);
     }
 })();
+//延续局部变量的寿命
+var report = function(src){
+    var img = new Image();
+    img.src = src;
+};
+report("http://xxx.com/getUserInfo");
+
+var report = (function(){
+    var imgs = [];
+    return function(src){
+        var img = new Image();
+        imgs.push(img);
+        img.src= src;
+    }
+})();
