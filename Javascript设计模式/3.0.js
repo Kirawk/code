@@ -119,3 +119,29 @@ var report = (function(){
         img.src= src;
     }
 })();
+
+var extent =function(){
+    var value =0;
+    return {
+        call:function(){
+            value++;
+            console.log(value);
+        }
+    }
+};
+var extent = extent();
+extent.call();
+extent.call();
+extent.call();
+
+//面向对象
+var extent = {
+    value:0,
+    call:function(){
+        this.value++;
+        console.log(this.value);
+    }
+};
+extent.call();
+extent.call();
+extent.call();
