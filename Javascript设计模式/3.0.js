@@ -145,3 +145,15 @@ var extent = {
 extent.call();
 extent.call();
 extent.call();
+//或者
+var Extent = function(){
+    this.value = 0;
+};
+Extent.prototype.call= function(){
+    this.value++;
+    console.log(this.value);
+};
+var extent = new Extent();
+extend.call();
+extend.call();
+extend.call();
