@@ -256,3 +256,38 @@ appendDiv(function(node){
 [1,4,3].sort(function(a,b){
     return b-a;
 })
+
+var isString = function(obj){
+    return Object.prototype.toString.call(obj)==='[bject String]';
+};
+var isArray=function(obj){
+    return Object.prototype.toString.call(obj)==='[object Array]';
+};
+var isNumber = function(obj){
+    return Object.prototype.toString.call(obj)==='[object Number]';
+};
+
+//改写
+var isType = function(type){
+    return function(obj){
+        return Object.prototype.toString.call(obj)==='[object'+type+']';
+    }
+};
+var isString = isType('String');
+var isArray = isType('Array');
+var isNumber = isType('Number');
+console.log(isArray([1,2,3]));
+
+//getSingle
+var getSingle = function(fn){
+    var ret;
+    return function(){
+        return ret || (ret = fn.apply(this,arguments));
+    };
+};
+var getScript = getSingle(function(){
+    return document.createElement("script");
+});
+var script1 = getScript();
+var script2 = getScript();
+console.log(script1===script2);
