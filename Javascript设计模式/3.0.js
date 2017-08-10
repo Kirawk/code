@@ -291,3 +291,40 @@ var getScript = getSingle(function(){
 var script1 = getScript();
 var script2 = getScript();
 console.log(script1===script2);
+
+//高阶函数实现AOP
+Function.prototype.before = function(beforefn){
+    var _self = this;//保存原函数引用
+    return function(){//返回包含了原函数和新函数的“代理”函数
+        beforefn.apply(this,arguments);//执行新函数，修正this
+        return _self.apply(this,arguments);//执行原函数
+    }
+};
+Function.prototype.after = function(after){
+    var _self = this;
+    return function(){
+        var ret =  _self.apply(this,arguments);
+        after.apply(this,arguments);
+        return ret;
+    }
+};
+var func = function(){
+    console.log(2);
+};
+func = func.before(function(){
+    console.log(1);
+}).after(function(){
+    console.log(3);
+});
+func();//1,2,3
+
+/**高阶函数其他应用***/
+//1.currying 函数柯里化
+var monthCost = 0;
+var cost = function(money){
+    monthCost+=money;
+};
+cost(100);
+cost(200);
+cost(300);
+console.log(monthCost);//600
