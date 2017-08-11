@@ -318,7 +318,7 @@ func = func.before(function(){
 });
 func();//1,2,3
 
-/**高阶函数其他应用***/
+/***********************高阶函数其他应用**********/
 //1.currying 函数柯里化
 var monthCost = 0;
 var cost = function(money){
@@ -328,3 +328,75 @@ cost(100);
 cost(200);
 cost(300);
 console.log(monthCost);//600
+
+var monthCost = 0;
+var cost = function(money) {
+    monthCost += money;
+};
+cost(100);
+cost(200);
+cost(300);
+console.log(monthCost);
+var cost = (function() {
+    var args = [];
+    return function() {
+        if (arguments.length === 0) {
+            var money = 0;
+            for (var i = 0, l = arguments.length; i < l; i++) {
+                money += arguments[i];
+            }
+            return money;
+        } else {
+            [].push.apply(args, arguments);
+        }
+    }
+})();
+cost(100);
+cost(200);
+cost(300);
+console.log(cost());
+//通用的currying
+var currying = function(fn){
+    var args = [];
+    return function(){
+        if(arguments.length==0){
+            return fn.apply(this,args);
+
+        }else{
+            [].push.apply(args,arguments);
+            return arguments.callee;
+
+        }
+    }
+};
+var cost = (function(){
+    var money =0;
+    return function(){
+        for(var i = 0,l = arguments.length;i<l;i++){
+            money+=arguments[i];
+        }
+        return money;
+    }
+})();
+var cost =currying(cost);
+cost(100);
+cost(200);
+cost(300);
+console.log(cost());
+
+//uncurrying
+var obj1 = {
+    name:'sven'
+};
+var obj2 = {
+    getName:function(){
+        return this.name;
+    }
+};
+console.log(obj2.getName.call(obj1));//输出sven
+(function(){
+    Array.prototype.call(arguments,4);
+    console.log(arguments);
+})(1,2,3);
+
+
