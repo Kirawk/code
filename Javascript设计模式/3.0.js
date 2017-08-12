@@ -399,4 +399,11 @@ console.log(obj2.getName.call(obj1));//输出sven
     console.log(arguments);
 })(1,2,3);
 
-
+//uncurrying
+Functionn.prototype.uncurrying =function(){
+    var self =this;
+    return function(){
+        var obj =Array.prototype.shift.call(arguments);
+        return self.apply(obj,arguments);
+    }
+}
