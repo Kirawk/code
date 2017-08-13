@@ -407,3 +407,63 @@ Functionn.prototype.uncurrying =function(){
         return self.apply(obj,arguments);
     }
 }
+
+var push = Array.prototype.push.uncurrying();
+(function(){
+    push(arguments,4);
+    console.log(arguments);
+})(1,2,3);
+
+for(var i= 0,fn,ary=['push','shift','forEach'];fn=ary[i++];){
+    Array[fn] = Array.prototype[fn].uncurrying();
+};
+var obj = {
+   "length":3,
+   "0":1,
+   "1":2,
+   "2":3
+};
+Array.push(obj,4);
+console.log(obj.length);
+
+var first =Array.shift(obj);
+console.log(first);
+console.log(obj);
+Array.forEach(obj,function(i,n){
+    console.log(n);
+});
+//uncurrying实现的另一种方式
+Function.prototype.uncurrying = function(){
+    var self =this;
+    return function(){
+        return Function.prototype.call.apply(self,arguments);
+    }
+};
+
+//函数节流
+var throttle = function(fn,interval){
+    var __self = fn,//保存需要被延迟执行的函数应用
+        timer,    //定时器
+        firstTime = true;   //是否是第一次调用
+
+        return function(){
+            var args = arguments,
+            __me = this;
+        if(firstTime){
+            __self.apply(__me,args);
+            return firstTime = false;
+        }
+        if(timer){
+            return false;
+        }
+           timer =setTimeout(function(){
+            clearTimeout(timer);
+            timer = null;
+            __self.apply(__me,args);
+        },interval||500);
+      };   
+};
+window.onresize = throttle(function(){
+    console.log(1);
+},500);
+
