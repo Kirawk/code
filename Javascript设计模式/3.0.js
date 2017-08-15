@@ -482,3 +482,87 @@ var renderFriendList = function(data){
 };
 renderFriendList(ary);
 
+//改进
+var timeChunk = function(ary,fn,count){
+    var obj,
+        t;
+    var len = ary.length;
+    var start = function(){
+        for(var i=0;i<Math.min(count||1,ary.length);i++){
+            var obj =ary.shift();
+            fn(obj);
+        };
+
+        return function(){
+            t = setInterval(function(){
+                if(ary.length === 0){
+                    return clearInterval(t);
+                }
+                start();
+            },200);//分批执行时间间隔
+        };
+    };
+
+};
+var ary = [];
+for(var i=1;i<=100;i++){
+    ary.push(i);
+};
+
+var renderFriendList = timeChunk(ary,function(n){
+    var div =  document.createElement("div");
+    div.innerHTML = n;
+    document.body.appendChild(div);
+},8);
+renderFriendList();
+
+//5.0 懒惰加载函数
+//第一种
+var addEvent = function(elem,type,handle){
+    if(window.addEventListener){
+        return elem.addEventListener(type,handle,false);
+    }
+    if(window.attachEvent){
+        return elem.attachEvent("on"+type,handle);
+    }
+};
+//第二种方案
+var addEvent = (function(){
+    if(window.addEventListener){
+        return function(elem,type,handle){
+            elem.addEventListener(type,handle,false);
+        }
+    }
+    if(window.attachEvent){
+        return function(elem,type,handle){
+            elem.addEventListener("on"+type,handle);
+        }
+    }
+})();
+//第三种
+/*
+<div id="div1">点我绑定事件</div>
+*/
+var addEvent = function(elem,type,handle){
+    if(window.addEventListener){
+        addEvent = function(elem,type,handle){
+            elem.addEventListener(type,handle,false);
+        }
+    }else if(window.attachEvent){
+        addEvent = function(elem,type,handle){
+            elem.attachEvent('on'+type,handle);
+}
+    }
+    addEvent(elem,type,handle);
+};
+
+var div1 = document.getElementById('div1');
+
+addEvent(div,'click',function(){
+    console.log(1);
+});
+addEvent(div,'click',function(){
+    console.log(2);
+});
+
+
