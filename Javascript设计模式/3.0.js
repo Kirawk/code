@@ -565,4 +565,5 @@ addEvent(div,'click',function(){
     console.log(2);
 });
 
+//
 
