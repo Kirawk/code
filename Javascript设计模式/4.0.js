@@ -105,3 +105,15 @@ var user = (function(){
            }
        }
 })();
+
+//惰性单例
+Singleton.getInstance = (function(){
+    var instance = null;
+    return function(name){
+        if(!instance){
+            instance = new Singleton(name);
+        }
+
+        return instance;
+    }
+})();
