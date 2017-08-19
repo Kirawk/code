@@ -117,3 +117,60 @@ Singleton.getInstance = (function(){
         return instance;
     }
 })();
+
+var getSingle = function(fn){
+    var result;
+    return function(){
+        return result||(result = fn.apply(this,arguments));
+    }
+}
+var createLoginLayer = function(){
+    var div = document.createElement('div');
+    div.innerHTML = "我是登录浮窗";
+    div.style.display = 'none';
+    document.body.appendChild(div);
+};
+
+var createSingleLoginLayer = getSingle(createLoginLayer);
+document,getElementById('loginBtn').onclick = function(){
+    var loginLayer = createSingleLoginLayer();
+    loginLayer.style.display = 'block';
+};
+//创建唯一的iframe
+var createSingleIframe = getSingle(function(){
+    var iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+    return iframe;
+});
+
+document.getElementById('loginBtn').onclick = function(){
+    var  loginLayer = createSingleIframe();
+    loginLayer.src ='http://baicu.com';
+}
+//jQuery绑定one事件
+var bindEvent = function(){
+    $('div').one('click',function(){
+        alert('click');
+    });
+};
+var render = function(){
+    console.log('开始渲染列表');
+    bindEvent();
+};
+render();
+render();
+render();
+//使用getSingle函数
+var bindEvent = getSingle(function(){
+    document.getElementById('div1').onclick = function(){
+        console.log('click');
+    }
+    return true;
+});
+var render = function(){
+    console.log('开始渲染列表');
+    bindEvent();
+}
+render();
+render();
+render();
