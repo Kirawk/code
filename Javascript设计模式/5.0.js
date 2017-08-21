@@ -13,3 +13,29 @@ var calculateBonus = function(performanceLevel,salary){
 };
 calculateBonus("B",20000);//40000
 calculateBonus("S",6000);//24000
+
+//使用组合函数重构代码
+
+var performanceS = function(salary){
+    return salary*4;
+};
+var performanceA = function(salary){
+    return salary*3;
+};
+var performanceB = function(salary){
+    return salary*2;
+};
+
+var calculateBonus =function(performanceLevel,salary){
+    if(performanceLevel==="S"){
+        return performanceS(salary);
+    }
+    if(performanceLevel==="A"){
+        return performanceA(salary);
+    }
+    if(performanceLevel==="B"){
+        return performanceB(salary);
+    }
+};
+calculateBonus('A',10000);
+
