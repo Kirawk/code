@@ -160,4 +160,57 @@ var div = document.getElementById( 'div' );
 var animate = new Animate( div );
 animate.start( 'left', 500, 9000, 'strongEaseOut' ); 
 
+/**
+<form action="http:// xxx.com/register" id="registerForm" method="post">
+ 请输入用户名：<input type="text" name="userName"/ >
+ 请输入密码：<input type="text" name="password"/ >
+ 请输入手机号码：<input type="text" name="phoneNumber"/ >
+ <button>提交</button>
+ </form> 
+ **/
+ //表单验证
+ var registerForm = document.getElementById('registerForm');
+ registerForm.onsubmit = function(){
+     if(registerForm.userName.value ===''){
+         console.log("用户名不能为空");
+         return false;
+     }
+     if(registerForm.password.value.length<6){
+         console.log("密码长度不能为空");
+         return false;
+     }
+     if(!/(^1[3|5|8][0-9]{9}$)/.test(registerForm.phoneNumber.value)){
+         console.log("手机格式不正确");
+         return false;
+     }
+ }
+ //使用策略模式重构表单验证
+ var strategies = {
+     isNonEmpty:function(value,errorMsg){
+         if(value===''){
+             return errorMsg;
+         }
+     },
+     minLength:function(value,length,errorMsg){
+         if(value.length<length){
+             return errorMsg;
+         }
+     },
+     isMobile:function(value,errorMsg){
+         if(!/(^1[3|5|8][0-9]{9}$)/.test(value)){
+             return errorMsg;
+         }
+     }
+ };
+ var validateFunc = function(){
+     var validator = new Validator();//创建一个validator对象
+     /*添加校验规则*/
+     validator.add(registerForm.userName,'isNonEmpty','用户名不能为空');
+     validator.add(registerForm.password,'minLength','密码长度不能少于6位');
+     validator.add(registerForm.phoneNumber,'isMobile','手机号码格式不正确');
+
+     var errorMsg = validator.start();
+     return errorMsg;
+ };
+ 
 
