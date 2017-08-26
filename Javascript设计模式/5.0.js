@@ -213,4 +213,11 @@ animate.start( 'left', 500, 9000, 'strongEaseOut' );
      return errorMsg;
  };
  
-
+ var registerForm = document.getElementById( 'registerForm' );
+ registerForm.onsubmit = function(){
+ var errorMsg = validataFunc(); // 如果 errorMsg 有确切的返回值，说明未通过校验
+ if ( errorMsg ){
+ console.log ( errorMsg );
+ return false; // 阻止表单提交
+ }
+}; 
