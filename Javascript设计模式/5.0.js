@@ -221,3 +221,19 @@ animate.start( 'left', 500, 9000, 'strongEaseOut' );
  return false; // 阻止表单提交
  }
 }; 
+
+// Valodator类实现
+ var Validator = function(){
+     this.cache = [];
+ };
+ Validator.prototype.add = function( dom, rule, errorMsg ){
+ var ary = rule.split( ':' ); // 把 strategy 和参数分开
+ this.cache.push(function(){ // 把校验的步骤用空函数包装起来，并且放入 cache
+ var strategy = ary.shift(); // 用户挑选的 strategy
+ ary.unshift( dom.value ); // 把 input 的 value 添加进参数列表
+ ary.push( errorMsg ); // 把 errorMsg 添加进参数列表
+ return strategies[ strategy ].apply( dom, ary );
+ });
+};
+Validator.prototype.start = function(){
+}
