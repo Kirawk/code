@@ -235,5 +235,11 @@ animate.start( 'left', 500, 9000, 'strongEaseOut' );
  return strategies[ strategy ].apply( dom, ary );
  });
 };
-Validator.prototype.start = function(){
-}
+ Validator.prototype.start = function(){
+     for(var i=0,validatoFunc;validatoFunc = this.cache[i++];){
+         var msg = validatoFunc();
+         if(msg){
+             return msg;
+         }
+     }
+};
