@@ -60,3 +60,28 @@ var A = {
 xiaoming.sendFlower(B);
 
 /**6.3虚拟代理之实现图片预加载**/
+var myImage =(function(){
+    var imgNode = document.createElement('img');
+    document.body.appendChild(imgNode);
+    return {
+        setSrc:function(src){
+            imgNode.src=src;
+        }
+    }
+})
+myImage.setSrc("http://web.1meeting.cn/Upload/Place/2017-08-10/598c16844c2bd.png");
+
+//引入代理
+var proxyImage = (function(){
+    var img = new Image;
+    img.onload= function(){
+        myImage.setSrc(this.src);
+    }
+    return{
+        setSrc:function(src){
+            myImage.setSrc("file:// /D:/1.jpg");
+            img.src= src;
+        }
+    }
+})();
+proxyImage.setSrc("http://web.1meeting.cn/Upload/Place/2017-08-10/598c16844c2bd.png");
