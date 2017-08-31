@@ -85,3 +85,24 @@ var proxyImage = (function(){
     }
 })();
 proxyImage.setSrc("http://web.1meeting.cn/Upload/Place/2017-08-10/598c16844c2bd.png");
+
+/**6.5本体接口**/
+var myImage = (function(){
+    var imgNode = document.createElement('img');
+    document.body.appendChild(imgNode);
+
+    return function(src){
+        imgNode.src = src;
+    }
+})();
+var proxyImage = (function(){
+    var img = new Image;
+    img.onload = function(){
+        myImage(this.src);
+    }
+    return function(src){
+        myImage('file://');
+        img.src = src;
+    }
+})();
+proxyImage('http://web.1meeting.cn/Upload/Place/2017-08-10/598c16844c2bd.png');
