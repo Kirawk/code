@@ -106,3 +106,16 @@ var proxyImage = (function(){
     }
 })();
 proxyImage('http://web.1meeting.cn/Upload/Place/2017-08-10/598c16844c2bd.png');
+
+/*虚拟代理合并http请求*/
+var synchronousFile = function(id){
+    console.log('开始同步文件'+id);
+};
+var checkbox = document.getElementByTagName('input');
+for(var i= 0,c;c=checkbox[i++];){
+    c.onclick = function(){
+        if(this.checked === true){
+            synchronousFile(this.id);
+        }
+    }
+};
