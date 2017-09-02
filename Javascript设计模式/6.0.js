@@ -119,3 +119,8 @@ for(var i= 0,c;c=checkbox[i++];){
         }
     }
 };
+
+//改进上述代码
+var synchronousFile = function( id ){
+ console.log( '开始同步文件，id 为: ' + id );
+}; 
