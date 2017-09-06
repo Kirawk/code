@@ -24,3 +24,37 @@ var compare = function(ary1,ary2){
     alert('ary1和ary2相等');
 };
 compare([1,2,3],[1,2,4]);
+
+//外部迭代器
+var Iterator = function(obj){
+    var current = 0;
+     var next = function(){
+         current+=1;
+     };
+     var isDone = function(obj){
+         return current >=obj.length;
+     };
+     var getCurrItem = function(){
+         return obj[current];
+     };
+
+     return {
+         next:next,
+         isDone:isDone,
+         getCurrItem:getCurrItem
+     }
+};
+//改写compare函数
+var compare = function(iterator1,iterator2){
+    while(!iterator1.isDone()&&!iterator2.isDone()){
+        if(iterator1.getCurrItem()!==iterator2.getCurrItem()){
+            throw new Error('iterator1和iterator2');
+        }
+        iterator1.next();
+        iterator2.next();
+    }
+     alert('两者相同');    
+}
+var iterator1 = Iterator([1,2,3]);
+var iterator2 =Iterator([1,2,3]);
+compare(iterator1,iterator2);
