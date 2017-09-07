@@ -58,3 +58,28 @@ var compare = function(iterator1,iterator2){
 var iterator1 = Iterator([1,2,3]);
 var iterator2 =Iterator([1,2,3]);
 compare(iterator1,iterator2);
+
+
+//迭代类数组对象和字面量对象
+$.each = function(obj,callback){
+    var value,
+    i=0,
+    length = obj,length,
+    isArray = isArray(obj);
+    if(isArray){
+        for(;i<length;i++){
+            value = callback.call(obj[i],i,obj[i]);
+            if(value==false){
+                break;
+            }
+        }
+    }else{
+        for(i in obj){
+            value =callback.call(obj[i],i,obj[i]);
+            if(value==false){
+                break;
+            }
+        }
+    }
+    return obj;
+};
