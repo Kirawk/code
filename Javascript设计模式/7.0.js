@@ -107,3 +107,17 @@ each([1,2,3,4,5],function(i,n){
     }
     console.log(n);
 });
+/*迭代器重构项目上传模块*/
+var getUpLoadObj = function(){
+    try{
+        return new ActivexObject("TXFTNActiveX.FTNUpload");
+    }catch(e){
+        if(supportFlash()){
+            var str = '<object type="application/x-shockwave-flash"></object>';
+            return $(str).appendTo($('body'));
+        }else{
+            var str ='<input name="file" type="file" />';
+            return $(str).appendTo($("body"));
+        }
+    }
+};
