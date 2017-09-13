@@ -9,3 +9,13 @@ salesOffices.trigger = function(){
         fn.apply(this,arguments);
     }
 };
+salesOffices.listen(function(price,squareMeter){
+    console.log('价格='+price);
+    console.log('squareMeter='+squareMeter);
+});
+salesOffices.listen(function(price,squareMeter){
+    console.log('价格='+price);
+    console.log('squareMeter='+squareMeter);
+});
+salesOffices.trigger(200000,88);
+salesOffices.trigger(300000,100);
