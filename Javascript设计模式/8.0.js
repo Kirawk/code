@@ -88,3 +88,21 @@ salesOffices.listen( 'squareMeter100', function( price ){ // 小红订阅消息
 });
 salesOffices.trigger( 'squareMeter88', 2000000 ); // 输出：2000000
 salesOffices.trigger( 'squareMeter100', 3000000 ); // 输出：3000000 
+
+/*取消订阅的事件*/
+event.remove = function(key,fn){
+    var fns = this.clientList[key];
+    if(!fns){
+        return false;
+    }
+    if(!fn){
+        fns &&(fns.length=0);
+    }else{
+        for(var l=fns.length-1;l>=0;l--){
+            var _fn = fns[l];
+            if(_fn===fn){
+                fns.splice(l,1);
+            }
+        }
+    }
+};
