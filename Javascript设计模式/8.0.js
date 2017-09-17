@@ -106,3 +106,18 @@ event.remove = function(key,fn){
         }
     }
 };
+var salesOffices = {};
+var installEvent = function( obj ){
+ for ( var i in event ){
+ obj[ i ] = event[ i ];
+ }
+}
+installEvent( salesOffices );
+salesOffices.listen( 'squareMeter88', fn1 = function( price ){ // 小明订阅消息
+ console.log( '价格= ' + price );
+});
+salesOffices.listen( 'squareMeter88', fn2 = function( price ){ // 小红订阅消息
+ console.log( '价格= ' + price );
+});
+salesOffices.remove( 'squareMeter88', fn1 ); // 删除小明的订阅
+salesOffices.trigger( 'squareMeter88', 2000000 ); // 输出：2000000 
