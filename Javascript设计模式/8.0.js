@@ -121,3 +121,39 @@ salesOffices.listen( 'squareMeter88', fn2 = function( price ){ // 小红订阅�
 });
 salesOffices.remove( 'squareMeter88', fn1 ); // 删除小明的订阅
 salesOffices.trigger( 'squareMeter88', 2000000 ); // 输出：2000000 
+
+/*真实例子-网站登录*/
+$.ajax('http://xx.com?login',function(data){
+    login.trigger('loginSucc',data);
+});
+var header = (function(){
+    login.listen('loginSucc',function(data){
+        header.setAvatar(data.avatar);
+    });
+    return {
+        setAvatar:function(data){
+            console.log('设置header模块的头像');
+        }
+    }
+})();
+var nav = (function(){
+   login.listen('loginSucc',function(data){
+       nav.setAvatar(data.avatar);
+   });
+   return{
+       setAvatar:function(avatar){
+           console.log("设置nav模块的头像");
+       }
+   }
+})();
+var address = (function(){ // nav 模块
+ login.listen( 'loginSucc', function( obj ){
+ address.refresh( obj );
+ });
+ return {
+ refresh: function( avatar ){
+ console.log( '刷新收货地址列表' );
+ }
+ }
+})();
+
