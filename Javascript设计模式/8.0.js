@@ -157,3 +157,30 @@ var address = (function(){ // nav 模块
  }
 })();
 
+/*event作为中介*/
+var Event =(function(){
+    var clientList = {},
+    listen,
+    trigger,
+    remove;
+    listen = function(key,fn){
+        if(!clientList[key]){
+            clientList[key]=[];
+        }
+        clientList[key].push(fn);
+    };
+    trigger =function(){
+
+        var key =Array.prototype.shift.call(arguments),
+        fns = clientList[key];
+
+        if(!fns||fns.length===0){
+            return false;
+        }
+        for(var i=0,fn;fn=fns[i++];){
+            fn.apply(this,arguments);
+        }
+    };
+    
+})();
+
