@@ -181,6 +181,30 @@ var Event =(function(){
             fn.apply(this,arguments);
         }
     };
+      remove = function(key,fn){
+        var fns = clientList[key];
+        if(!fns){
+            return false;
+        }
+        if(!fn){
+            fns && (fns.length=0);
+        }else{
+            for(var l=fns.length-1;l>=0;l--){
+                var _fn = fns[l];
+                if(_fn===fn){
+                    fns.splice(l,1);
+                }
+            }
+        }
+    };
+    return {
+        listen:listen,
+        trigger:trigger,
+        remove:remove
+    }
     
 })();
-
+Event.listen( 'squareMeter88', function( price ){ // 小红订阅消息
+ console.log( '价格= ' + price ); // 输出：'价格=2000000'
+});
+Event.trigger( 'squareMeter88', 2000000 ); // 售楼处发布消息
