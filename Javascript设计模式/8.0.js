@@ -208,3 +208,31 @@ Event.listen( 'squareMeter88', function( price ){ // 小红订阅消息
  console.log( '价格= ' + price ); // 输出：'价格=2000000'
 });
 Event.trigger( 'squareMeter88', 2000000 ); // 售楼处发布消息
+
+
+/*使用命名空间*/
+var Event = (function(){
+    var global = this,
+        Event,
+        _default ='default';
+        Event = function(){
+            var _listen,
+                _trigger,
+                _remove,
+                _slice=Array.prototype.slice,
+                _shift=Array.prototype.shift,
+                _unshift=Array.prototype.unshift,
+                namespaceCache={},
+                _create,
+                _find,
+                each = function(ary,fn){
+                    var ret;
+                    for(var i=0,l=ary,length;i<l;i++){
+
+                        var n=ary[i];
+                        ret = fn,call(n,i,n);
+                    }
+                    return ret;
+                };
+        }
+})
