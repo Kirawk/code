@@ -234,5 +234,33 @@ var Event = (function(){
                     }
                     return ret;
                 };
+                _remove = function(key,cache,fn){
+                    if(cache[key]){
+                        if(fn){
+                            for(var i=cache[key].length;i>=0;i--){
+                                if(cache[key][i]===fn){
+                                    cache[key].splice(i,1);
+                                }
+                            }
+                        }else{
+                                cache[key]=[];
+                           }
+                    }
+                };
+
+                _trigger = function(){
+                    var cache = _shift.call(arguments),
+                        key=_shift.call(arguments),
+                        args=arguments,
+                        _self=this,
+                        ret,
+                        stack = cache[key];
+                    if(!stack||!stack.length){
+                        return;
+                    }
+                    return each(stack,function(){
+                        return this.apply(_self,args);
+                    });
+                };
         }
 })
