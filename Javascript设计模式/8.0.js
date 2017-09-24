@@ -211,6 +211,7 @@ Event.trigger( 'squareMeter88', 2000000 ); // 售楼处发布消息
 
 
 /*使用命名空间*/
+/*使用命名空间*/
 var Event = (function(){
     var global = this,
         Event,
@@ -234,6 +235,7 @@ var Event = (function(){
                     }
                     return ret;
                 };
+
                 _remove = function(key,cache,fn){
                     if(cache[key]){
                         if(fn){
@@ -262,5 +264,68 @@ var Event = (function(){
                         return this.apply(_self,args);
                     });
                 };
-        }
-})
+                _create = function(namespace){
+                        var namespace = namespace||_default;
+                        var cache={},
+                        offlineStack = [],
+                        ret ={
+                                listen: function(key,fn,last){
+                                        _listen(key,fn,cache);
+                                        if(offlineStack===null){
+                                                return;
+                                        }
+                                        if(last==='last'){
+                                                offlineStack.length &&offlineStack.pop()();
+                                        }else{
+                                                each(offlineStack,function(){
+                                                        this();
+                                                });
+                                        }
+                                        offlineStack=null;    
+                                },
+                                one:function(key,fn,last){
+                                        _remove(key,cache);
+                                        this.listen(key,fn,last);
+                                },
+                                remove:function(key,fn){
+                                        _remove(key,cache,fn);
+                                },
+                                trigger:function(){
+                                        var fn,
+                                            args,
+                                            _self=this;
+                                        _unshift.call(arguments,cache);
+                                        args=arguments;
+                                        fn=function(){
+                                                return _trigger.apply(_self,args);
+                                        };
+                                        if(offlineStack){
+                                                return offlineStack.push(fn);
+                                        }
+                                        return fn();
+                                }
+                        };
+                        return namespace?(namespaceCache[namespace]?namespaceCache[namespace]:namespaceCache[namespace]=ret):ret;
+                };
+                return {
+                        create:_create,
+                        one:function(key,fn,last){
+                                var event = this.create();
+                                    event.one(key,fn,last);
+                        },
+                        remove:function(key,fn){
+                                var event=this.create();
+                                event.remove(key,fn);
+                        },
+                        listen:function(key,fn,last){
+                                var event = this.create();
+                                    event.listen(key,fn,last);
+                        },
+                        trigger:function(){
+                                  var event = this.create();
+                                    event.trigger.apply(this,arguments);
+                        }
+                };
+        }();
+        return Event;
+})();
