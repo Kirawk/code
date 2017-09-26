@@ -22,3 +22,27 @@ var SubMenu = {
 var RefreshMenuBarCommand = function(receiver){
 	this.receiver=receiver;
 };
+RefreshMenuBarCommand.prototype.execute=function(){
+	this.receiver.refresh();
+};
+var AddSubMenuCommend = function(){
+	this.receiver=receiver;
+};
+AddSubMenuCommend.prototype.execute=function(){
+	this.receiver.refresh();
+};
+var DelSubMenuCommand = function(receiver){
+	this.receiver=receiver;
+};
+
+DelSubMenuCommand.prototype.execute =function(){
+	console.log("删除子菜单");
+};
+//将命令传接受者传到command对象中,并将command安装到button上
+var refreshMenuBarCommand =new RefreshMenuBarCommand(MenuBar);
+var addSubMenuCommand = new DelSubMenuCommand(SubMenu);
+var delSubMenuCommand = new DelSubMenuCommand(SubMenu);
+
+setCommand(button1,refreshMenuBarCommand);
+setCommand(button2,addSubMenuCommand);
+setCommand(button2,delSubMenuCommand);
