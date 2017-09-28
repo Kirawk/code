@@ -68,3 +68,44 @@ var SubMenu = {
 bindClick(button1,MenuBar.refresh);
 bindClick(button2,SubMenu.add);
 bindClick(button3,SubMenu.del);
+
+/*用闭包实现的命令模式*/
+var setCommand = function(button,func){
+	button.onclick = function(){
+		func();
+	}
+};
+
+var MenuBar ={
+	refresh:function(){
+		console.log("刷新菜单界面");
+	}
+};
+
+var RefreshMenuBarCommand = function(receiver){
+	return function(){
+		receiver.refresh();
+	}
+};
+
+var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
+setCommand(button1,refreshMenuBarCommand);
+
+
+/*将执行函数改为调用execute*/
+var RefreshMenuBarCommand = function(receiver){
+	return{
+		execute:function(){
+			receiver.refresh();
+		}
+	}
+};
+
+var setCommand = function(button,command){
+	button.onclick = function(){
+		command.execute();
+	}
+};
+
+var refreshMenuBarCommand = new RefreshMenuBarCommand(MenuBar);
+setCommand(button1,refreshMenuBarCommand);
