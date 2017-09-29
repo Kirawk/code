@@ -109,3 +109,12 @@ var setCommand = function(button,command){
 
 var refreshMenuBarCommand = new RefreshMenuBarCommand(MenuBar);
 setCommand(button1,refreshMenuBarCommand);
+
+/*撤销命令*/
+var ball = document.getElementById("ball");
+var pos = document.getElementById('pos');
+var moveBtn = document.getElementById('moveBtn');
+moveBtn.onclick = function(){
+	var animate = new Animate(ball);
+	animate.start('left',pos.value,1000,'strongEaseOut');
+};
