@@ -118,3 +118,20 @@ moveBtn.onclick = function(){
 	var animate = new Animate(ball);
 	animate.start('left',pos.value,1000,'strongEaseOut');
 };
+/*将上述代码改为命令模式*/
+var ball = document.getElementById("ball");
+var pos = document.getElementById('pos');
+var moveBtn = document.getElementById('moveBtn');
+var MoveCommand = function(receiver,pos){
+	this.receiver=receiver;
+	this.pos=pos;
+};
+MoveCommand.prototype.execute = function(){
+	this.receiver.start('left',this.pos,1000,"strongEaseOut");
+};
+var moveCommand;
+moveBtn.onclick= function(){
+	var animate = new Animate(ball);
+	moveCommand = new MoveCommand(animate,pos.value);
+	moveCommand.execute();
+};
