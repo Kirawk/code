@@ -135,3 +135,34 @@ moveBtn.onclick= function(){
 	moveCommand = new MoveCommand(animate,pos.value);
 	moveCommand.execute();
 };
+
+/*撤销命令*/
+var ball = document.getElementById("ball");
+var pos = document.getElementById('pos');
+var moveBtn = document.getElementById('moveBtn');
+var cancleBtn = document.getElementById('cancleBtn');
+
+var MoveCommand = function(receiver,pos){
+	this.receiver = receiver;
+	this.pos = pos;
+	this.oldPos = null;
+};
+
+MoveCommand.prototye.execute = function(){
+	this.receiver.start('left',this.pos,1000,'strongEaseOut');
+	this.oldPos = this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName];
+};
+
+MoveCommand.prototye.uundo = function(){
+	this.receiver.start('left',this.oldPos,1000,'strongEaseOut');
+};
+
+var moveCommand;
+moveBtn.onClick = function(){
+	var animate = new Animate(ball);
+	moveCommand = new MoveCommand(animate,pos.value);
+	moveCommand.execute();
+};
+cancelBtn.onclick = function(){
+	moveCommand.undo();
+};
