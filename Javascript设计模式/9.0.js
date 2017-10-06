@@ -182,3 +182,31 @@ var Ryu = {
 		console.log("蹲下");
 	}
 };
+//创建命令
+var makeCommand = function(receiver,state){
+    return function(){
+        receiver[state]();
+    }
+};
+var commands = {
+    "119":"jump",
+    "115":"crouch",
+    "97":"defense",
+    "100":"attack"
+};
+
+var commandStack = [];//保存命令的堆栈
+document.onkeypress = function(ev){
+    var keyCode = ev.keyCode,
+    command= makeCommand(Ryu,commands[keyCode]);
+    if(command){
+        command();
+        commandStack.push(command);
+    }
+};
+document.getElementById("reply").onclick = function(){
+    var command;
+    while(command=commandStack.shift()){
+        command();
+    }
+};
