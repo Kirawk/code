@@ -210,3 +210,21 @@ document.getElementById("reply").onclick = function(){
         command();
     }
 };
+
+//宏命令
+var closeDoorCommand = {
+
+    execute:function(){
+        console.log('关门');
+    }
+};
+var openPcCommand = {
+    execute:function(){
+        console.log("开电脑");
+    }
+};
+var openQQCommand ={
+    execute:function(){
+        console.log("登录QQ");
+    }
+};
