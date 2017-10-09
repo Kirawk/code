@@ -248,3 +248,10 @@ macroCommand.add( closeDoorCommand );
 macroCommand.add( openPcCommand );
 macroCommand.add( openQQCommand );
 macroCommand.execute(); 
+
+/*智能命令与傻瓜命令*/
+var closeDoorCommand = {
+	execute:function(){
+		console.log('关门');
+	}
+};
