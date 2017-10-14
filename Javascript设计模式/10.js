@@ -33,3 +33,18 @@ macroCommand.add(closeDoorCommand);
 macroCommand.add(openPcCommand);
 macroCommand.add(openQQCommand);
 macroCommand.execute();
+
+/*更强大的宏命令*/
+var MacroCommand = function () {
+
+    return {
+        commandsList : [],
+        add : function () {
+            this.commandsList.push(command);
+        },
+        execute: function (){
+         for(var i = 0,command; command = this.commandsList[i++];){
+            command.execute();
+        }
+    }
+};
