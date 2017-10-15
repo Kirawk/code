@@ -48,3 +48,8 @@ var MacroCommand = function () {
         }
     }
 };
+var  openAcCommand = {
+    execute: function(){
+        console.log('打开空调');
+    }
+};
