@@ -23,5 +23,41 @@ console.log(a.length);//2
 typeof [1,2,3] === "object";
 
 /**
-1.3
+1.3 值和类型
 **/
+var a = 42;
+typeof a;//number
+var a = true;
+typeof a;//boolean
+
+typeof typeof 42;//string
+
+var a;
+typeof a;//boolean  P6书上说是undefined
+var c;
+var b=42;
+b=c;
+typeof b;//undefined
+typeof c;//undefined
+
+//typeof的安全机制
+if(DEBUG){
+    console.log("Debugging is starting");
+}
+if(typeof DEBUG === "undefined"){
+    console.log("Debugging is starting");
+}
+if(windows.DEBUG){
+//....
+}
+if(!windows.DEBUG){
+    //...
+}
+
+function doSomethingCool(){
+    var help = (typeof FeatureXYZ !== "undefined")? 
+    FeatureXYZ:
+    function(){};
+    var val = help();
+
+}
