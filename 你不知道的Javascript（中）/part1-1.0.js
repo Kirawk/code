@@ -33,7 +33,7 @@ typeof a;//boolean
 typeof typeof 42;//string
 
 var a;
-typeof a;//boolean  P6书上说是undefined
+typeof a;//undefined 
 var c;
 var b=42;
 b=c;
@@ -61,3 +61,19 @@ function doSomethingCool(){
     var val = help();
 
 }
+
+(function(){
+    function FeatureXYZ(){/** my xyz feasure **/}
+    function doSomethingCool(){
+        var help =(typeof FeatureXYZ =="undefined") ? FeatureXYZ:function(){};
+        var val = help();
+    }
+    domethingCool();        
+})();
+
+/*依赖注入*/
+function doSomethingCool(FeatureXYZ){
+    var help = FeatureXYZ || function() {};
+    var val = help();
+}
+
