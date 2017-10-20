@@ -38,7 +38,7 @@ foo("bar","baz");// ["bar", "baz", "bam"]
 
 
 /**
-字符串
+@ 2.2字符串
 */
 var a = "foo";
 var b = ["f","o","o"];
@@ -81,3 +81,29 @@ b.reverse();//["!", "o", "0", "f"]
 
 var c =a.split("").reverse().join("");
 c; //oof
+
+/**
+@ 2.3 数字
+**/
+var a = 5E10;
+a;//50000000000
+var b = a.toExponential();
+b;//"5e+10"
+
+var c = a*a;
+c;//2.5e+21;
+
+var d = 1/a;
+d;//2e-11
+
+var a= 42.58;
+a.toFixed(0);//"43"
+var s=a.toFixed(1);//"42.6"
+typeof s;//string
+a.toFixed(2);"42.58"
+a.toFixed(3);"42.580"
+a.toFixed(4);"42.5800"
+
+var a = 42.59
+a.toPrecision(1);"4e+1";
+
