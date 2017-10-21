@@ -105,5 +105,127 @@ a.toFixed(3);"42.580"
 a.toFixed(4);"42.5800"
 
 var a = 42.59
-a.toPrecision(1);"4e+1";
+a.toPrecision(1);//"4e+1";
+a.toPrecision(2);//"43"
+a.toPrecision(3);//"42.6"
+a.toPrecision(5);//"42.590"
 
+42.toFixed(3);//Uncaught SyntaxError: Invalid or unexpected token
+(42).toFixed(3);//42.000
+0.42.toFixed(3);//"0.420"
+42..toFixed(3);//"42.000"
+(42).toFixed(3);//42.000
+0.42.toFixed(3);//"0.420"
+42..toFixed(3);//"42.000"
+42 .toFixed(3);//42.000"
+
+0.1+0.2 === 0.3;//false
+
+if(!Number.EPSILON){
+    Number.EPSILON = Math.pow(2,-52);
+}
+
+function numbersCloseEnoughToEqual(n1,n2){
+    return Math.abs(n1-n2) < Number.EPSILON;
+}
+
+var a = 0.1+0.2;
+var b = 0.3;
+numbersCloseEnoughToEqual(a,b);//true
+numbersCloseEnoughToEqual( 0.0000001, 0.0000002 ); //false
+
+//判断是否为整数
+Number.isInteger(42);//true
+Number.isInteger(42.00);//true
+Number.isInteger(42.01);//false
+
+if(!Number.isInteger){
+    Number.isInteger = function(num){
+        return typeof num == "number" && num % 1 ==0;
+    };
+}
+
+//判断安全整数
+Number.isSafeInteger(Number.MAX_SAFE_INTEGER);//true
+Number.isSafeInteger(Math.pow(2,53));//false
+Number.isSafeInteger(Math.pow(2,53)-1);
+
+if(!Number.isSafeInteger){
+    Number.isSafeInteger = function(num){
+        return Number.isInteger(num) && Math.abs(num)<=Number.MAX_SAFE_INTEGER;
+    };
+}
+
+/**
+@ 2.4 特殊数值
+**/
+//非严格模式下给undefined 赋值
+function foo(){
+    undefined = 2;
+}
+foo();
+
+function foo(){
+    "use strict";
+    undefined = 2;
+}
+foo();//TypeError
+
+function foo(){
+    "use strict";
+    var undefined =2;
+    console.log(undefined);//2
+}
+foo();
+
+var a =42;
+console.log(void a,a);//undefined 42
+
+function domeSomething(){
+    if(!APP.ready){
+        //稍后再试
+        return void setTimeout(domeSomething,100);
+    }
+    var result;   
+   return result;
+}
+
+if(domeSomething()){
+    //立即执行下一个任务
+}
+
+if(!App.ready){
+    setTimeout(domeSomething,100);
+    return;
+}
+
+
+//特殊数字
+var a = 2 /"foo";
+typeof a == "number";//true
+
+a===NaN;//false
+a == NaN;//false
+
+isNaN(a);//true
+
+var a = 2/"foo";
+var b ="foo";
+a;NaN
+b;"foo"
+
+window.isNaN(a);//true
+window.isNaN(b);//true
+
+if(!Number.isNaN){
+    Number.isNaN = function(n){
+        return (typeof n==="number"&& window.isNaN(n));
+    };
+}
+Number.isNaN(a);//true
+Number.isNaN(b);//false
+if(!Number.isNaN){
+    Number.isNaN = function(n){
+        return n!==n;
+    };
+}
