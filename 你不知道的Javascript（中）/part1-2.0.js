@@ -229,3 +229,139 @@ if(!Number.isNaN){
         return n!==n;
     };
 }
+
+//无穷数
+var a = 1 / 0;
+a;//Infinity
+var b = -1 / 0;
+b;//-Infinity
+var a = Number.MAX_VALUE;
+a + a;//Infinity
+a + Math.pow(2,970);//Infinity
+a + Math.pow(2,969);//1.7976931348623157e+308
+
+var a = 0 / -3;//-0 
+var b = 0 * -3;//-0
+
+var c = 0;
+var d = 0 / -3;
+a == b;//true
+
+function isNegZero(n){
+    n = Number(n);
+    return (n===0) && (1/n === -Infinity);
+}
+isNegZero(-0);//true
+isNegZero(0 / -3);//true
+isNegZero(0);//false
+
+//特殊等式
+var a = 2 / "foo";
+var b = -3*0;
+
+Object.is(a,NaN);//true
+Object.is(b,-0);//true
+Object.is(b,0);//false
+
+if(!Object.is){
+    Object.is = function(v1,v2){
+        if(v1===0 && v2===0){
+            return 1 /v1 === 1 / v2;
+        }
+        //判断是否NaN
+        if(v1 !== v1){
+            return v2 !== v2;
+        }
+        return v1 === v2;
+    };
+}
+
+
+//特殊等式
+var a = 2 / "foo";
+var b = -3*0;
+
+Object.is(a,NaN);//true
+Object.is(b,-0);//true
+Object.is(b,0);//false
+
+if(!Object.is){
+    Object.is = function(v1,v2){
+        if(v1===0 && v2===0){
+            return 1 /v1 === 1 / v2;
+        }
+        //判断是否NaN
+        if(v1 !== v1){
+            return v2 !== v2;
+        }
+        return v1 === v2;
+    };
+}
+
+/**
+@ 值和引用
+**/
+var a = 2;
+var b = a;
+b++;
+a;//2
+b;//3
+var c = [1,2,3];
+var d =c;
+d.push(4);
+c;//[1,2,3,4]
+d;//[1,2,3,4]
+
+var a = [1,2,3];
+var b = a;
+a;//[1,2,3]
+b;//[1,2,3]
+
+b = [4,5,6];
+a;//[1,2,3]
+b;//[4,5,6];
+
+function foo(x){
+    x.push(4);
+    x;//[1,2,3,4]
+    x = [4,5,6];
+    x.push(7);
+    x;//[4,5,6,7]
+}
+var a = [1,2,3];
+
+foo(a);
+a;//[1,2,3,4]不是[4,5,6,7]
+
+function foo(x){
+    x.push(4);
+    x;//[1,2,3,4]
+
+    //然后
+    x.length = 0;
+    x.push(4,5,6,7);
+    x;//[4,5,6,7];
+}
+var a = [1,2,3];
+foo(a);
+a;//[4,5,6,7]
+
+function foo(wrapper){
+    wrapper.a = 42;
+}
+var obj = {
+    a:2
+};
+foo(obj);
+obj.a;//42
+
+function foo(x){
+    x = x + 1;
+    x;
+}
+var a = 2;
+var b = new Number(a);
+foo(b);
+console.log(b);
+
+
