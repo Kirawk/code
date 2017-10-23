@@ -107,4 +107,4 @@ var h = new RegExp( "^a*b+", "g" );
 
 var name = "Kyle";
 var namePattern = new RegExp("\\b(?:" + name +")+\\b","ig");
-//var matches = someText.match(namePattern);
+var matches = someText.match(namePattern);
