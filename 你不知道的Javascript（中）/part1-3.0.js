@@ -108,3 +108,41 @@ var h = new RegExp( "^a*b+", "g" );
 var name = "Kyle";
 var namePattern = new RegExp("\\b(?:" + name +")+\\b","ig");
 var matches = someText.match(namePattern);
+
+ if(!Date.now){
+    Date.now = function(){
+        return (new Date()).getTime();
+    }
+}
+
+var mysym = Symbol("my own symbol");
+mysym;//Symbol(my own symbol)
+mysym.toString();//Symbol(my own symbol)
+typeof mysym;//symbol
+
+var a = {};
+a[mysym] = "foobar";
+
+Object.getOwnPropertySymbols(a);//[Symbol(my own symbol)]
+
+var a = " abc ";
+a.indexOf("c");//3
+a.toUpperCase();//ABC
+a.trim();//abc
+
+function isThisCool(vals,fn,rx) {
+    vals = vals || Array.prototype;
+    fn = fn ||Function.prototype;
+    rx = rx || RegExp.prototype;
+
+    return rx.test(
+    vals.map( fn ).join( "" )
+    );
+}
+//isThisCool();
+isThisCool(
+["a","b","c"],
+function(v){
+    return v.toUpperCase();
+},/D/
+);//false
