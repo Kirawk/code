@@ -34,3 +34,48 @@ a.toJSON = function(){
     return {b: this.b};
 };
 JSON.stringify(a);//"{"b":42}"
+
+var a = {
+    val :[1,2,3],
+    toJSON : function(){
+        return this.val.slice(1);
+    }
+};
+
+var b = {
+    val: [1,2,3],
+    toJSON: function(){
+        return "["+this.val.slice(1).join()+"]";
+    }
+};
+JSON.stringify(a);//"[2,3]"
+JSON.stringify(b);//""[2,3]""
+
+var a ={
+    b:42,
+    c:"42",
+    d: [1,2,3]
+};
+JSON.stringify(a,["b","c"]);//{"b":42,"c":"42"}
+JSON.stringify(a,function(k,v){
+    if(k!=="c") return v;
+});//"{"b":42,"d":[1,2,3]}"
+
+//ToNumber
+var a = {
+    valueOf: function(){
+        return "42";
+    }
+};
+var b = {
+    toString: function(){
+        return "42";
+    }
+};
+var c = [4,2];
+c.toString = function(){
+    return this.join("");//"42"
+};
+Number(a);//42
+Number(b);//42
+Number(c);//42
