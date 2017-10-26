@@ -79,3 +79,41 @@ c.toString = function(){
 Number(a);//42
 Number(b);//42
 Number(c);//42
+
+// TooBoolean
+var a = new Boolean(false);
+var b = new Number(0);
+var c = new String("");
+var d = Boolean(a && b && c);
+d;//true
+
+var a = [];
+var b = {};
+var c = function(){};
+var d = Boolean(a && b && c);
+d;//true
+
+/**
+@ 4.3 显示强制类型转换
+**/
+var a = 42;
+var b =String(a);
+
+var c = "3.14";
+var d = Number(c);
+b;//"42"
+d;//3.14
+
+var a = 42;
+var b = a.toString();
+
+var c ="3.14";
+var d = -c;
+b;//"42"
+d;//-3.14
+var e = - -c;
+e;//3.14
+
+var f = 1 + - + + + - + 1;
+f;//2
+
