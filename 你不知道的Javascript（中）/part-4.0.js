@@ -117,3 +117,14 @@ e;//3.14
 var f = 1 + - + + + - + 1;
 f;//2
 
+var timestamp = +new Date();
+timestamp;//1509116017614
+var timestamp2= Date.now();
+timestamp2;//1509116093105
+
+if(!Date.now){
+    Date.now = function(){
+        return +new Date();
+    };
+}
+
