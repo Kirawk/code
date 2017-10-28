@@ -128,3 +128,48 @@ if(!Date.now){
     };
 }
 
+//奇特的~运算符 
+0 | -0;//0
+0 | NaN;//0
+0 | Infinity;//0
+0 | -Infinity;//0
+
+var a ="hello world!";
+if(a.indexOf("lo") >= 0){
+    console.log(a.indexOf("lo"));//3
+}
+var a = "hello world!";
+~a.indexOf("lo");//-4
+~a.indexOf("ol");//0
+
+//字位截除
+Math.floor(-49.6);//-50
+~~-49.6;//-49
+
+//显示解析数字字符串
+var a = "42";
+var b = "42px";
+Number(a);//42
+parseInt(a);//42
+
+Number(b);//NaN
+parseInt(b);//42
+
+parseInt(new String("42"));//42
+var a ={
+    num: 21,
+    toString: function(){
+        return this.num*2;
+    }
+};
+parseInt(a);//42
+
+parseInt(1/0,19);//18
+parseInt(0.000008);//0
+parseInt(0.0000008);//8
+parseInt(parseInt,16);//15;
+parseInt("0x10");//16
+parseInt("103",2);//2
+
+//显示转化为布尔值
+
