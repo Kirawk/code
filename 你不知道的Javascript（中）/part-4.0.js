@@ -172,4 +172,10 @@ parseInt("0x10");//16
 parseInt("103",2);//2
 
 //显示转化为布尔值
+var a ="0";
+var b = [];
+var c = {};
+Boolean(a);
+Boolean(b);
+Boolean(c); 
 
