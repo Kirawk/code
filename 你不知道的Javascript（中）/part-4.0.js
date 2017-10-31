@@ -179,3 +179,33 @@ Boolean(a);
 Boolean(b);
 Boolean(c); 
 
+var a = "0";
+var b = [];
+var c = {};
+
+var d = "";
+var e = 0;
+var f = null;
+
+!!a;//true
+!!b;//true
+!!c;//true
+
+!!d;//false
+!!e;//false
+!!f;//false
+
+var a = [
+    1,
+    function(){},
+    2,
+    function(){}
+];
+JSON.stringify(a);
+JSON.stringify(a,function(key,val){
+    if(typeof val === "function"){
+        return !!val;
+    }else{
+        return val;
+    }
+});//"[1,true,2,true]"
