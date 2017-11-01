@@ -209,3 +209,62 @@ JSON.stringify(a,function(key,val){
         return val;
     }
 });//"[1,true,2,true]"
+
+var a = 42;
+var b =String(a);
+
+var c = "3.14";
+var d = Number(c);
+b;//"42"
+d;//3.14
+
+var a = 42;
+var b = a.toString();
+
+var c ="3.14";
+var d = -c;
+b;//"42"
+d;//3.14
+
+/**
+@ 4.4 隐式强制类型转换
+**/
+//字符串和数字之间的隐式强制类型转换
+var a = "42";
+var b = "0";
+
+var c = 42;
+var d = 0;
+
+a + b;//"420"
+c + d;//42
+
+var a = [1,2];
+var b = [3,4];
+a+b;//"1,23,4"
+
+var a = {
+    valueOf: function(){return 42;},
+    toString:function(){return 4;}
+};
+a + "";//"42"
+String(a);//"4"
+
+var a = "3.14";
+var b = a-0;
+b;//3.14
+
+var a = [3];
+var b = [1];
+a-b;//2
+
+//布尔值到数字的隐式强制类型装换
+function onlyOne(a,b,c){
+    return !!((a&&!b&&!c)||(!a&&b&&!c)||(!a&&!b&&c));
+}
+var a = true;
+var b= false;
+
+onlyOne(a,b,b);//true
+onlyOne(b,a,b);//true
+onlyOne(a,b,a);//false
