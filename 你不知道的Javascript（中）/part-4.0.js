@@ -268,3 +268,44 @@ var b= false;
 onlyOne(a,b,b);//true
 onlyOne(b,a,b);//true
 onlyOne(a,b,a);//false
+
+function onlyOne() {
+ var sum = 0;
+ for (var i=0; i < arguments.length; i++) {
+ // 跳过假值，和处理0一样，但是避免了NaN
+ if (arguments[i]) {
+ sum += arguments[i];
+ }
+ }
+ return sum == 1;
+}
+var a = true;
+var b = false;
+onlyOne( b, a ); // true
+onlyOne( b, a, b, b, b ); // true
+onlyOne( b, b ); // false
+onlyOne( b, a, b, b, b, a ); // false
+
+function onlyOne() {
+ var sum = 0;
+ for (var i=0; i < arguments.length; i++) {
+ sum += Number( !!arguments[i] );
+ }
+ return sum === 1;
+}
+//隐式强制类型转换为布尔值
+var a = 42;
+var b = "abc";
+var c;
+var d = null;
+if (a) {
+ console.log( "yep" ); // yep
+}
+while (c) {
+  console.log( "nope, never runs" );
+}
+c = d ? a : b;
+c; // "abc"
+if ((a && d) || c) {
+ console.log( "yep" ); // yep
+}
