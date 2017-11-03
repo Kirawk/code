@@ -309,3 +309,13 @@ c; // "abc"
 if ((a && d) || c) {
  console.log( "yep" ); // yep
 }
+
+/*4.45 ||和&&**/
+var a = 42;
+var b = "abc";
+var c = null;
+a||b;//42
+a && b;//"abc"
+
+c||b;//"abc"
+c&&b;//null
