@@ -319,3 +319,28 @@ a && b;//"abc"
 
 c||b;//"abc"
 c&&b;//null
+
+/*4.45 ||和&&**/
+function foo(a,b){
+    a = a || "hello";
+    b = b || "world";
+    console.log( a + " " + b); 
+}
+foo();//"hello world"
+foo("yeah","yeah");//"yeah yeah!"
+
+var a = 42;
+var b = null;
+var c = "foo";
+if(a && (b || c)){
+    console.log("yep");
+}
+if(!!a && (!!b || !!c)){
+    console.log("yep");
+}
+//4.4.6 符号的强制类型转换
+var s1 = Symbol("cool");
+String(s1);//"Symbol(cool)"
+
+var s2 = Symbol("not cool");
+s2 + "";//Uncaught TypeError
