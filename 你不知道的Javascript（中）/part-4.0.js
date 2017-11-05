@@ -344,3 +344,12 @@ String(s1);//"Symbol(cool)"
 
 var s2 = Symbol("not cool");
 s2 + "";//Uncaught TypeError
+
+/***
+* @4.6宽松相等和严格相等
+*/
+//== 允许在相等比较中进行强制类型转换，而 === 不允许
+var a = 42;
+var b = "42";
+a === b;//false
+a == b;//true
