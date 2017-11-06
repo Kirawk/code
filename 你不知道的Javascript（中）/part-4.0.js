@@ -348,8 +348,84 @@ s2 + "";//Uncaught TypeError
 /***
 * @4.6宽松相等和严格相等
 */
-//== 允许在相等比较中进行强制类型转换，而 === 不允许
+//字符串与数字之间的相等比较
 var a = 42;
 var b = "42";
 a === b;//false
 a == b;//true
+
+//其他类型和布尔类型之间的相等比较
+var a = "42";
+var b = true;
+a === b;//false
+
+var a = "42";
+var b = false;
+a === b;//false
+
+var a = "42";
+var b = false;
+a === b;//false
+if(a == true){//不要这样用，判断条件不成立
+
+}
+if(a === true){
+
+}
+if(a){//这样显示用法没问题
+
+}
+if(!!a){//这样显示用法更好
+
+}
+//null与undefined之间的相等比较
+var a = null;
+var b;
+a == b;//true
+a == null;//true
+b == null; //true
+a == false;//false
+b == false;//false
+a == "";//false
+b == "";//false
+a == 0;//false
+b == 0;//false
+
+var a = doSomething();
+if(a==null){
+    //...
+}
+var a = doSomething();
+if(a == null||a==undefined){
+    //...
+}
+
+//对象与非对象之间的相等比较
+var a = 42;
+var b =[42];
+console.log(a==b)//true
+
+var a = 42;
+var b =[42];
+a == b;//true
+
+var a = "abc";
+var b = Object(a);
+a === b;//false
+a == b;//true
+
+var a = null;
+var b = Object(a);
+a == b;//false
+
+var a = undefined;
+var b = Object(a);
+a == b;//false
+
+var a =NaN;
+var b =Object(a);
+a == b;//false
+
+
+
+
