@@ -426,6 +426,21 @@ var a =NaN;
 var b =Object(a);
 a == b;//false
 
+/*比较少见的情况*/
+//返回其他数字
+Number.prototype.valueOf = function(){
+    return 3;
+}
+new Number(2) === 3;//true
+
+var i = 2;
+Number.prototype.valueOf = function(){
+    return i++;
+};
+var a = new Number(42);
+if(a == 2 && a == 3){
+    console.log("Yep,this happened.");
+}
 
 
 
