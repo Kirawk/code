@@ -442,5 +442,55 @@ if(a == 2 && a == 3){
     console.log("Yep,this happened.");
 }
 
+//假值的相等比较
+"0" == null;//fasle
+"0" == undefined;//fasle
+"0" == false;//true
+"0" == NaN;//fasle
+"0" == 0;//true
+"0" == "";//fasle
+
+false == null;//fasle
+false == undefined;//fasle
+false == NaN;//fasle
+false == 0;//true
+false == "";//true
+false == [];//true
+false == {};//fasle
+
+"" == null;//fasle
+"" == undefined;//fasle
+"" == NaN;//fasle
+"" == 0;//true
+"" == [];//true
+"" == {};//false
+
+0 == null;//false
+0 == undefined;//fasle
+0 == NaN;//fasle
+0 == [];//true
+0 == {};//false
+
+
+42 == "43";//fasle
+"foo" == 42;//fasle
+"true" == true;//false
+42 == "42";//true
+"foo" == ["foo"];//true
+
+//完整性检查
+"0" == false;//true
+false == 0;//true
+false == "";//true
+false == [];//true
+"" == 0;//true
+"" == [];//true
+0 == [];//true
+
+"" == 0;//true
+"" == [];//true
+0 == [];//true
+
+//安全运用隐式强制类型转换
 
 
