@@ -346,7 +346,7 @@ var s2 = Symbol("not cool");
 s2 + "";//Uncaught TypeError
 
 /***
-* @4.6宽松相等和严格相等
+* @4.5宽松相等和严格相等
 */
 //字符串与数字之间的相等比较
 var a = 42;
@@ -492,5 +492,35 @@ false == [];//true
 0 == [];//true
 
 //安全运用隐式强制类型转换
+
+/***
+* @4.6抽象关系比较
+*/
+var a = [42];
+var b = ["43"];
+a < b;//true
+a > b;//false
+
+var a = ["42"];
+var b = ["043"];
+a < b;//false
+
+var a = [4,2];
+var b = [0,4,3];
+a < b;//false
+
+var a = {b:42};
+var b = {b:43};
+a < b;//false
+a == b;//false
+a > b;//false
+a <= b;//true
+a >= b;//true
+
+var a = [42];
+var b = "043";
+a < b;//false --字符串比较
+Number(a) < Number(b);//true -- 数字比较
+
 
 
