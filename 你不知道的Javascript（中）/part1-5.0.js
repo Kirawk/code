@@ -19,3 +19,14 @@
  	}
  };
  a;//42
+
+ //表达式副作用
+ var a = 2;
+ var b = a+3;
+
+ function foo(){
+ 	a = a + 1;
+ }
+ var a = 1;
+ foo();
+ 
