@@ -52,67 +52,6 @@ var b = (a++);
 a;//43
 b;//42
 
-var a;
-a = 42;
-a;//42
-
-function vowls(str){
-	var matches;
-	if (str) {
-		matches = str.match(/[aeiou]/g);
-		if (matches) {
-			return matches;
-		};
-	};
-}
-vowls("Hello world!");//["e", "o", "o"]
-
-//改写上述代码
-function vowls (str) {
-	var matches;
-
-	if (str &&(matches = str.match(/[aeiou]/g))) {
-		return match;
-	}
-}
-vowls("Hello world!");
-
-／*5.1.3上下问规则*／
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
