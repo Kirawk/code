@@ -77,7 +77,8 @@ function vowls (str) {
 }
 vowls("Hello world!");
 
-／*5.1.3上下问规则*／
+
+／*5.1.3上下文规则*／
 /*上下文规则*/
 var a = {
     foo:bar()
