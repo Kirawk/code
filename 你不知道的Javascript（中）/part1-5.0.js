@@ -1,45 +1,45 @@
 /* 语法
 *@  5.1 语句和表达式
 */
- var b;
- if(true){
- 	b = 4 +38;
- }
+var b;
+if (true) {
+    b = 4 + 38;
+}
 
-  var a,b;
- a = if(true){
-     b = 4 + 38;
- };
+var a, b;
+a = if (true) {
+    b = 4 + 38;
+};
 
- //do表达式
- var a ,b;
- a = do{
- 	if(true){
- 		b = 4 + 38;
- 	}
- };
- a;//42
+//do表达式
+var a, b;
+a = do {
+    if (true) {
+        b = 4 + 38;
+    }
+};
+a;//42
 
- //表达式副作用
- var a = 2;
- var b = a+3;
+//表达式副作用
+var a = 2;
+var b = a + 3;
 
- function foo(){
- 	a = a + 1;
- }
- var a = 1;
- foo();
+function foo() {
+    a = a + 1;
+}
+var a = 1;
+foo();
 
- var a = 42;
- var b = a++;
- a;
- b;
+var a = 42;
+var b = a++;
+a;
+b;
 
- var a = 42;
- a++;
- a;
- ++a;
- a;//44
+var a = 42;
+a++;
+a;
+++a;
+a;//44
 
 var a = 42;
 a++;
@@ -56,47 +56,46 @@ var a;
 a = 42;
 a;//42
 
-function vowls(str){
-	var matches;
-	if (str) {
-		matches = str.match(/[aeiou]/g);
-		if (matches) {
-			return matches;
-		};
-	};
+function vowls(str) {
+    var matches;
+    if (str) {
+        matches = str.match(/[aeiou]/g);
+        if (matches) {
+            return matches;
+        };
+    };
 }
 vowls("Hello world!");//["e", "o", "o"]
 
 //改写上述代码
-function vowls (str) {
-	var matches;
+function vowls(str) {
+    var matches;
 
-	if (str &&(matches = str.match(/[aeiou]/g))) {
-		return match;
-	}
+    if (str && (matches = str.match(/[aeiou]/g))) {
+        return match;
+    }
 }
 vowls("Hello world!");
 
 
-／*5.1.3上下文规则*／
-/*上下文规则*/
+//5.1.3上下文规则
 var a = {
-    foo:bar()
+    foo: bar()
 };
 
 
-foo:for(var i=0; i<4; i++){
-    for(var j=0;j<4;j++){
+foo: for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
         //如果j和i相等，继续外层的循环
-        if(j==i){
+        if (j == i) {
             continue foo;
         }
         //跳过奇数结果
-        if((j*i)%2 == 1){
+        if ((j * i) % 2 == 1) {
             continue;
         }
 
-        console.log(i,j);
+        console.log(i, j);
     }
 }
 //1 0
@@ -105,8 +104,8 @@ foo:for(var i=0; i<4; i++){
 //3 0
 //3 2
 
-function foo(){
-    bar:{
+function foo() {
+    bar: {
         console.log("hello");
         break bar;
         console.log("never runs");
@@ -118,50 +117,50 @@ foo();
 //world
 
 //代码快
-[]+{};//[object Object]
-{}+[];//0
+[] + {};//[object Object]
+{ } +[];//0
 
 //对象解构
-function getData(){
+function getData() {
     //
     return {
-        a:42,
-        b:"foo"
+        a: 42,
+        b: "foo"
     };
 }
-var {a,b} = getData();
-console.log(a,b);//42 "foo";
+var { a, b } = getData();
+console.log(a, b);//42 "foo";
 //类似下面的代码
 var res = getData();
 var a = res.a;
 var b = res.b;
 
-function foo({a,b,c}){
-    console.log(a,b,c);
+function foo({ a, b, c }) {
+    console.log(a, b, c);
 }
 foo({
-    c:[1,2,3],
-    a:42,
-    b:"foo"
+    c: [1, 2, 3],
+    a: 42,
+    b: "foo"
 });
 
 //else if(javascript 没有if else if else)
 
-if(a){
+if (a) {
     //
-}else if(b){
-//
-}else{
-  //  
-}　
+} else if (b) {
+    //
+} else {
+    //  
+}
 //本质
-if(a)dosomenthing(a);
-if(a){
+if (a) dosomenthing(a);
+if (a) {
     //
-}else{
-    if(b){
+} else {
+    if (b) {
         //..
-    }else{
+    } else {
         //..
     }
 }
@@ -171,6 +170,76 @@ var a = 42;
 var b = "foo";
 a && b;
 a || b;
+
+var a = 42;
+var b = "foo";
+var c = [1, 2, 3];
+a && b || c;
+a || b && c;
+
+var a = 42, b;
+b = (a++ , a);
+a;//43
+b;//43
+
+var a = 42, b;
+b = a++ , a;
+a;//43
+b;//42
+
+var a = 42;
+var b = "foo";
+var c = false;
+
+var d = a && b || c ? c || b ? a : c && b : a;
+d;//42
+
+(false && true) || true;//true
+false && (true || true);//false
+
+false && true || true;//true
+(false && true) || true;
+
+true || false && false;//true
+(true || false) && false;//false
+true || (false && false);//true 说明&&运算符优先于||
+
+//5.2.1 短路
+function dosomenthing(opts){
+    if(opts && opts.cool){
+        //domething
+    }
+}
+
+function domething(opts){
+    if(opts.cache || primeCache()){
+        //...
+    }
+}
+
+//5.2.2 更强的绑定
+a && b || c ? c || b ? a : c && b : a
+(a && b || c) ? (c || b) ? a : (c && b) : a
+
+//5.2.3 关联 关联顺序不同结果是不同的
+true ? false : true ? true : false;//false
+true ? false : (true ? true : false);//false
+(true ? false : true) ? true : false;//false
+
+ var a = true,b = false ,c = true, d =true, e = false;
+ a ? b :(c ? d : e); //false,执行a和b；
+ (a ? b : c) ? d : e; //false,执行a,b和e
+
+var a = 42;
+var b = "foo";
+var c = false;
+
+var d = a && b || c ? c || b ? a : c && b : a;
+d;//42
+//改写上述代码P110
+((a && b) || c ) ? ((c || b) ? a : (c && b)) : a;
+
+//5.2.4 释疑
 
 
 
