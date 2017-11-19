@@ -240,6 +240,198 @@ d;//42
 ((a && b) || c ) ? ((c || b) ? a : (c && b)) : a;
 
 //5.2.4 释疑
+//5.3 自动分号
+var a = 42, b
+c;
+//5.4 错误
+ function foo(a,b,a){}//没问题
+ function foo(a,b,a){//错误
+     "user strict";
+ }
+(function (){
+    "use strict";
+
+    var a = {
+        b : 42,
+        b : 43
+    };//错误
+})();
+//提前使用变量
+{
+    a = 2;
+    let a ;//ReferenceError
+}
+{
+    typeof a;//undefined
+    typeof b;//ReferenceError!
+    let b;
+}
+//5.5函数参数
+function foo(a = 42, b = a + 1){
+    console.log(a,b);
+}
+foo();// 42 43
+foo(undefined);//42 43
+foo(5);// 5 6
+foo(void 0 ,7);
+foo(null);
+
+function foo(a = 42 , b = a +1){
+    console.log(
+        arguments.length,a,b,
+        arguments[0],arguments[1]
+    );
+}
+foo(); //0 42 43 undefined undefined
+foo(10);//1 10 11 10 undefined
+foo(10 , undefined); //2 10 111 10 undefined
+foo(10 ,null);//2 10 null 10 null
+
+function foo(a) {
+    "use strict";
+    a = 42;
+    console.log(arguments[0]);
+}
+foo(2);//2
+foo();//undefined (not linked)
+
+//?不要同时访问命名参数和其对应的arguments数组单元
+function foo(a){
+    console.log(a + arguments[1]);//安全
+}
+foo(10,32);//42
+
+//5.6 try..finally
+function foo(){
+    try{
+        return 42;
+    }
+    finally{
+        console.log("hello");
+    }
+    console.log("never run");
+}
+console.log(foo());
+//hello
+//42
+
+function foo(){
+    try {
+        throw 42;
+    }
+    finally{
+        console.log("hello");
+    }
+    console.log("never runs");
+}
+console.log(foo());
+//hello;
+//uncaught Exception :42
+
+function foo(){
+    try {
+        return 42;
+    }
+    finally{
+        throw "Oops!";
+    }
+    console.log("never runs");
+}
+console.log(foo());//uncaught Exception :Oops!
+
+for(var i = 0; i<10;i++){
+    try{
+        continue;
+    }
+    finally{
+        console.log(i);
+    }
+}
+
+function foo(){
+    try{
+        return 42;
+    }
+    finally{
+        //没有返回语句，所以没有覆盖
+    }
+}
+function bar(){
+    try{
+        return 42;
+    }
+    finally{
+        return;
+    }
+}
+function baz(){
+    try{
+        return 42;
+    }
+    finally{
+        return "hello";
+    }
+}
+foo();//42
+bar();//undefined
+baz();//hello
+
+//finally 与break混合使用
+function foo(){
+    bar: {
+        try {
+            return 42;
+        }
+        finally {
+            break bar;
+        }
+    }
+    console.log("Crazy");
+    return "hello";
+}
+console.log(foo());
+//Crazy
+//hello
+
+//switch
+var a = "42";
+switch(true){
+    case a == 10:
+            console.log("10 or '10'");
+            break;
+    case a == 42:
+           console.log("42 or '42'");
+           break;
+}
+//42 or '42'
+
+var a = "hello world";
+var b = 10;
+switch(true){
+    case(a || b == 10):
+            break;
+    default:
+            console.log("Oops");
+}
+//Oops
+
+var a = 10;
+switch(a){
+    case 1:
+    case 2:
+    default :
+            console.log("default");
+    case 3:
+            console.log("3");
+    case 4: 
+            console.log("4");
+}
+//default
+//3
+
+
+
+
 
 
 
