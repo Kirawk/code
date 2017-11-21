@@ -68,3 +68,104 @@ a;//183
 b;//180
 
 //1.4 并发
+//1.4.1并发之非交互
+var res = {};
+function foo(results){
+    res.foo = results;
+}
+function bar(results){
+    res.bar = results;
+}
+ajax("http://some.url.1",foo);
+ajax("http://some.url.2",bar);
+
+//1.4.2 并发之交互
+ var res = [];
+ function response(data){
+     res.push(data);
+ }
+ ajax("http://some.url.1",response);
+ ajax("http://some.url.2",response);
+
+ //解决办法
+ var res = [];
+ function response(data){
+     if(data.url == "http://some.url.1"){
+         res[0].push(data); 
+     }else if( data.url == "http://some.url.2"){
+         res[1].push(data);
+     }
+ }
+ ajax("http://some.url.1",response);
+ ajax("http://some.url.2",response);
+
+ var a,b;
+ function foo(x){
+     a = x*2;
+     baz()
+ }
+ function bar(y){
+     b = y*2;
+     baz();
+ }
+ function baz(){
+     console.log(a+b);
+ }
+ ajax("http://some.url.1",foo);
+ ajax("http://some.url.2",bar);
+
+ //改进上述代码
+ var a,b;
+ function foo(x){
+     a = x * 2;
+     if(a&&b){
+         baz();
+     }
+ }
+ function bar(x){
+     b = y * 2;
+     if(a&&b){
+         baz();
+     }
+ }
+ function baz(){
+     console.log(a+b);
+ }
+
+ ajax("http://some.url.1",foo);
+ ajax("http://some.url.2",bar);
+
+ var a;
+ function foo(x){
+     a = x * 2;
+     baz();
+ }
+ function bar(x){
+     a = x / 2;
+     baz();
+ }
+function baz(){
+    console.log(a);
+}
+ajax("http://some.url.1",foo);
+ajax("http://some.url.2",bar);
+
+var a;
+function foo(x){
+    if(!a){
+        a = x * 2;
+        baz();
+    }
+    
+}
+function bar(x){
+    if(!a){
+        a = x / 2;
+        baz();
+    }
+}
+function baz(){
+    console.log(a);
+}
+ajax("http://some.url.1",foo);
+ajax("http://some.url.2",bar);
