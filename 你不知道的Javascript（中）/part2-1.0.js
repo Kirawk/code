@@ -170,4 +170,33 @@ function baz(){
 ajax("http://some.url.1",foo);
 ajax("http://some.url.2",bar);
 
-//1.4.3
+//1.4.3 协作
+var res = [];
+function response(data){
+    res = res.concat(
+        data.map(function(val){
+            return val*2;
+        })
+    );
+}
+ajax("htttp://some.url.1",response);
+ajax("http://some.url.2",response);
+
+//一次读写1000万数据
+ var res = [];
+ function response(data){
+    var chunk = data.splice(0,1000);
+    res.concat(
+        chunk.map(function(val){
+            return val*2;
+        })
+    );
+    if(data.length>0){
+        setTimeout(function(){
+            response(data);
+        },0)
+    }
+ }
+ ajax("http://some.url.1",response);
+ ajax("hhtp://some.url.2",response);
+ 
