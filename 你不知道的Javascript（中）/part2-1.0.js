@@ -200,3 +200,17 @@ ajax("http://some.url.2",response);
  ajax("http://some.url.1",response);
  ajax("hhtp://some.url.2",response);
  
+ //1.5任务队列
+
+ console.log("A");
+ setTimeout(function(){
+     console.log("B");
+ },0);
+
+ schedule(function(){
+     console.log("c");
+     schedule(function(){
+         console.log("D");
+     });
+ });
+ 
