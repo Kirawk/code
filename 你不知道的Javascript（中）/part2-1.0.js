@@ -213,4 +213,30 @@ ajax("http://some.url.2",response);
          console.log("D");
      });
  });
+ //1.6语句顺序
+ var a,b;
+ a = 10;
+ b =30;
+ a = a + 1;
+ b = b + 1;
+ console.log(a + b);
+
+ var a,b;
+ a = 10;
+ a++;
+ b = 30;
+ b++;
+ console.log(a + b);
+
+ //或者这样
+ var a,b;
+ a = 10;
+ b = 30;
+
+ console.log(a * b);
+ a = a + 1;
+ b = b + 1;
+ console.log(a + b);
+
  
+
