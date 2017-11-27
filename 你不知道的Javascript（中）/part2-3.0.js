@@ -99,3 +99,26 @@ var p = foo(42);
 p.then(bar, oopsBar);
 p.then(baz, oopsBar);
 
+//3.2 具有then方法的鸭子类型
+if(p !=null && (typeof p == "object" || typeof p =="function")&& typeof p.then =="function"){
+    //假定这是一个thenable
+}else{
+    //不是thenable
+}
+
+var o = {
+    then:function(){}
+};
+var v = Object.create(o);
+
+v.someStuff = "cool";
+v.otherStuff = "not so cool";
+v.hasOwnProperty("then");
+
+Object.prototype.then = function(){};
+Array.prototype.then = function(){};
+
+var v1 = {
+    hello: "world"
+};
+var v2 = ["Hello","world"];
