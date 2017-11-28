@@ -122,3 +122,17 @@ var v1 = {
     hello: "world"
 };
 var v2 = ["Hello","world"];
+
+/**
+ * Promise的信任问题
+ */
+p.then(function(){
+    p.then(function(){
+        console.log("C");
+    });
+    console.log("A");
+});
+p.then(function(){
+    console.log("B");
+});
+//A B C
