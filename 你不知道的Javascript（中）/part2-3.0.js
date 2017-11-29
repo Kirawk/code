@@ -136,3 +136,42 @@ p.then(function(){
     console.log("B");
 });
 //A B C
+
+var p3 = new Promise(function(resolve,reject){
+    resolve("B");
+});
+var p1 = new Promise(function(resolve,reject){
+    resolve(p3);
+});
+p2 = new Promise(function(resolve,reject){
+    resolve("A");
+});
+p1.then(function(v){
+    console.log(v);
+});
+p2.then(function(v){
+    console.log(v);
+});
+
+//3.3.3 回调未调用
+function timeoutPromise(delay){
+    return new Promise(function(resolve,reject){
+        setTimeout(function(){
+            reject("Timeout!");
+        },delay);
+    });
+}
+
+//设置foo()超时
+Promise.race([
+    foo(),
+    timeoutPromise(3000)
+])
+.then(function(){
+   //foo()及时完成
+},function(err){
+//或者foo()被拒绝
+}
+);
+
+//3.3.4 调用次数过多
