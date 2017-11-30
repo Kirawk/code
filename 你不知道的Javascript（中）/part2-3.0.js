@@ -175,3 +175,31 @@ Promise.race([
 );
 
 //3.3.4 调用次数过多
+//3.3.5 未能传递参数
+//3.3.6 吞掉错误或异常
+var p = new Promise(function(resolve,reject){
+    foo.bar();//foo未定义会出错；
+    resolve(42);
+});
+p.then(
+    function fulfiled(){
+     //永远不会运行到这里
+    },
+    function rejected(err){
+     //err将会是一个typeError异常对象来自foo.bar
+    }
+);
+
+var p = new Promise(function(resolve,reject){
+    resolve(42);
+});
+p.then(
+    function fulfiled(msg){
+        foo.bar();
+        console.log(nsg);
+    },
+    function rejected(err){
+        //永远也不会到达这里
+    }
+);
+
