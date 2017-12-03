@@ -211,3 +211,203 @@ var p2 = Promise.resolve(42);
 var p1 = Promise.resolve(42);
 var p2 = Promise.resolve(p1);
 p1 === p2;//true
+
+var p = {
+    then: function(cb){
+        cb(42);
+    }
+};
+p.then(
+    function fulfiled(val){
+        console.log(val);
+    },
+    function rejected(err){
+        console.log(err);//永远不会到达这里
+    }
+);
+
+var p = {
+    then :function (cb,err){
+        cd(42);
+        errcb("evil laugh");
+    }
+};
+p.then(
+    function fulfilled(val){
+        console.log(val);
+    },
+    function rejected(err){
+        console.log(err);
+    }
+);
+Promise.resolve(p).then(
+    function fulfilled(val){
+        console.log(val);
+    },
+    function rejected(err){
+        //永远也不会执行到这里
+    }
+);
+//不要只是这样做
+foo(42).then(
+    function(v){
+        console.log(v);
+    }
+);
+//而要这样做
+Promise.resolve(foo(42)).then(
+    function (v){
+        console.log(v);
+    }
+);
+/*3.3.8 建立信任*/
+　var p = Promise.resolve(21);
+var p2 = p.then(function (v){
+    console.log(v);//21
+    return v*2;
+});
+p2.then(function(v){
+    console.log(v);//42
+});
+
+var p = Promise.resolve(21);
+p
+.then(function(v){
+    console.log(v);//21
+    return v *2;
+})
+.then(function(v){
+    console.log(v);//42
+});
+
+var p = Promise.resolve(21);
+p.then(function(v){
+    console.log(v);//21
+    return new Promise(function(resolve,reject){
+        resolve(v*2);
+    });
+})
+.then(function(v){
+    console.log(v);//42
+});
+
+var p = Promise.resolve(21);
+p.then(function(v){
+    console.log(v);
+    //创建一个promise并返回
+    return new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve(42);
+        },100);
+    });
+})
+.then(function(v){
+    //在前一步中的100ms延迟之后运行
+    console.log(v);//42
+});
+
+function delay(time){
+    return new Promise(function(resolve,reject){
+        setTimeout(resolve,time);
+    });
+}
+delay(100)
+.then(function STEP2(){
+    console.log("step 2 (after 100ms)");
+    return delay(200);
+})
+.then(function STEP3(){
+    console.log("step 3 (after another 200ms)");
+})
+.then(function STEP4(){
+    console.log("step 4 (next Job)");
+    return delay(50);
+})
+
+//不用定时器来构造ajax请求
+function request(url){
+    return new Promise(function(resolve,reject){
+        //ajax()回调应该是我们这个promise的resolve（）函数
+        ajax(url,resolve);
+    });
+}
+request("http://some.url.1/")
+.then(function(response1){
+    return request("http://some.url.2/?v="+response1);
+})
+.then(function(response2){
+    console.log(response2);
+});
+
+//当这真个链接出现错误时
+//步骤1
+request("http://some.url.1/")
+//步骤二
+.then(function(request1){
+    foo.bar();
+    
+    //永远不会到达这里
+     return request("http://some.url.2/?v="+response1);
+})
+//步骤三
+.then(
+    function fulfilled(response2){
+        //永远不会到达这里
+    },
+
+    //捕捉错误的拒绝处理函数
+    function rejected(err){
+        console.log(err);
+        return 42;
+    }
+ )
+ //步骤4:
+ .then(function(msg){
+     console.log(msg);//42
+ });
+
+ var p = new Promise(function(resolve,reject){
+    reject("Oops");
+ });
+ var p2 = p.then(
+     function fulfiled(){
+         //永远不会到这里
+     }
+ );
+
+ var p = Promise.resolve(42);
+ p.then(null,function reject(err){
+     //永远不会执行到这里
+ });
+  var rejectedPr = new Promise(function(resolve,reject){
+      //用一个被拒绝的promise完成这个promise
+      resolve(Promise.reject("Oops"));
+  });
+  rejectedPr.then(
+      function fulfilled(){
+      //永远不会到达这里
+      },
+      function rejected(err){
+          console.log(err);//"Oops"
+      }
+);
+function fulfiled(msg){
+    console.log(msg);
+}
+function rejected(err){
+    console.log(err);
+}
+p.then(
+    fulfilled,
+    rejected
+);
+
+/**
+ * 3.5 错误处理
+ */
+
+
+
+
+
+
