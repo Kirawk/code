@@ -405,6 +405,33 @@ p.then(
 /**
  * 3.5 错误处理
  */
+function foo(){
+    setTimeout(function(){
+        baz.bar();
+    },100);
+}
+try {
+    foo();
+} catch (error) {
+    //永远也不会到达
+}
+function foo(cb){
+    setTimeout(function(){
+        try {
+           var x = baz.bar();
+           cb(null,x); 
+        } catch (error) {
+            cb(err);
+        }
+    },100);
+}
+foo(function(err,val){
+    if(err){
+        console.log(err);
+    }else{
+        console.log(val);
+    }
+});
 
 
 
