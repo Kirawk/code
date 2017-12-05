@@ -432,6 +432,29 @@ foo(function(err,val){
         console.log(val);
     }
 });
+//Promise没有使用error-first风格而采用了
+//分离回调风格
+var p = Promise.reject("Oops");
+p.then(
+    function fulfilled(){
+        //永远不会运行到这里了
+    },
+    function rejected(err){
+        console.log(err);
+    }
+);
+
+var p = Promise.resolve(42);
+p.then(
+    function fulfilled(msg){
+        console.log(msg.toLowerCase());//数字没有string函数，会报错
+    },
+    function rejected(err){
+        console.log(err);//永远不会到这里
+    }
+);
+
+//3.5.1绝望的陷阱
 
 
 
