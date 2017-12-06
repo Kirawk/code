@@ -455,7 +455,23 @@ p.then(
 );
 
 //3.5.1绝望的陷阱
+var p = Promise.resolve(42);
+p.then(
+    function fulfilled(msg){
+        console.log(msg.toLowerCase());
+    }
+)
+.catch(handleErrors);
 
+var p = Promise.resolve(42);
+p.then(
+    function fulfilled(msg){
+        console.log(msg.toLowerCase());
+    }
+)
+.catch(null,handleErrors);
+
+//3.5.3成功的坑
 
 
 
