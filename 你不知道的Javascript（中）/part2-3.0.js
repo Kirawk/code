@@ -472,7 +472,19 @@ p.then(
 .catch(null,handleErrors);
 
 //3.5.3成功的坑
+var p = Promise.reject("Oops").defer();
+foo(42)
+.then(
+    function fulfilled(){
 
+    },
+    function rejected(err){
+        //处理foo错误
+
+    }
+);
+
+//Promise模式
 
 
 
