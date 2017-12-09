@@ -500,6 +500,66 @@ Promise.all([p1,p2])
         console.log(msg);
 });
 
+//3.6.2 Promise.race
+var p1 = request("http://some.url.1");
+var p2 = request("http://some.url.2");
+Promise.race([p1,p2])
+.then(function (msg){
+    //p1或者p2将赢得这场比赛
+    return request(
+        "http://some.url.3/?v="
+    );
+})
+.then(function (msg){
+    console.log(msg);
+});
+//超时竞赛
+Promise.race([
+    foo(),
+    timeoutPromise(3000)
+])
+.then(
+    function(){
+        //foo按时完成
+    },
+    function(err){
+        //要么foo()被拒绝，要么只是没能按时完成
+    }
+);
+
+var p = Promise.resolve(42);
+p.then(something)
+.finally(cleanup)
+.then(another)
+.finally(cleanup)
+
+if(!Promise.observe){
+    Promise.observe = function(pr,cb){
+        //观察pr的协议
+        pr.then(
+            function fulfiled(msg){
+                Promise.resolve(msg).then(cb);
+            },
+            function rejected(err){
+                Promise.resolve(err).then(cb);
+            }
+        );
+        //返回最初的promise
+        return pr;
+    };
+}
+
+Promise.race([
+    Promise.observe(
+        foo(),
+        function cleanup(msg){
+
+        }
+    ),
+    timeoutPromise(3000)
+])
+
+//3.6.3 all()与race()的变体
 
 
 
