@@ -560,6 +560,19 @@ Promise.race([
 ])
 
 //3.6.3 all()与race()的变体
+//first([])模仿
+if(!Promise.first){
+    Promise.first = function(prs){
+     return new Promise(function(resolve,reject){
+         prs.forEach(function(pr){
+             Promise.resolve(pr)
+             .then(resolve);
+         });
+     });
+    };
+}
+
+//3.6.4 并发迭代
 
 
 
