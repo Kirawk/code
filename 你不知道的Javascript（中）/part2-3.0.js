@@ -605,7 +605,10 @@ Promise.map([p1,p2,p3],function(pr,done){
 /**
  * 3.7 Promise API概述
  */
-
+var p = new Promise(function(resolve,reject){
+    reject("OOPs");
+});
+var p2 = Promise.reject("Oops");
 
 
 
