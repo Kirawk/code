@@ -610,5 +610,20 @@ var p = new Promise(function(resolve,reject){
 });
 var p2 = Promise.reject("Oops");
 
+var fulfiledTh = {
+    then: function(cb){
+        cb(42);
+    }
+};
+var rejectTh = {
+    then: function(cb,errCb){
+        errCb("Oops");
+    }
+};
+var p1 = Promise.resolve(fulfiledTh);
+var p2 = Promise.resolve(rejectTh);
+
+//3.7.3 then()和catch()
+
 
 
