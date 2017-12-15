@@ -624,6 +624,23 @@ var p1 = Promise.resolve(fulfiledTh);
 var p2 = Promise.resolve(rejectTh);
 
 //3.7.3 then()和catch()
+//3.7.4 all（）和race（）
+var p1 = Promise.resolve(42);
+var p2 = Promise.resolve("hello world!");
+var p3 = Promise.resolve("Oops");
+Promise.race([p1,p2,p3])
+.then(function(msg){
+    console.log(msg);
+});
+Promise.all([p1,p2,p3])
+.catch(function(err){
+   console.log(err);
+});
+
+Promise.all([p1,p2])
+.then(function(msgs){
+    console.log(msgs);
+});
 
 
 
