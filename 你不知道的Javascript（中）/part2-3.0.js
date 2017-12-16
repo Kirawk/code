@@ -642,5 +642,181 @@ Promise.all([p1,p2])
     console.log(msgs);
 });
 
+/**
+ * 3.8 Promise的局限性
+ */
+//3.8.1 顺序错误处理
+//3.8.2 单一值
+function getY(x){
+    return new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve((3*x)-1);
+        });
+    })
+}
+function foo(bar,baz){
+    var x = bar * baz;
+    return getY(x)
+    .then(function(y){
+        return [x,y];
+    });
+}
+foo(10,20)
+.then(function(msgs){
+    var x = msgs[0];
+    var y = msgs[1];
+    console.log(x,y);
+});
 
+function foo(bar,baz){
+    var x = bar*baz;
+    //返回两个Promise
+    return [
+        Promise.resolve(x),
+        getY(x)
+    ];
+}
+Promise.all(
+    foo(10,20)
+)
+.then(function(msg){
+    var x = msgs[0];
+    var y = msgs[1];
+    console.log(x,y);
+});
 
+function spread(fn){
+    return Function.call.bind(fn,null);
+}
+Promise.all(foo(10,20))
+.then(
+    spread(function(x,y){
+        console.log(x,y);//200 599
+    })
+)
+Promise.all(
+    foo(10,20)
+)
+.then(function(msg){
+    var [x,y] = msgs;
+    console.log(x,y);
+})
+//es6数组参数结构
+Promise.all(
+    foo(10,20)
+)
+.then(function([x,y]){
+    console.log(x,y);
+});
+//3.8.3 单决议
+//click(...)把click事件绑定到DOM元素上
+//request()支持Promis的Ajax
+var p = new Promise(function(resolve,reject){
+    click("#mybtn",resolve);
+});
+p.then(function(evt){
+    var btnID = evt.currentTarget.id;
+    return request("http://some.url.1/?id="+btnID);
+})
+.then(function(text){
+    console.log(text);
+});
+
+click("#mybtn",function(evt){
+    var btnID = evt.currentTarget.id;
+    request("http://some.url.1/?id="+btnID)
+    .then(function(text){
+        console.log(text);
+    });
+});
+//3.8.4 惯性
+function foo(x,y,cb){
+    ajax("http://some.url.1/?x="+x+"&y="+y,cb);
+}
+foo(11,31,function(err,text){
+    if(err){
+        console.error(err);
+    }else{
+        console.log(text);
+    }
+});
+
+//polyfii安全的guard检查
+if(!Promise.wrap){
+    Promise.wrap = function(fn){
+        return function(){
+            var args = [].slice.call(arguments);
+            return new Promise(function(resolve,reject){
+                fn.apply(
+                    null,
+                    args.concat(function(err,v){
+                        if(err){
+                            reject(err);
+                        }else{
+                            resolve(v);
+                        }
+                    })
+                );
+            });
+        };
+    };
+}
+
+var request = Promise.wrap(ajax);
+function foo(x,y,cb){
+    request("http://some.url.1/?x="+x+"&y"+y)
+    .then(
+        function fulfiled(text){
+            cb(null,text);
+        },
+        cb
+    );
+}
+//为foo构造一个promisory
+var betterFoo = Promise.wrap(foo);
+betterFoo(11,31)
+.then(
+    function fulfiled(text){
+        console.log(text);
+    },
+    function rejected(err){
+        console.log(err);
+    }
+);
+
+function foo(x,y){
+    return request("http://some.url.1/?x"+x+"&y="+y);
+}
+//3.8.5无法取消的Promise
+//考虑Promise超时场景
+var p = foo(42);
+Promise.race([p,timeoutPromise(3000)])
+.then(
+    doSomething,
+    handleError
+);
+p.then(function(){
+    //即使在超时的情况下也会发生
+});
+
+var OK =true;
+var p = foo(42);
+Promise.race([
+    p,
+    timeoutPromise
+    .catch(function(err){
+        OK = false;
+        throw err;
+    })
+])
+.then(
+    doSomething,
+    handleError
+);
+p.then(function(){
+    if(OK){
+        //只有在没超时情况下才会发生
+    }
+});
+
+//3.8.6 Promis性能
