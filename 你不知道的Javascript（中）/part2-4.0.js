@@ -32,10 +32,114 @@ bar();
 x;
 it.next();
 
-//4.11输入与输出
+//4.1.1输入与输出
 function *foo(x,y){
     return x*y;
 }
 var it = foo(6,7);
 var res = it.next();
 res.value;//42
+ 
+function *foo(x){
+    var y = x*(yield);
+    return y;
+}
+var it = foo(6);
+//启动foo()
+it.next();
+var res = it.next(7);
+res.value;//42
+
+function *foo(x){
+    var y = x*(yield "hello");
+    return y;
+}
+var it = foo(6);
+var res = it.next();
+res.value;//"hello"
+res = it.next(7);
+res.value;//42
+
+//4.1.2 多个迭代器
+function *foo(){
+    var x = yield 2;
+    z++;
+    var y = yield(x*z);
+    console.log(x,y,z);
+}
+var z = 1;
+var it1 = foo();
+var it2 = foo();
+var val1 = it1.next().value;//2
+var val2 = it2.next().value;//2
+
+val1 = it1.next(val2*10).value;//40
+val2 = it2.next(val1*5).value;//
+
+it1.next(val2 / 2);//y:300 //20 300 3
+it2.next(val1 / 4);//y:10 //200 10 3
+
+var a = 1;
+var b = 2;
+function foo(){
+    a++;
+    b = b * a;
+    a = b + 3;
+}
+function bar(){
+    b--;
+    a = 8 + b;
+    b = a * 2;
+}
+//改写上述代码
+var a = 1;
+var b = 2;
+function *foo(){
+    a++;
+    yield;
+    b = b * a;
+    a = (yield b) + 3;
+}
+function *bar(){
+    b--;
+    yield;
+    a = (yield 8) + b;
+    b = a * (yield 2);
+}
+function step(gen){
+    var it = gen();
+    var last;
+    return function(){
+        //不管yield出来的是什么，下一都把它原样传回去
+        last = it.next(last).value;
+    };
+}
+a = 1;
+b = 2;
+
+var s1= step(foo);
+var s2 = step(bar);
+s1();
+s1();
+s1();
+//y运行bar()
+s2();
+s2();
+s2();
+console.log(a,b);
+//使用交替执行顺序
+a = 1;
+b = 2;
+var s1 = step(foo);
+var s2 = step(bar);
+s2();
+s2();
+s1();
+s2();
+s1();
+s1();
+s1();
+s2();
+console.log(a,b);
+
+//4.2 生成器产生值
