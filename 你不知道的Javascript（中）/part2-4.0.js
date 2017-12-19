@@ -143,3 +143,60 @@ s2();
 console.log(a,b);
 
 //4.2 生成器产生值
+var gimmeaSomething = (function(){
+    var nextVal;
+    return function(){
+        if(nextVal === undefined){
+            nextVal = 1;
+        }
+        else{
+            nextVal = (3*nextVal)+6;
+        }
+        return nextVal;
+    };
+});
+gimmeaSomething();//1
+gimmeaSomething();//9
+gimmeaSomething();//33
+gimmeaSomething();//105
+
+//标准的迭代器接口
+var something = (function(){
+    var nextVal;
+    return {
+        [Symbol.iterator]:function(){return this},
+        next: function(){
+            if(nextVal === undefined){
+                nextVal = 1;
+            }
+            else{
+                nextVal = (3*nextVal)+6;
+            }
+            return {
+                done:false,
+                value:nextVal
+            };
+        }
+    };
+})();
+something.next().value;//1
+something.next().value;//9
+something.next().value;//33
+something.next().value;//105
+
+//es6提供了for..of
+for(var v of something){
+    console.lig(v);
+    if(v>500){
+        break;
+    }
+}
+
+var a = [1,3,5,7,9];
+for(var v of a){
+    console.log(v);
+}
+//1 3 5 7 9
+
+//4.2.2 iterable
+
