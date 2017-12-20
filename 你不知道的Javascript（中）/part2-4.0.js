@@ -199,4 +199,61 @@ for(var v of a){
 //1 3 5 7 9
 
 //4.2.2 iterable
+var a = [1,2,3,4,5];
+var it =a[Symbol.iterator]();
+
+it.next().value;//1
+it.next().value;//2
+
+//4.2.3 生成迭代器
+//使用生成器实现something无限数字序列生产者
+function *something(){
+    var nextVal;
+    while(true){
+        if(nextVal === undefined){
+            nextVal = 1;
+        }else{
+            nextVal = (3*nextVal) + 6;
+        }
+        yield nextVal;
+    }
+}
+
+for(var v of something()){
+    console.log(v);
+
+    //不要死循环
+    if(v > 500){
+        break;
+    }
+}
+function *something(){
+    try {
+        var nextVal;
+        if(nextVal === undefined){
+            nextVal = 1;
+        }else{
+            nextVal = (nextVal*3)+6;
+        }
+        yield nextVal;
+    } finally {
+        console.log("clearup");
+    }
+}
+
+var it = something();
+for(var v of it){
+    console.log(v);
+    if(v>500){
+        console.log(
+            it.return("hello world").value
+        );
+        //这里不需要break
+    }
+}
+// 1 9 33 105 321 969
+
+/**
+ * 4.3异步迭代生成器
+ */
 
