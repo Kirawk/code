@@ -297,8 +297,47 @@ var it = main();
 //启动
 it.next();
 
+//同步处理错误
+try {
+    var text = yield foo(11,31);
+    console.log(text);
+} catch (err) {
+    console.error(err);
+}
 
+if(err){
+    //向*main()抛出一个错误
+    it.throw(err);
+}
 
+function *main(){
+    var x = yield "hello world";
+    yield x.toLowerCase();
+}
+var it = main();
+it.next().value;
+try{
+    it.next(42);
+}catch(err){
+    console.log(err);
+}
+
+function *main(){
+    var x = yield "Hello World";
+    console.log(x);
+}
+var it = main();
+it.next();
+try{
+    it.throw("Oops");
+}
+catch{
+    //不行，没有处理
+    console.error(err);
+}
+/**
+ * 4.4 生成器 + Promise
+ */
 
 
 
