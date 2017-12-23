@@ -338,6 +338,255 @@ catch{
 /**
  * 4.4 生成器 + Promise
  */
+//前面例子
+function foo(x,y){
+    return request(
+        "http://some.url.1/?x="+x+"&y"+y
+    );
+}
+foo(11,31)
+.then(
+    function(text){
+        console.log(text)
+    },
+    function (err){
+        console.log(err);
+    }
+);
 
+//该写上述例子
+function foo(x,y){
+    return request(
+        "http://some.url.1?x="+x+"&y"+y
+    );
+}
+function *main(){
+    try {
+        var text = yield foo(11,31);
+    } catch (err) {
+        console.log(err);
+    }
+}
 
+var it = main();
+var p = it.next().value;
+//等待promise P决议
+p.then(
+    function(text){
+        it.next(text);
+    },
+    function (err){
+        it.throw(err);
+    }
+);
+function run(gen){
+    var args = [].slice.call(arguments,1),it;
+    //  当前上下文初始化生成器
+    it = gen.apply(this,args);
+
+    //返回一个promise用于生成器完成
+    return Promise.resolve()
+    .then(function handleNext(value){
+        var next = it.next(value);
+        return (function handleResult(next){
+            if(next.done){
+                return next.value;
+            }else{
+                return Promise.resolve(next.value)
+                .then(
+                    handleNext,
+                    function handleErr(err){
+                        return Promise.resolve(
+                            it.throw(err)
+                        )
+                        .then(handleResult);
+                    }
+                );
+            }
+        })(next);
+    });
+
+}
+
+//es6或es7
+function foo(x,y){
+    return request(
+        "http:some.url.1/?x="+x+"&y="+y
+    );
+}
+async function main(){
+    try{
+        var text = await foo(11,31);
+        console.log(text);
+    }catch(err){
+        console.error(err);
+    }
+}
+main();
+
+/**
+ * 4.4.2 生成器中的Promise并发
+ */
+function *foo(){
+    var r1 = yield request("http://some.url.1");
+    var r2 = yield request("http://some.url.2");
+
+    var r3 = yield request(
+        "http://some.url.3/?v="+r1+","+r2
+    );
+    console.log(r3);
+}
+//使用前面定义的工run(...)
+run(foo);
+
+//改进上述代码
+function *foo(){
+    //让两个请求同时
+    var p1 = request("http://some.url.1");
+    var p2 = request("http://some.url.2");
+    
+    //等待两个Promis都决议
+    var r1 = yield p1;
+    var r2 = yield p2;
+
+    var r3 = yield request(
+        "http://some.url.3/?v="+r1+","+r2
+    );
+    console.log(r3);
+}
+run(foo);
+//使用Promis.all改写上述代码
+function *foo(){
+    var results = yield Promise.all([
+        request("http://some.url.1"),
+        request("http://some.url.2")
+    ]);
+
+    var r1 = results[0];
+    var r2 = results[1];
+    var r3 = yield request(
+        "hhtp://some.url.3/?v="+r1+","+r2
+    );
+    console.log(r3);
+}
+run(foo);
+//隐藏的Promise
+function bar(url1,url2){
+    return Promise.all([
+        request(url1),
+        request(url2)
+    ]);
+}
+function *foo(){
+    //隐藏bar()内部基于Promise的并发细节
+    var results = yield bar(
+        "hhtp://some.url.1",
+        "http://some.url.2"
+    );
+
+    var r1 = request[0];
+    var r2 = request[1];
+
+    var r3 = yield request(
+        "http://some.url.3/?v="+r1+","+r2
+    );
+    console.log(r3);
+}
+run(foo);
+
+/**
+ * 4.5 生成器委托
+ */
+function *foo(){
+    var r2 = yield request("http://some.url.2");
+    var r3 = yield request("http://some.url.3/?v="+r2);
+
+    return r3;
+}
+function *bar(){
+    var r1 = yield request("http://some.url.1");
+
+    //通过run()委托给*foo()
+    var r3 = yield run(foo);
+
+    console.log(r3);
+}
+run(bar);
+
+//委托的简单场景
+function *foo(){
+    console.log("*foo() starting");
+
+    yield 3;
+    yield 4;
+    console.log("*foo() finished"); 
+}
+function *bar(){
+    yield 1;
+    yield 2;
+    yield *foo();//yield委托
+    yield 5;
+}
+var it = bar();
+it.next().value;//1
+it.next().value;//2
+it.next().value;//*foo启动
+                //3
+it.next().value;//4
+it.next().value;//*foo()完成
+                //5
+
+//再回到前面三个ajax请求的例子
+function *foo(){
+    var r2 = yield request("http://some.url.2");
+    var r3 = yield request("http://some.url.3/?v="+r2);
+    
+    return r3;
+}
+function *bar(){
+    var r1 = yield request("http://some.url.1");
+
+    //通国yield*委托给*foo()
+    var r3 = yield *foo();
+
+    console.log(r3);
+}
+run(bar);
+
+/**
+ * 4.5.2 消息委托
+ */
+function *foo(){
+    console.log("inside *foo:",yield "B");
+    console.log("inside *foo():",yield "C");
+    return "D";
+}
+function *bar(){
+    console.log("inside *bar():",yield "A");
+    console.log("inside *bar():",yield *foo());
+    console.log("inside *bar():",yield "E");
+
+    return "F";
+}
+var it = bar();
+console.log("outside",it.next().value);
+//outside:A
+console.log("outside",it.next(1).value);
+//inside *bar():1
+//outside:B
+console.log("outside",it.next(2).value);
+//inside *foo():2
+//outside:C
+console.log("outside",it.next(3).value);
+//inside *foo():3
+//inside *bar():D
+//outside:E
+console.log("outside",it.next(4).value);
+//inside *bar():4
+//outside:F
+
+function *bar(){
+    console.log("inside *bar():",yield "A");
+    console.log("inside  *bar()",yield *["B","C","D"]);
+}
 
