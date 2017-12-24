@@ -588,5 +588,76 @@ console.log("outside",it.next(4).value);
 function *bar(){
     console.log("inside *bar():",yield "A");
     console.log("inside  *bar()",yield *["B","C","D"]);
+    console.log("inside *bar():",yield "E");
+    return "F";
 }
+var it = bar();
+console.log("outside:", it.next().value);
+console.log("outside:",it.next(1).value);
+console.log("outside:",it.next(2).value);
+console.log("outside:",it.next(3).value);
+console.log("outside:",it.next(4).value);
+console.log("outside:",it.next(5).value);
+
+//异常也被委托
+function *foo(){
+    try{
+        yield "B"
+    }
+    catch(err){
+        console.log("error caught inside *foo():",err);
+    }
+    yield "C";
+    throw "D";
+}
+function *bar(){
+    yield "A";
+
+    try{
+        yield *foo();
+    }
+    catch(err){
+        console.log("error caught inside *bar():",err);
+    }
+    yield "E";
+    yield *baz();
+
+    //注：不会到达这里！
+    yield "G";
+}
+
+function *baz(){
+    throw "F";
+}
+
+var it = bar();
+console.log("outside:",it.next().value);
+console.log("outside:",it.next().value);
+console.log("outside:",it.throw(2).value);
+console.log("outside:",it.next(3).value);
+try{
+    console.log("outside:",it.next(4).value);
+}
+catch(err){
+    console.log("error caught outside:",err);
+}
+
+/**
+ * 异步委托
+ */
+function *foo(){
+    var r2 = yield request("http://some.url.2");
+    var r3 = yield request("http://some.url.3/?v="+r2);
+
+    return r3;
+}
+function *bar(){
+    var r1 = yield request("http:some.url.1");
+
+    var r3 = yield *foo();
+    console.log(r3);
+}
+run(bar);
+
+
 
