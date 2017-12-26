@@ -678,4 +678,17 @@ run(bar);
 /**
  * 4.6 生成器并发
  */
-
+function response(data){
+    if(data.url == "http://some.url.1"){
+        res[0] = data;
+    }
+    else if(data.url == "http://some.url.2"){
+        res[1] = data;
+    }
+}
+var res = [];
+function *reqData(url){
+    res.push(
+        yield request(url)
+    );
+}
