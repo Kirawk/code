@@ -709,3 +709,71 @@ p1
     it2.next(data);
 });
 
+var res = [];
+function *reqData(url){
+    var data = yield request(url);
+
+    //控制转移
+    yield;
+    res.push(data);
+}
+var it1 = reqData("http://some.url.1");
+var it2 = reqData("http:some.url.2");
+
+var p1 = it.next();
+var p2 = it.next();
+p1.then(function(data){
+   it1.next(data);
+});
+
+p2.then(function(data){
+    it2.next(data);
+});
+
+Promise.all([p1,p2])
+.then(function(){
+    it1.next();
+    it2.next();
+});
+
+var res = [];
+runAll(
+    function*(){
+        var p1 = request("http://some.url.1");
+
+        //控制转移
+        yield;
+        res.push(yield p1);
+    },
+    function*(){
+        var p2 = request("http://some.url.2");
+
+        //控制转移
+        yield;
+        res.push(yield p2);
+    }
+);
+
+/**
+ * 4.7 形实转化程序
+ */
+function foo(x,y){
+    return x+y;
+}
+function fooThhunk(){
+    return foo(3,4);
+}
+console.log(fooThhunk());
+
+function foo(x,y,cb){
+    setTimeout(function(){
+        cb(x+y);
+    },1000);
+}
+function fooThhunk(cb){
+    foo(3,4,cb);
+}
+fooThunk(function(sum){
+    console.log(sum);
+});
+
