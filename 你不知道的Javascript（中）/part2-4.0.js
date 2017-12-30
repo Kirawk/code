@@ -777,3 +777,14 @@ fooThunk(function(sum){
     console.log(sum);
 });
 
+function thunkify(fn){
+    var args = [].slice.call(arguments,1);
+    return function(cb){
+        args.push(cb);
+        return fn.apply(null,args);
+    };
+}
+var fooThhunk = thunkify(foo,3,4);
+fooThhunk(function(sum){
+    console.log(sum);
+});
