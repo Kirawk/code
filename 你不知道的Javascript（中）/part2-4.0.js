@@ -788,3 +788,13 @@ var fooThhunk = thunkify(foo,3,4);
 fooThhunk(function(sum){
     console.log(sum);
 });
+
+function thunkify(fn){
+    return function(cb){
+        var args = [].slice.call(arguments);
+        return function(cb){
+            args.push(cb);
+            return fn.apply(null,args);
+        };
+    };
+}
