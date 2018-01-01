@@ -798,3 +798,14 @@ function thunkify(fn){
         };
     };
 }
+
+var whatIsThis = thunkify(foo);
+var fooThunk = whatIsThis(3,4);
+//将来
+fooThunk1(function(sum){
+    console.log(sum);
+});
+
+fooThunk2(function(sum){
+    console.log(sum);
+});
