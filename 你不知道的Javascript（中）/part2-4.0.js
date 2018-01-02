@@ -809,3 +809,12 @@ fooThunk1(function(sum){
 fooThunk2(function(sum){
     console.log(sum);
 });
+
+//更简洁
+var fooThunkory = thunkify(foo);
+var fooThunk1 = fooThunkory(3,4);
+var fooThunk2 = fooThunkory(5,6);
+
+/**
+ * s/promise/thunk
+ */
