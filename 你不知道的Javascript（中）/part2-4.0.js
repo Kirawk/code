@@ -818,3 +818,8 @@ var fooThunk2 = fooThunkory(5,6);
 /**
  * s/promise/thunk
  */
+function foo(x,y,cb){
+    setTimeout(function(){
+        cb(null,x+y);
+    },1000);
+}
