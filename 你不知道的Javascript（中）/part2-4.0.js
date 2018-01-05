@@ -823,3 +823,10 @@ function foo(x,y,cb){
         cb(null,x+y);
     },1000);
 }
+var fooThunkory = thunkify(foo);
+var fooPromisory = Promisify(foo);
+
+//对称提问
+var fooThunk = fooThunkory(3,4);
+var fooPromise = fooPromisory(3,4);
+
