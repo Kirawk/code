@@ -830,3 +830,24 @@ var fooPromisory = Promisify(foo);
 var fooThunk = fooThunkory(3,4);
 var fooPromise = fooPromisory(3,4);
 
+//得倒答案
+fooThunk(function(err,sum){
+    if(err){
+        console.error(err);
+    }else{
+        console.log(sum);
+    }
+});
+
+//得倒promise答案
+fooPromise
+.then(
+    function(sum){
+        console.log(sum);
+    },
+    function(err){
+        console.error(err);
+    }
+);
+
+
