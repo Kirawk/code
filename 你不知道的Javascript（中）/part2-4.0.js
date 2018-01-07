@@ -850,4 +850,154 @@ fooPromise
     }
 );
 
+function *foo(){
+    var val = yield request("http://some.url.1");
+    console.log(val);
+}
+run(foo);
+
+//promisory request()
+var request = Promise.wrap(ajax);
+
+//thunkory request(...)
+var request = thunkify(ajax);
+
+/**
+ * 4.8 ES6之前的生成器
+ * */
+//手工变换
+//request()是一个支持Promise的Ajax工具
+function *foo(){
+    try{
+        console.log("requesting",url);
+        var val = yield request(url);
+        console.log(val);
+    }
+    catch(err){
+        console.log("Oops:",err);
+        return false;
+    }
+}
+var it = foo("http://some.url.1");
+
+function foo(url){
+    //...
+
+    //构造并返回一个迭代器
+    return {
+        next:function(v){
+            //..
+        },
+        throw:function(e){
+            //...
+        }
+    };
+}
+var it = foo("http://some.url.1");
+
+function *foo(){
+    //状态一
+    try{
+        console.log("requesting",url);
+       var TMP1 = request(url);
+       
+       //状态2
+       var val = yield TMP1;
+       console.log(val);
+    }
+    catch(err){
+        console.log("Oops:",err);
+        return false;
+    }
+}
+
+function foo(url){
+    //管理生成器状态
+    var state;
+
+    //生成器范围变量生申明
+    var val;
+    function process(v){
+        switch(state){
+            case 1:
+                console.log("requesting:",url);
+                return request(url);
+            case 2:
+                val = v;
+                console.log(val);
+                return;
+            case 3:
+                var err = v;
+                console.log("Oops:",err);
+                return false;
+        }
+    }
+    // 构造并返回一个生成器
+    return{
+        next: function(v){
+            //初始化状态
+            if(!state){
+                state = 1;
+                return{
+                    done:false,
+                    value:process()
+                };
+            }
+            //yield 成功恢复
+            else if(state == 1){
+                statue = 2;
+                return{
+                    done:true,
+                    value:process(v)
+                };
+            }
+            //生成器已经完成
+            else{
+                return {
+                    done:true,
+                    value:undefined
+                };
+            }
+        },
+        "throw":function(e){
+            if(state == 1){
+                state = 3;
+                return {
+                    done:true,
+                    value:process(e)
+                };
+            }
+            else{
+                throw e;
+            }
+        }
+    };  
+}
+//4.8.2 自动转换
+//regenerator http://facebook.github.io/regenerator/
+var foo = regeneratorRuntime.mark(function foo(url){
+    var val;
+    return regeneratorRuntime.wrap(function foo$(context$1$0){
+        while(1) switch(context$1$0.prev = context$1$0.next){
+            case 0:
+                context$1$0.prev = 0;
+                console.log("requesting:",url);
+                context$1$0.next = 4;
+                return request(url);
+            case 4:
+                val = context$1$0.sent;
+                console.log(val);
+                context$1$0.next = 12;
+                break;
+            case 8:
+                context$1$0.prev = 8;
+                context$1$0.t0 = context$1$0.catch(0);
+                console.log("Oops:",context$1$0.t0);
+                return context$1$0.abrupt("return",false);
+            case 12:
+            case "end":
+                return context$1$0.stop();
+        }
+    },foo,this,[[0,8]]);
+});
 
