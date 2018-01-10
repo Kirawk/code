@@ -326,3 +326,30 @@ if(!Function.prototype.bind){
 /**
  * 添加私有函数
  */
+var Person = function(){};
+(function(){
+    var findById = function(){};
+    Person.find = function(id){
+        if(typeof id == "integer"){
+            return findById(id);
+        }
+    };
+})();
+
+/**
+ * 类库
+ */var Person = $.Class.create({
+     initalize: function(name){
+         this.name = name;
+     }
+ });
+
+ var Student = $.Class.create(Person,{
+     price: function(){}
+ });
+ var alex = new Student("Alex");
+ alex.pay();
+
+ Person.find = function(id){
+     
+ }
