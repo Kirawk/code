@@ -26,4 +26,8 @@ jQuery("#element").bind(eventName,handle);
   /**
    * 自定义事件
    */
+  //绑定自定义事件
+  $(".class").bind("refresh.widget",function(){});
+//触发自定义事件
+$(".class").trigge("refresh.widget");
   
