@@ -30,4 +30,24 @@ jQuery("#element").bind(eventName,handle);
   $(".class").bind("refresh.widget",function(){});
 //触发自定义事件
 $(".class").trigge("refresh.widget");
-  
+
+//自定义事件和jQuery插件
+//选项卡实现
+/**
+ * <ul id="tabs">
+ *    <li data-tab = "users">Usarea</li>
+ *    <li data-tab = "groups">Groups</li>
+ * </ul>
+ * 
+ * 
+ */
+jQuery.fn.tabs = function(control){
+    var element = $(this);
+    control = $(control);
+
+    element.find("li").bind("click",function(){
+        //从列表中添加或删除active类
+        element.find("li").removeClass("active");
+        $(this).addClass("active");
+    })
+}
