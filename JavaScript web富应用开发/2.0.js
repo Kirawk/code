@@ -49,5 +49,11 @@ jQuery.fn.tabs = function(control){
         //从列表中添加或删除active类
         element.find("li").removeClass("active");
         $(this).addClass("active");
+
+        //给tabConten添加或删除active
+        var tabName = $(this).attr("data-tab");
+        control.find(">[data-tab]").removeClass("active");
+        control.find(">[data-tab='"+tabName+"']").addClass("active");
     })
 }
+
