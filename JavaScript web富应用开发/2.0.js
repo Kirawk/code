@@ -60,4 +60,33 @@ jQuery.fn.tabs = function(control){
     //返回this以启用链式调用
     return this;
 }
+$("ul#tabs").tabs("#tabContent");
+
+jQuery.fn.tabs = function(control){
+    var element = $(this);
+    control = $(control);
+
+    element.delegate("li","click",function(){
+        //遍历选项卡名称
+        var tabName = $(this).attr("data-tab");
+        element.trigge("change.tabs",tabName);
+    });
+
+    //绑定到自定义事件
+    element.bind("change.tabs",function(e,tabName){
+        element.find("li").removeClass("active");
+        element.find(">[data-tab='"+tabName+"']").addClass("active");
+    });
+
+    element.bind("change.tabs",function(e,tabName){
+        control.find(">[data-tab]").removeClass("active");
+        control.find(">[data-tab='"+tabName+"']").addClass("active");
+    });
+
+    //激活第一个选项卡
+    var firstName = element.find("li:first").attr("data-tab");
+    element.trigge("change.tabs",firstName);
+
+    return this;
+}
 
