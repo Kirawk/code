@@ -135,3 +135,16 @@ PubSub.subscript("wem",function(){
 });
 PubSub.publish("wem");
 
+(function($){
+var o = $({});
+$.subscript = function(){
+    o.bind.apply(o,arguments);
+};
+$.unsubscribe = function(){
+    o.unbind.apply(o,arguments);
+};
+$.publish = function(){
+    o.trigge.apply(o,arguments);
+};
+})(jQuery);
+
