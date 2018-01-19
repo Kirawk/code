@@ -137,7 +137,7 @@ PubSub.publish("wem");
 
 (function($){
 var o = $({});
-$.subscript = function(){
+$.subscribe = function(){
     o.bind.apply(o,arguments);
 };
 $.unsubscribe = function(){
@@ -148,3 +148,15 @@ $.publish = function(){
 };
 })(jQuery);
 
+$.subscribe("/some/topic",function(event,a,b,c){
+    console.log(event.type,a+b+c);
+});
+$.publish("/some/topic","a","b","c");
+
+var Asset = {};
+//添加PubSub
+jQuery.extend(Asset,PubSub);
+
+Asset.subscribe("create",function(){
+
+});
