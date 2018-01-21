@@ -26,3 +26,36 @@ if(typeof Object.create!="function"){
         return new F();
     };
 }
+var Modal = {
+    inherited: function(){},
+    created:function(){},
+    prototype:{
+        init:function(){}
+    },
+    create:function(){
+        var object = object.create(this);
+        object.parent = this;
+        object.prototype = object.fn = Object.create(this.prototype);
+
+        object.created();
+        this.inherited(object);
+        return object;
+    },
+    init:function(){
+        var instance = Object.create(this.prototype);
+        instance.parent = this;
+        instance.init.apply(instance,arguments);
+        return instance;
+    }
+};
+var Asset = Modal.create();
+var User = Modal.create();
+
+var user = User.init();
+
+/**
+ * 添加ORM属性
+ */
+jQuery.extend(Modal,{
+    find:function(){}
+});
