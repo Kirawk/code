@@ -59,3 +59,41 @@ var user = User.init();
 jQuery.extend(Modal,{
     find:function(){}
 });
+
+//天加实力属性
+jQuery.extend(Model.prototype,{
+    inti:function(atts){
+        if(atts) this.load(atts);
+    },
+    load:function(attributes){
+        for(var name in attributes)
+        this[name] = attributes[name];
+    }
+});
+assertEqual(typeof Asset.find,"function");
+var Modal = {
+    /** */
+
+    extend:function(o){
+        var extended = o.extended;
+        jQuery.extend(this,o);
+        if(extended)extended(this);
+    },
+
+    include:function(o){
+        var included = o.included;
+        jQuery.extend(this.prototype,o);
+        if(include) included(this);
+    }
+};
+
+//添加对象属性
+Model.extended({
+    find:function(){}
+});
+
+//添加实例属性
+Modal.include({
+    init:function(atts){},
+    load:function(attributes){}
+});
