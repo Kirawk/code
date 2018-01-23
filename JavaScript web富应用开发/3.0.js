@@ -97,3 +97,18 @@ Modal.include({
     init:function(atts){},
     load:function(attributes){}
 });
+
+/**
+ * 持久化记录
+ */
+Modal.records = {};
+Modal.include({
+    newRecord:true,
+    create:function(){
+        this.newRecord = false;
+        this.parent.records[this.id] = this;
+    },
+    destroy:function(){
+        delete this.parent.records[this.id];
+    }
+});
