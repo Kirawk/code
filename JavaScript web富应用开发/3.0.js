@@ -112,3 +112,15 @@ Modal.include({
         delete this.parent.records[this.id];
     }
 });
+
+Modal.include({
+    update:function(){
+        this.parent.records[this.id] = this;
+    }
+});
+Modal.include({
+    save:function(){
+        this.newRecord?this.create():this.update();
+    }
+});
+
