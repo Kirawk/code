@@ -123,4 +123,9 @@ Modal.include({
         this.newRecord?this.create():this.update();
     }
 });
-
+Model.extend({
+    //通过ID查找，找不到则抛出异常
+    find:function(id){
+        return this.records[id]|| throw ("Unknow record");
+    }
+});
