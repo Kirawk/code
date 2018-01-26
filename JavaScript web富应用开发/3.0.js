@@ -129,3 +129,18 @@ Model.extend({
         return this.records[id]|| throw ("Unknow record");
     }
 });
+
+var asset = Asset.init();
+asset.name = "same,same";
+asset.id = 1;
+asset.save();
+
+var asset2 = Asset.init();
+asset2.name = "but different";
+asset2.id = 2;
+asset2.save();
+asset2.destroy();
+
+/**
+ * 增加ID支持
+ */
