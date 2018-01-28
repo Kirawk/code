@@ -149,3 +149,6 @@ Math.guid = function(){
     var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
     return v.toString(16); }).toUpperCase();
     }
+    Model.extend({ create: function(){
+        if ( !this.id ) this.id = Math.guid(); this.newRecord = false; this.parent.records[this.id] = this;
+        } });
