@@ -78,3 +78,9 @@ mod.load(function(){
 });
 })(jQuery,Controller);
 
+Controller.fn.unload = function(func){
+    jQuery(window).bind("unload",this.proxy(true));
+};
+
+var mod = new Controller();
+mod.include(StateMachine);
