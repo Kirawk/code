@@ -84,3 +84,15 @@ Controller.fn.unload = function(func){
 
 var mod = new Controller();
 mod.include(StateMachine);
+
+//文档加载完成后载入控制器
+var exports = this;
+(function(){
+var mod = {};
+mod.create = function(includes){
+var result = function(){
+    this.init.apply(this,arguments);
+};
+
+}
+})(jQuery)
