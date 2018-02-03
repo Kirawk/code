@@ -111,3 +111,16 @@ return result;
 };
 exports.Controller = mod;
 })(jQuery)
+jQuery(function($){
+    var ToggleView = Controller.create({
+        init:function(view){
+            this.view = $(view);
+            this.view.mouseover(this.proxy(this.toggleClass),true);
+            this.view.mouseout(this.proxy(this.toggleClass),false);
+        },
+        this.toggleClass:function(e){
+            this.view.toggleClass("over",e.data);
+        }
+    });
+    new ToggleView("#view");
+});
