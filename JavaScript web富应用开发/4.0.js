@@ -118,9 +118,18 @@ jQuery(function($){
             this.view.mouseover(this.proxy(this.toggleClass),true);
             this.view.mouseout(this.proxy(this.toggleClass),false);
         },
-        this.toggleClass:function(e){
+        toggleClass:function(e){
             this.view.toggleClass("over",e.data);
         }
     });
     new ToggleView("#view");
 });
+
+/**
+ * 访问视图
+ */
+//....
+inti:function(view){
+    this.view = $(view);
+    this.form = this.view.find("form");
+}
