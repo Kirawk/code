@@ -133,3 +133,7 @@ inti:function(view){
     this.view = $(view);
     this.form = this.view.find("form");
 }
+elements: {
+    "form.searchForm": "searchForm", 
+    "form input[type=text]": "searchInput"
+}
