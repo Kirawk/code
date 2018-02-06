@@ -133,7 +133,21 @@ inti:function(view){
     this.view = $(view);
     this.form = this.view.find("form");
 }
+/*
 elements: {
     "form.searchForm": "searchForm", 
     "form input[type=text]": "searchInput"
 }
+*/
+var exports = this;
+jQuery(function($){
+    exports.SearchView = Controller.create({
+        //选择器到局部变量名的映射
+        elements:{
+            "input[type=seach]":"searchInput",
+            "form":"searchForm"
+        },
+
+        //实例化调用
+    });
+});
