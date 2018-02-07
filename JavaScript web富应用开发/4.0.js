@@ -147,7 +147,11 @@ jQuery(function($){
             "input[type=seach]":"searchInput",
             "form":"searchForm"
         },
-
         //实例化调用
+        init:function(element){
+            this.el = $(element);
+            this.refreshElements();
+            this.searchForm.submit(this.proxy(thiss.search);
+        },
     });
 });
