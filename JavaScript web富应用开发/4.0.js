@@ -153,5 +153,10 @@ jQuery(function($){
             this.refreshElements();
             this.searchForm.submit(this.proxy(thiss.search);
         },
+        search: function () {
+            console.log("Searching:", this.searchInput.val());
+        },
+            // 私有
+            
     });
 });
