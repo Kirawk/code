@@ -156,7 +156,10 @@ jQuery(function($){
         search: function () {
             console.log("Searching:", this.searchInput.val());
         },
-            // 私有
+        // 私有
+        $: function (selector) {
+            // 需要一个`el`属性，同时传入选择器 return $(selector, this.el);
+            },
             
     });
 });
