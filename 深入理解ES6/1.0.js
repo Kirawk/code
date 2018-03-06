@@ -19,6 +19,7 @@ function getValue2(condition) {
     } else {
         return null;
     }
+    console.log(value);
 }
 
 /**
@@ -32,3 +33,12 @@ function getValue3(condition) {
         return null;
     }
 }
+
+/*
+ * 禁止重声明
+ */
+
+var count = 30;
+let count = 40; //抛出语法错误
+
+var count = 30;
