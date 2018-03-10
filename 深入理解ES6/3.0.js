@@ -71,3 +71,72 @@ let person = ((name) => {
         }
     };
 })("Nicholas");
+
+/**
+ * 箭头函数没有this绑定
+ */
+let PageHandler = {
+    id: "123",
+    init: function() {
+        document.addEventListener("clicl", function(event) {
+            this.doSomething(event.type); //抛出错误    
+        }, false);
+    },
+    doSomething: function(type) {
+        console.log("Handling" + type + "for" + this.id);
+    }
+};
+
+let PageHandler = {
+    id: "123",
+    init: function() {
+        document.addEventListener("clicl", (function(event) {
+            this.doSomething(event.type); //抛出错误    
+        }).bind(this), false);
+    },
+    doSomething: function(type) {
+        console.log("Handling" + type + "for" + this.id);
+    }
+};
+
+let PageHandler = {
+    id: "123",
+    init: function() {
+        document.addEventListener("click",
+            event => this.doSomething(event.type), false);
+    },
+    doSomething: function(type) {
+        console.log("Handling" + type + "for" + this.id);
+    }
+};
+
+/**
+ * 箭头函数与数组
+ */
+var result = values.sort(function(a, b) {
+    return a - b;
+});
+
+var result = values.sort((a, b) => a - b);
+
+/**
+ * 箭头函数没有arguments绑定
+ */
+function createArrowFunctionReturningFirstArg() {
+    return () => arguments[0];
+}
+var arrowFunction = createArrowFunctionReturningFirstArg(5);
+console.log(arrowFunction()); //5
+
+/**
+ * 箭头函数的辨识方法
+ */
+var comparator = (a, b) => a - b;
+console.log(typeof comparator); //"Function"
+console.log(comparator instanceof Function); //true
+
+var sum = (num1, num2) => num1 + num2;
+console.log(sum.call(null, 1, 2)); //3
+console.log(sum.apply(null, [1, 2]));
+var boundSum = sum.bind(null, 1, 2);
+console.log(boundSum());
