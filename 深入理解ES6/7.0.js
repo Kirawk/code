@@ -36,3 +36,18 @@ map.count = 1;
 if (map.count) {
     //要执行的代码
 }
+
+/**
+ * ES6中的set集合
+ */
+let set = new Set();
+set.add(5);
+set.add("5");
+console.log("set.size");
+
+let set = new Set();
+key1 = {};
+key2 = {};
+set.add(key1);
+set.add(key2);
+console.log(set.size); //2
