@@ -45,9 +45,42 @@ set.add(5);
 set.add("5");
 console.log("set.size");
 
-let set = new Set();
-key1 = {};
-key2 = {};
+let set = new Set(),
+    key1 = {},
+    key2 = {};
 set.add(key1);
 set.add(key2);
 console.log(set.size); //2
+
+//重复调用会被忽略
+let set = new Set();
+set.add(5);
+set.add("5");
+set.add(5); //这行会被忽略
+console.log(set.size);
+
+//通过构造函数
+let set = new Set([1, 2, 3, 4, 5, 5, 5]);
+console.log(set.size); //5
+
+//has()方法
+let set = new Set();
+set.add(5);
+set.add("5");
+set.add(6);
+console.log(set.has(5)); //true
+console.log(set.has(8)); //false
+
+//移除元素
+let set = new Set();
+set.add(5);
+set.add("5");
+console.log(set.has(5)); //true
+
+set.delete(5);
+console.log(set.has(5)); //false
+console.log(set.size); //1
+
+set.clear();
+console.log(set.has("5")); //false
+console.log(set.size); //0
