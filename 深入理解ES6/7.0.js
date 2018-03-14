@@ -84,3 +84,36 @@ console.log(set.size); //1
 set.clear();
 console.log(set.has("5")); //false
 console.log(set.size); //0
+
+/**
+ *set集合中的forEach 
+ **/
+let set = new Set([1, 2]);
+set.forEach(function(value, key, ownerSet) {
+    console.log(key + "" + value);
+    console.log(ownerSet == set);
+});
+
+let set = new Set([1, 2]);
+let processor = {
+    output(value) {
+        console.log(value);
+    },
+    process(dataSet) {
+        dataSet.forEach(function(value) {
+            this.output(value);
+        }, this);
+    }
+};
+processor.process(set);
+
+let set = new Set([1, 2]);
+let processor = {
+    output(value) {
+        console.log(value);
+    },
+    process(dataSet) {
+        data.forEach(value => this.output(value));
+    }
+};
+processor.process(set);
