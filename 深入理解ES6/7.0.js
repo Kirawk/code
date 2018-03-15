@@ -117,3 +117,17 @@ let processor = {
     }
 };
 processor.process(set);
+
+/**
+ * set集合转化位数组
+ */
+let set = new Set([1, 2, 3, 3, 4, 5]),
+    array = [...set];
+console.log(array); //1,2,3,4,5
+
+function eliminateDuplicates(items) {
+    return [...new Set(items)];
+}
+let num = [1, 2, 3, 4, 5, 5, 6, 6];
+noDuplicates = eliminateDuplicates(num);
+console.log(noDuplicates);
