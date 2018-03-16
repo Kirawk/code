@@ -131,3 +131,14 @@ function eliminateDuplicates(items) {
 let num = [1, 2, 3, 4, 5, 5, 6, 6];
 noDuplicates = eliminateDuplicates(num);
 console.log(noDuplicates);
+
+/**
+ * weak set集合
+ */
+let set = new Set();
+key = {};
+set.add(key);
+console.log(set.size); //1
+
+key = null;
+console.log(set.size); //1
