@@ -142,3 +142,11 @@ console.log(set.size); //1
 
 key = null;
 console.log(set.size); //1
+
+//创建weak Set结合
+let set = new WeakSet(),
+    key = {};
+set.add(key);
+console.log(set.has(key)); //true
+set.delete(key);
+console.log(set.has(key)); //false
