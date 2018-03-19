@@ -150,3 +150,15 @@ set.add(key);
 console.log(set.has(key)); //true
 set.delete(key);
 console.log(set.has(key)); //false
+
+let key1 = {},
+    key2 = {},
+    set = new WeakSet([key1, key2]);
+console.log(set.has(key1));
+console.log(set.has(key2));
+
+let set = new WeakSet();
+key = {};
+set.add(key);
+console.log(set.has(key));
+key = null;
