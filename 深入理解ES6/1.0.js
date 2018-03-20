@@ -42,3 +42,35 @@ var count = 30;
 let count = 40; //抛出语法错误
 
 var count = 30;
+
+/**
+ * 常量声明
+ */
+//有效的常量
+const maxItems = 30;
+//语法错误
+const name;
+
+if (condition) {
+    const maxItems = 5;
+}
+//此时的maxitem 在此处是无法访问的
+
+var message = "hello";
+let age = 25;
+
+//二者均会抛出错误
+const message = "Goodbye";
+const age = 30;
+
+//const声明对象
+const person = {
+    name: "Nicholas"
+};
+//工作正常
+person.name = "Greg";
+
+//抛出错误
+person = {
+    name: "Greg"
+};
