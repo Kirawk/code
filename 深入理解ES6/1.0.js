@@ -74,3 +74,24 @@ person.name = "Greg";
 person = {
     name: "Greg"
 };
+
+//暂时性死区
+if (condition) {
+    console.log(typeof value);
+    let value = "blue";
+}
+console.log(typeof value);
+if (condition) {
+    let value = "blue";
+}
+
+//循环中的块级元素
+for (var i = 0; i < 10; i++) {
+    process(item[i]);
+}
+console.log(i);
+
+for (let i = 0; i < 10; i++) {
+    process(item[i]);
+}
+console.log(i);
