@@ -95,3 +95,14 @@ for (let i = 0; i < 10; i++) {
     process(item[i]);
 }
 console.log(i);
+
+//循环内的函数
+var funcs = [];
+for (var i = 0; i < 10; i++) {
+    funcs.push(function() {
+        console.log(i);
+    })
+}
+funcs.forEach(function(func) {
+    func();
+});
