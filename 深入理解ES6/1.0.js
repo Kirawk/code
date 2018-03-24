@@ -106,3 +106,16 @@ for (var i = 0; i < 10; i++) {
 funcs.forEach(function(func) {
     func();
 });
+
+//纠正上述代码
+var func = [];
+for (var i = 0; i < 10; i++) {
+    funcs.push((function(value) {
+        return function() {
+            console.log(value);
+        }
+    }(i)));
+}
+funcs.forEach(function(func) {
+    func();
+})
