@@ -119,3 +119,15 @@ for (var i = 0; i < 10; i++) {
 funcs.forEach(function(func) {
     func();
 })
+
+/*循环内的let声明*/
+var funcs = [];
+for (let i = 0; i < 10; i++) {
+    funcs.push(function() {
+        console.log(i);
+    });
+}
+
+funcs.forEach(function(func) {
+    func();
+})
