@@ -131,3 +131,19 @@ for (let i = 0; i < 10; i++) {
 funcs.forEach(function(func) {
     func();
 })
+
+var funcs = [],
+    object = {
+        a: true,
+        b: true,
+        c: true
+    };
+for (let key in object) {
+    funcs.push(function() {
+        console.log(key);
+    });
+}
+
+funcs.forEach(function() {
+    func();
+})
