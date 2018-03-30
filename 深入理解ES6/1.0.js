@@ -170,3 +170,19 @@ for (const key in object) {
 funcs.forEach(function(func) {
     func();
 });
+
+//全局块级绑定
+var RegExp = "Hello!";
+console.log(window.RegExp);
+
+var ncz = "Hi!";
+console.log(window.ncz);
+
+//在浏览器中
+let RegExp = "Hello!";
+console.log(RegExp);
+console.log(window.RegExp === RegExp);
+
+const ncz = "Hi!";
+console.log(ncz);
+console.log("ncz" in window);
