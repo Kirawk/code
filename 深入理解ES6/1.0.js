@@ -186,3 +186,5 @@ console.log(window.RegExp === RegExp);
 const ncz = "Hi!";
 console.log(ncz);
 console.log("ncz" in window);
+
+//结束
