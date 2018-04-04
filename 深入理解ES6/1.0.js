@@ -186,3 +186,9 @@ console.log(window.RegExp === RegExp);
 const ncz = "Hi!";
 console.log(ncz);
 console.log("ncz" in window);
+
+function is32Bit(c) {
+    return c.codePointAt(0) > 0xFFFF;
+}
+console.log(is32Bit("吉"));
+console.log(is32Bit("a"));
