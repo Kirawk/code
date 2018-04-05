@@ -192,3 +192,5 @@ function is32Bit(c) {
 }
 console.log(is32Bit("吉"));
 console.log(is32Bit("a"));
+
+console.log(String.fromCodePoint(134071)); //""
