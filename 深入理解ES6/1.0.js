@@ -194,3 +194,17 @@ console.log(is32Bit("吉"));
 console.log(is32Bit("a"));
 
 console.log(String.fromCodePoint(134071)); //""
+
+//normalize()
+var normalize = value.map(function(text) {
+    return text.normalize();
+});
+normalize.sort(function(first, second) {
+    if (first < second) {
+        return -1;
+    } else if (first === second) {
+        return 0;
+    } else {
+        return 1;
+    }
+});
