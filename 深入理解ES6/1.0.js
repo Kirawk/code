@@ -186,25 +186,3 @@ console.log(window.RegExp === RegExp);
 const ncz = "Hi!";
 console.log(ncz);
 console.log("ncz" in window);
-
-function is32Bit(c) {
-    return c.codePointAt(0) > 0xFFFF;
-}
-console.log(is32Bit("吉"));
-console.log(is32Bit("a"));
-
-console.log(String.fromCodePoint(134071)); //""
-
-//normalize()
-var normalize = value.map(function(text) {
-    return text.normalize();
-});
-normalize.sort(function(first, second) {
-    if (first < second) {
-        return -1;
-    } else if (first === second) {
-        return 0;
-    } else {
-        return 1;
-    }
-});
