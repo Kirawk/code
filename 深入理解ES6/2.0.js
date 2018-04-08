@@ -52,3 +52,15 @@ value.sort(function(first, second) {
         return 1;
     }
 });
+
+value.sort(function(first, second) {
+    var firstNormalized = first.normalize("NFD"),
+        secondNormalized = second.normalize("NFD");
+    if (firstNormalized < secondNormalized) {
+        return -1;
+    } else if (firstNormalized === secondNormalized) {
+        return 0;
+    } else {
+        return 1;
+    }
+});
