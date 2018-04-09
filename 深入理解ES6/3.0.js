@@ -140,3 +140,19 @@ console.log(sum.call(null, 1, 2)); //3
 console.log(sum.apply(null, [1, 2]));
 var boundSum = sum.bind(null, 1, 2);
 console.log(boundSum());
+
+/**
+ * 带参数的默认值函数
+ */
+function makeRequest(url, timeout, callback) {
+    timeout = timeout || 2000;
+    callback = callback || function() {};
+
+    //函数剩余部分
+}
+
+function makeRequest(url, timeout, callback) {
+    timeout = (typeof timeout != "undefined") ? timeout : 2000;
+    callback = (typeof callback != "undefined") ? callbak : function() {};
+    //函数剩余部分
+}
