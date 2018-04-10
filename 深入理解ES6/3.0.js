@@ -156,3 +156,13 @@ function makeRequest(url, timeout, callback) {
     callback = (typeof callback != "undefined") ? callbak : function() {};
     //函数剩余部分
 }
+
+//es6中的参数默认值
+function makeRequest(url, timeout = 2000, callback = function() {}) {
+    //函数剩余部分
+}
+makeRequest("/foo");
+makeRequest("/foo", 500);
+makeRequest("/foo", 500, function(body) {
+    doSomething(body);
+});
