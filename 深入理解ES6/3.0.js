@@ -166,3 +166,56 @@ makeRequest("/foo", 500);
 makeRequest("/foo", 500, function(body) {
     doSomething(body);
 });
+
+function makeRequest(url, timeout = 2000, callback) {}
+makeRequest("/foo", undefined, function(body) {
+    doSomething(body);
+    //当传入undefined时才会使用timeout
+})
+makeRequest("/foo");
+makeRequest("/foo", null, function(body) {
+    doSomething(body);
+})
+
+//传入默认参数对arguments对象的影响
+function mixArgs(first, second) {
+    console.log(first === arguments[0]); //true
+    console.log(second === arguments[1]);
+    first = "a";
+    second = "b";
+    console.log(first === arguments[0]); //true
+    console.log(second === arguments[1]); //true
+}
+
+function mixArgs(first, second) {
+    //采用严格模式
+    "use strict";
+    console.log(first === arguments[0]); //true
+    console.log(second === arguments[1]); //true
+    first = "a";
+    second = "b";
+    console.log(first === arguments[0]); //false
+    console.log(second === arguments[1]); //false
+}
+mixArgs("a", "b");
+//es6中默认参数对arguments的影响
+function mixArgs(first, second = "b") {
+    console.log(arguments.length); //1
+    console.log(first === arguments[0]); //true
+    console.log(second === arguments[1]); //false
+    first = "c";
+    second = "d";
+    console.log(first === arguments[0]); //false
+    console.log(second === arguments[1]); ////false
+}
+mixArgs("a");
+//默认参数表达式
+function getValue() {
+    return 5;
+}
+
+function add(first, second = getValue()) {
+    return first + second;
+}
+console.log(add(1, 1)); //2
+console.log(add(1)); //6
