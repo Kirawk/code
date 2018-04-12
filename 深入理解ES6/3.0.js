@@ -219,3 +219,57 @@ function add(first, second = getValue()) {
 }
 console.log(add(1, 1)); //2
 console.log(add(1)); //6
+let value = 5;
+
+function getValue() {
+    return value++;
+}
+
+function add(first, second = getValue) {
+    return first + second;
+}
+console.log(add(1, 1)); //2
+console.log(add(1)); //6
+console.log(add(1)); //7
+
+function add(first, second = first) {
+    return first + second;
+}
+console.log(add(1, 1)); //2
+console.log(add(1)); //2
+
+function getValue(value) {
+    return value + 5;
+}
+
+function add(first, second = getValue(first)) {
+    return first + second;
+}
+console.log(add(1, 1)); //2
+console.log(add(1)); //7
+
+function add(first = second, second) {
+    return first + second;
+}
+console.log(add(1, 1)); //2
+console.log(add(undefined, 1)) //抛出错误
+
+//参数默认暂时性死区
+function getValue(value) {
+    return value + 5;
+}
+
+function add(first, second = getValue(first)) {
+    return first + second;
+}
+console.log(add(1, 1)); //2
+console.log(add(1)); //7
+
+//js调用add(1，1)
+let first = 1;
+let second = 1;
+//js调用add(1)
+let first = 1;
+let second = getValue(first);
+
+//使用不具名参数
