@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vuejs学习</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+    <div id="app2">
+        <my-component></my-component>
+    </div>
+    <div id="app3">
+        <table>
+            <tbody is="my-component"></tbody>
+        </table>
+    </div>
+    <div id="app4">
+        <my-component></my-component>
+    </div>
+
+</body>
+<script>
+    Vue.component("my-component", {
+        template: '<div>这是组件的内容</div>'
+    });
+    var app = new Vue({
+        el: "#app"
+    })
+
+    var child = {
+        template: "<div>这是局部组件内容</div>"
+    }
+    var app2 = new Vue({
+        el: '#app2',
+        components: {
+            'my-component': child
+        }
+    });
+
+    var tableChild = {
+        template: "<div>这是表格中的组件内容</div>"
+    }
+    var app3 = new Vue({
+        el: "#app3",
+        components: {
+            "my-component": tableChild
+        }
+    });
+    var child3 = {
+        template: "<div>{{message}}</div>",
+        data: function() {
+            return {
+                message: "这里是通过组件中data属性赋值的"
+            }
+        }
+
+    }
+    var app4 = new Vue({
+        el: "#app4",
+        components: {
+            "my-component": child3
+        }
+    })
+</script>
+
+</html>
