@@ -24,6 +24,16 @@
     <div id="app4">
         <my-component></my-component>
     </div>
+    <div id="app5">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+    </div>
+    <div id="app6">
+        <my-component></my-component>
+        <my-component></my-component>
+        <my-component></my-component>
+    </div>
 
 </body>
 <script>
@@ -66,6 +76,38 @@
         el: "#app4",
         components: {
             "my-component": child3
+        }
+    })
+
+
+    var data = {
+        counter: 0
+    }
+    var child4 = {
+        template: "<button @click='counter++'>{{counter}}</button>",
+        data: function() {
+            return data;
+        }
+    }
+    var app5 = new Vue({
+        el: "#app5",
+        components: {
+            "my-component": child4
+        }
+    });
+    var child5 = {
+        template: "<button @click='counter++'>{{counter}}</button>",
+        data: function() {
+            return {
+                counter: 0
+            }
+        }
+    }
+
+    var app6 = new Vue({
+        el: "#app6",
+        components: {
+            "my-component": child5
         }
     })
 </script>
