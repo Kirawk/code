@@ -14,6 +14,11 @@
         <my-component message="来自父组件的数据"></my-component>
     </div>
 
+    <div id="app2">
+        <input type="text" v-model="parentMessage">
+        <my-component :message="parentMessage"></my-component>
+    </div>
+
 
 </body>
 <script>
@@ -23,6 +28,20 @@
     });
     var app = new Vue({
         el: "#app"
+    })
+    var child = {
+        props: ['message'],
+        template: "<div>{{message}}</div>"
+    }
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            parentMessage: ''
+        },
+        components: {
+            "my-component": child
+        }
+
     })
 </script>
 

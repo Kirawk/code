@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父组件传值给子组件</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>v-on绑定</p>
+        <p>总数：{{total}}</p>
+        <my-component @increase="handleGetTotal" @reduce="handleGetTotal"></my-component>
+    </div>
+    <div id="app2">
+        <p>使用v-model绑定数据</p>
+        <p>总数：{{total}}</p>
+        <my-component v-model="total"></my-component>
+    </div>
+    <div id="app3">
+        <p>v-model创建自定义表单输入组件</p>
+        <p>总数：{{total}}</p>
+        <my-component v-model="total"></my-component>
+        <button @click="handleReduce">-1</button>
+    </div>
+
+    <div id="app4">
+        <p>非父子组件间的通信</p>
+        <p>{{message}}</p>
+        <component-a></component-a>
+    </div>
+
+
+</body>
+<script>
+    var child = {
+        template: '\
+<div>\
+<button @click="handleIncrease">+1</button>\
+<button @click="handleReduce">-1</button>\
+</div>\
+',
+        data: function() {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            handleIncrease: function() {
+                this.counter++;
+                this.$emit('increase', this.counter);
+            },
+            handleReduce: function() {
+                this.counter--;
+                this.$emit('reduce', this.counter);
+            }
+        }
+    };
+    var app = new Vue({
+        el: "#app",
+        data: {
+            total: 0
+        },
+        methods: {
+            handleGetTotal: function(total) {
+                this.total = total;
+            }
+        },
+        components: {
+            "my-component": child
+        }
+    });
+
+    var child2 = {
+        template: '\
+<div>\
+<button @click="handleIncrease">+1</button>\
+<button @click="handleReduce">-1</button>\
+</div>\
+',
+        data: function() {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            handleIncrease: function() {
+                this.counter++;
+                this.$emit('input', this.counter);
+            },
+            handleReduce: function() {
+                this.counter--;
+                this.$emit('input', this.counter);
+            }
+        }
+    };
+    var app2 = new Vue({
+        el: "#app2",
+        data: {
+            total: 0
+        },
+        components: {
+            "my-component": child2
+        }
+    });
+    var child3 = {
+        template: '\
+<div>\
+<input :value="value" @input="updateValue">\
+</div>\
+',
+        data: function() {
+            return {
+                counter: 0
+            }
+        },
+        props: ['value'],
+        methods: {
+            updateValue: function(event) {
+                this.$emit('input', event.target.value);
+            }
+        }
+    };
+    var app3 = new Vue({
+        el: "#app3",
+        data: {
+            total: 0
+        },
+        components: {
+            "my-component": child3
+        },
+        methods: {
+            handleReduce: function() {
+                this.total--;
+            }
+        }
+    });
+    var bus = new Vue();
+
+    Vue.component("component-a", {
+        template: '<button @click="handleEvent">传递事件</button>',
+        methods: {
+            handleEvent: function() {
+                bus.$emit("on-message", '来自组件component-a的内容');
+            }
+        }
+    });
+
+    var app4 = new Vue({
+        el: "#app4",
+        data: {
+            message: ''
+        },
+        mounted: function() {
+            var _this = this;
+            bus.$on('on-message', function(msg) {
+                _this.message = msg;
+            });
+        }
+    })
+</script>
+
+</html>
