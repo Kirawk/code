@@ -24,6 +24,10 @@
         <my-component :message="[1,2,3]"></my-component>
     </div>
 
+    <div id="app4">
+        <my-component :init-count="1"></my-component>
+    </div>
+
 
 </body>
 <script>
@@ -51,12 +55,28 @@
 
     var child3 = {
         props: ['message'],
-        template: "<div>{{message.length}}</div>"
+        template: "<div>{{count}}</div>",
+        data: function() {
+            return {
+                count: this.initCount
+            }
+        }
     }
     var app3 = new Vue({
         el: "#app3",
         components: {
             "my-component": child3
+        }
+    })
+
+    var child4 = {
+        props: ['init-count'],
+        template: "<div>{{message.length}}</div>"
+    }
+    var app3 = new Vue({
+        el: "#app3",
+        components: {
+            "my-component": child4
         }
     })
 </script>
