@@ -27,7 +27,9 @@
     <div id="app4">
         <my-component :init-count="1"></my-component>
     </div>
-
+    <div id="app5">
+        <my-component :width="1"></my-component>
+    </div>
 
 </body>
 <script>
@@ -77,6 +79,24 @@
         el: "#app3",
         components: {
             "my-component": child4
+        }
+    })
+
+    var child5 = {
+        props: ['width'],
+        template: "<div>组件内容</div>",
+        computed: {
+            style: function() {
+                return {
+                    width: this.width + 'px'
+                }
+            }
+        }
+    }
+    var app4 = new Vue({
+        el: "#app4",
+        components: {
+            "my-component": child5
         }
     })
 </script>
