@@ -20,6 +20,23 @@
         <p>输入的内容是：{{message}}</p>
     </div>
 
+    <div id="app3">
+        <input type="radio" :checked="picked">
+        <label>单选按钮</label>
+    </div>
+    <div id="app4">
+        <input type="radio" v-model="picked" value="html" id="html">
+        <label for="html">HTML</label>
+        <br>
+        <input type="radio" v-model="picked" value="js" id="js">
+        <label for="js">Javascript</label>
+        <br>
+        <input type="radio" v-model="picked" value="css" id="css">
+        <label for="css">Css</label>
+        <br>
+        <p>选择的项是：{{picked}}</p>
+    </div>
+
 
 </body>
 <script>
@@ -38,6 +55,19 @@
             handleInput: function(e) {
                 this.message = e.target.value;
             }
+        }
+    });
+    var app3 = new Vue({
+        el: "#app3",
+        data: {
+            picked: false
+        }
+    });
+
+    var app4 = new Vue({
+        el: "#app4",
+        data: {
+            picked: 'js'
         }
     })
 </script>
