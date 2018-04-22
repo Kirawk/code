@@ -36,6 +36,46 @@
         <br>
         <p>选择的项是：{{picked}}</p>
     </div>
+    <div id="app5">
+        <input type="checkbox" v-model="check" id="checked">
+        <label for="check">选择的状态：{{check}}</label>
+    </div>
+
+    <div id="app6">
+        <input type="checkbox" v-model="check" id="html" value="html">
+        <label for="html">HTML</label>
+        <br>
+        <input type="checkbox" v-model="check" id="css" value="css">
+        <label for="css">css</label>
+        <br>
+        <input type="checkbox" v-model="check" id="js" value="javascript">
+        <label for="js">javascript</label>
+    </div>
+
+    <div id="app7">
+        <select name="" id="" v-model="selected">
+            <option>html</option>
+            <option value="css">css</option>
+            <option value="js">javascript</option>
+        </select>
+        <p>选中的是：{{selected}}</p>
+    </div>
+
+    <div id="app8">
+        <select name="" id="" v-model="selected" multiple>
+                <option>html</option>
+                <option>css</option>
+                <option value="js">javascript</option>
+        </select>
+        <p>选中的是：{{selected}}</p>
+    </div>
+
+    <div id="app9">
+        <select name="" id="" v-model="selected">
+            <option v-for="option of options" :value="option.value">{{option.text}}</option>
+        </select>
+        <p>选中的是：{{selected}}</p>
+    </div>
 
 
 </body>
@@ -68,6 +108,46 @@
         el: "#app4",
         data: {
             picked: 'js'
+        }
+    });
+    var app5 = new Vue({
+        el: "#app5",
+        data: {
+            check: false
+        }
+    })
+    var app6 = new Vue({
+        el: "#app6",
+        data: {
+            check: ['javascript']
+        }
+    })
+    var app7 = new Vue({
+        el: "#app7",
+        data: {
+            selected: 'html'
+        }
+    });
+    var app8 = new Vue({
+        el: "#app8",
+        data: {
+            selected: ['html', 'js']
+        }
+    })
+    var app9 = new Vue({
+        el: "#app9",
+        data: {
+            selected: 'html',
+            options: [{
+                text: 'html',
+                value: 'html'
+            }, {
+                text: 'css',
+                value: 'css'
+            }, {
+                text: 'javascript',
+                value: 'js'
+            }]
         }
     })
 </script>
