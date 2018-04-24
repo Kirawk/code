@@ -28,6 +28,19 @@
             <option :value="{number:123}">123</option>
         </select> {{selected.number}}
     </div>
+
+    <div id="app4">
+        <input type="text" v-model.lazy="message">
+        <p>{{message}}</p>
+    </div>
+    <div id="app5">
+        <input type="text" v-model.number="message">
+        <p>{{typeof message}}</p>
+    </div>
+    <div id="app6">
+        <input type="text" v-model.trim="message">
+        <p>{{message}}</p>
+    </div>
 </body>
 <script>
     var app = new Vue({
@@ -55,47 +68,19 @@
     var app4 = new Vue({
         el: "#app4",
         data: {
-            picked: 'js'
+            message: ''
         }
     });
     var app5 = new Vue({
         el: "#app5",
         data: {
-            check: false
+            message: ''
         }
     })
     var app6 = new Vue({
         el: "#app6",
         data: {
-            check: ['javascript']
-        }
-    })
-    var app7 = new Vue({
-        el: "#app7",
-        data: {
-            selected: 'html'
-        }
-    });
-    var app8 = new Vue({
-        el: "#app8",
-        data: {
-            selected: ['html', 'js']
-        }
-    })
-    var app9 = new Vue({
-        el: "#app9",
-        data: {
-            selected: 'html',
-            options: [{
-                text: 'html',
-                value: 'html'
-            }, {
-                text: 'css',
-                value: 'css'
-            }, {
-                text: 'javascript',
-                value: 'js'
-            }]
+            message: ''
         }
     })
 </script>
