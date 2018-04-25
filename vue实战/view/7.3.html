@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>父组件传值给子组件</title>
-    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script src="vue.js"></script>
 </head>
 
 <body>
@@ -30,6 +30,11 @@
     <div id="app4">
         <p>非父子组件间的通信</p>
         <p>{{message}}</p>
+        <component-a></component-a>
+    </div>
+
+    <div id="app5">
+        {{message}}
         <component-a></component-a>
     </div>
 
@@ -159,6 +164,24 @@
             bus.$on('on-message', function(msg) {
                 _this.message = msg;
             });
+        }
+    });
+    var child5 = {
+        template = "<button @click='handleEvent'>通过父链直接修改数据</button>",
+        methods: {
+            handleEvent: function() {
+                this.$parent.message = "来自comomenta的数据"
+            }
+        }
+    }
+
+    var app5 = new Vue({
+        el: "#app5",
+        data: {
+            message: ''
+        },
+        components: {
+            "component-a": child5
         }
     })
 </script>
