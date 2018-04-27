@@ -38,6 +38,12 @@
         <component-a></component-a>
     </div>
 
+    <div id="app6">
+        <p>子组件索引</p>
+        <button @click="handleRef">通过ref获取子组件</button>
+        <component-a ref="comA"></component-a>
+    </div>
+
 
 </body>
 <script>
@@ -182,6 +188,28 @@
         },
         components: {
             "component-a": child5
+        }
+    })
+
+    var child6 = {
+        template = "<div>子组件</div>",
+        data: function() {
+            return {
+                message: "子组件内容"
+            }
+
+        }
+    }
+
+
+    var app6 = new Vue({
+        el: "#app6",
+        methods: {
+            handleRef: function() {
+                var msg = this.$ref.comA.message;
+                console.log(msg);
+
+            }
         }
     })
 </script>
