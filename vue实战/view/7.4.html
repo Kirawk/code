@@ -17,6 +17,14 @@
         <child-component></child-component>
     </div>
 
+    <div id="app3">
+        <p>单个slot用法</p>
+        <child-component>
+            <p>分发的内容</p>
+            <p>更多分发的内容</p>
+        </child-component>
+    </div>
+
 </body>
 <script>
     Vue.component("child-component", {
@@ -43,6 +51,24 @@
             "child-component": child
         }
 
+    });
+
+    var child3 = {
+        template: '<div>\
+            <slot>\
+                <p>如果父组件没有插入内容，我将作为默认出现</p>\
+            </slot>\   <
+            /div>'
+    }
+
+    var app3 = new Vue({
+        el: "#app3",
+        data: {
+
+        },
+        components: {
+            "child-component": child3
+        }
     })
 </script>
 
