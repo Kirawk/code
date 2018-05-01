@@ -25,6 +25,16 @@
         </child-component>
     </div>
 
+    <div id="app4">
+        <p>具名slot</p>
+        <child-component>
+            <h2 slot="header">标题</h2>
+            <p>正文内容</p>
+            <p>更多正问内容</p>
+            <div slot="footer">底部信息</div>
+        </child-component>
+    </div>
+
 </body>
 <script>
     Vue.component("child-component", {
@@ -57,8 +67,9 @@
         template: '<div>\
             <slot>\
                 <p>如果父组件没有插入内容，我将作为默认出现</p>\
-            </slot>\   <
-            /div>'
+            </slot>\   < /
+        div > \
+        '
     }
 
     var app3 = new Vue({
@@ -69,6 +80,29 @@
         components: {
             "child-component": child3
         }
+    });
+
+    var child4 = {
+        template: '\
+        <div class="container">\
+            <div class="header>\
+                <slot name="header"></slot>\
+                <div>\
+            <div class="main">\
+                <slot></slot>\
+            </div>\
+            <div class="footer">\
+                <slot name="footer"></slot>\
+            </div>\
+            </div>'
+    }
+
+    var app4 = new Vue({
+        el: "#app4",
+        components: {
+            "child-compoent": child4
+        }
+
     })
 </script>
 
