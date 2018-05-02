@@ -35,6 +35,16 @@
         </child-component>
     </div>
 
+    <div id="app5">
+        <p>作用域插槽</p>
+        <child-component>
+            <template>
+                <p>来自父组件的内容</p>
+                <p>{{props.msg}}</p>
+            </template>
+        </child-component>
+    </div>
+
 </body>
 <script>
     Vue.component("child-component", {
@@ -64,12 +74,12 @@
     });
 
     var child3 = {
-        template: '<div>\
+        template: '\
+        <div>\
             <slot>\
                 <p>如果父组件没有插入内容，我将作为默认出现</p>\
-            </slot>\   < /
-        div > \
-        '
+            </slot>\
+        </div>'
     }
 
     var app3 = new Vue({
@@ -103,6 +113,19 @@
             "child-compoent": child4
         }
 
+    });
+
+    var child5 = {
+        template: '\
+        <div class="container">\
+            <slot msg="来自子组件的内容">\
+        </div>'
+    };
+    var app5 = new Vue({
+        el: "#app5",
+        components: {
+            "child-component": child5
+        }
     })
 </script>
 
