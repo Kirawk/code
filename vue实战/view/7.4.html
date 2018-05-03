@@ -45,6 +45,15 @@
         </child-component>
     </div>
 
+    <div id="app6">
+        <p>列表组件</p>
+        <my-list :books="books">
+            <template slot="book" scope="props">
+                <li>{{props.bookName}}</li>
+            </template>
+        </my-list>
+    </div>
+
 </body>
 <script>
     Vue.component("child-component", {
@@ -125,6 +134,40 @@
         el: "#app5",
         components: {
             "child-component": child5
+        }
+    });
+
+    var child6 = {
+        props: {
+            books: {
+                type: Array,
+                default: function() {
+                    return [];
+                }
+            }
+        },
+        template: '\
+        <ul>\
+            <slot name="book"\
+            v-for="book in books"\
+            :book-name="book.name">\
+            </slot>\
+        </ul>',
+    }
+
+    var app6 = new Vue({
+        el: "#app6",
+        data: {
+            books: [{
+                name: '《vuejs实战》'
+            }, {
+                name: '《javscript语言精髓》'
+            }, {
+                name: '《javascritpt高级程序设计》'
+            }]
+        },
+        components: {
+            "my-list": child6
         }
     })
 </script>
