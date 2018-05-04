@@ -54,6 +54,16 @@
         </my-list>
     </div>
 
+    <div id="app7">
+        <p>访问slot</p>
+        <child-component>
+            <h2 slot="header">标题</h2>
+            <p>征文内容</p>
+            <p>更多的正文内容</p>
+            <div slot="footer">底部内容</div>
+        </child-component>
+    </div>
+
 </body>
 <script>
     Vue.component("child-component", {
@@ -168,6 +178,35 @@
         },
         components: {
             "my-list": child6
+        }
+    })
+
+    var child7 = {
+        template: '\
+        <div class="container">\
+            <div class="header">\
+                <slot name="header"></slot>\
+            </div>\
+            <div class="main">\
+                <slot></slot>\
+            </div>\
+            <div class="footer">\
+                <slot name="footer"></slot>\
+            </div>\
+        </div>',
+        mounted: function() {
+            var header = this.$slots.header;
+            var main = this.$slots.default;
+            var footer = this.$slots.footer;
+            console.log(footer);
+            console.log(footer[0].elm.innerHTML);
+        }
+    }
+
+    var app7 = new Vue({
+        el: "#app7",
+        components: {
+            "child-component": child7
         }
     })
 </script>
