@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件高级用法</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child-component :count="1"></child-component>
+    </div>
+</body>
+<script>
+    var child = {
+        name: "child-component",
+        props: {
+            count: {
+                type: Number,
+                default: 1
+            }
+        },
+        template: '\
+        <div class="child">\
+            <child-component\
+            :count="count+1"\
+            v-if="count<3"></childe-component>\
+        </div>'
+    }
+
+    var app = new Vue({
+        el: "#app",
+        components: {
+            "child-component": child
+        }
+    })
+</script>
+
+</html>
