@@ -13,6 +13,15 @@
     <div id="app">
         <child-component :count="1"></child-component>
     </div>
+    <div id="app2">
+        <child-component2 inline-template>
+            <div>
+                <h2>在父组件中定义子组件模版</h2>
+                <p>{{message}}</p>
+                <p>{{msg}}</p>
+            </div>
+        </child-component2>
+    </div>
 </body>
 <script>
     var child = {
@@ -27,7 +36,7 @@
         <div class="child">\
             <child-component\
             :count="count+1"\
-            v-if="count<3"></childe-component>\
+            v-if="count<3"></child-component>\
         </div>'
     }
 
@@ -36,7 +45,31 @@
         components: {
             "child-component": child
         }
+    });
+
+    var child2 = {
+        data: function() {
+            return {
+                msg: "在子组件中声明的数据"
+            }
+        }
+    };
+    Vue.component("child-component2", {
+        data: function() {
+            return {
+                msg: "在子组件中声明的数据"
+            }
+        }
     })
+    var app2 = new Vue({
+        el: "#app2",
+        data: {
+            message: "在父组件中声明的数据"
+        }
+        // components: {
+        //     "child-component": child2
+        // }
+    });
 </script>
 
 </html>
