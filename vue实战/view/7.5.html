@@ -22,6 +22,14 @@
             </div>
         </child-component2>
     </div>
+
+    <dvi id="app3">
+        <p>动态组件</p>
+        <component :is="currentView"></component>
+        <button @click="handleChangeView('A')">切换到A</button>
+        <button @click="handleChangeView('B')">切换到B</button>
+        <button @click="handleChangeView('C')">切换到C</button>
+    </dvi>
 </body>
 <script>
     var child = {
@@ -70,6 +78,29 @@
         //     "child-component": child2
         // }
     });
+
+    var app3 = new Vue({
+        el: "#app3",
+        data: {
+            currentView: 'comA'
+        },
+        components: {
+            'comA': {
+                template: '<div>组件A</div>'
+            },
+            'comB': {
+                template: '<div>组件B</div>'
+            },
+            'comC': {
+                template: '<div>组件C</div>'
+            }
+        },
+        methods: {
+            handleChangeView: function(component) {
+                this.currentView = 'com' + component;
+            }
+        }
+    })
 </script>
 
 </html>
