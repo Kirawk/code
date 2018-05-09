@@ -30,6 +30,12 @@
         <button @click="handleChangeView('B')">切换到B</button>
         <button @click="handleChangeView('C')">切换到C</button>
     </dvi>
+    <div id="app4">
+        <p>异步组件</p>
+        <child-component></child-component>
+    </div>
+
+
 </body>
 <script>
     var child = {
@@ -100,6 +106,17 @@
                 this.currentView = 'com' + component;
             }
         }
+    })
+
+    Vue.component("child-component", function(resolve, reject) {
+        window.setTimeout(function() {
+            resolve({
+                template: '<div>我是异步渲染的</div>'
+            });
+        }, 2000);
+    });
+    var app4 = new Vue({
+        el: "#app4",
     })
 </script>
 
