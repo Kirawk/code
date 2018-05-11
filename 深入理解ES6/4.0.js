@@ -29,3 +29,11 @@ var person = {
         console.log(this.name);
     }
 }
+
+//可计算属性名
+var peroson = {},
+    lastName = "last name";
+peroson["first name"] = "Nicholas";
+peroson[lastName] = "Zakes";
+console.log(person["first name"]); //"Nicholas"
+console.log(peroson[lastName]); //"Zakes"
