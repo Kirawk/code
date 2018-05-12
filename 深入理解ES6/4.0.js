@@ -37,3 +37,21 @@ peroson["first name"] = "Nicholas";
 peroson[lastName] = "Zakes";
 console.log(person["first name"]); //"Nicholas"
 console.log(peroson[lastName]); //"Zakes"
+
+//es6
+let lastName = "last name";
+let Person = {
+    "first name": "Nicholas",
+    [lastName]: "Zakes"
+};
+console.log(peroson["first name"]);
+console.log(person[lastName]);
+
+//使用表达式
+let stuffix = "last name";
+var person = {
+    ["first" + stuffix]: "Nickolas",
+    ["last" + stuffix]: "Zakes"
+};
+console.log(person["first name"]);
+console.log(person["last name"]);
