@@ -55,3 +55,19 @@ var person = {
 };
 console.log(person["first name"]);
 console.log(person["last name"]);
+
+//Object.is()
+console.log(+0 == -0); //true
+console.log(+0 === -0); //true
+console.log(Object.is(+0, -0)); //false
+
+console.log(NaN == NaN); //false
+console.log(NaN === NaN); //false
+console.log(Object.is(NaN, NaN));
+
+console.log(5 == 5); //true
+console.log(5 == "5"); //true
+console.log(5 === "5"); //false
+console.log(5 === 5); //true
+console.log(Object.is(5, 5)); //true
+console.log(Object.is(5, "5")); //false
