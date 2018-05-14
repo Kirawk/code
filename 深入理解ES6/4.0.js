@@ -71,3 +71,11 @@ console.log(5 === "5"); //false
 console.log(5 === 5); //true
 console.log(Object.is(5, 5)); //true
 console.log(Object.is(5, "5")); //false
+
+//混合
+function mixmin(receiver, supplier) {
+    Object.keys(supplier).forEach(function(key) {
+        receiver[key] = supplier[key];
+    });
+    return receiver;
+}
