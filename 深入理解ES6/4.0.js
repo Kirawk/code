@@ -79,3 +79,13 @@ function mixmin(receiver, supplier) {
     });
     return receiver;
 }
+
+function EventTarget() { /**/ }
+EventTarget.prototype = {
+    constructor: EventTarget,
+    emit: function() {},
+    on: function() {}
+}
+var myObject = {};
+mixmin(myObject, EventTarget.prototype);
+myObject.emit("somethingChaned");
