@@ -89,3 +89,14 @@ EventTarget.prototype = {
 var myObject = {};
 mixmin(myObject, EventTarget.prototype);
 myObject.emit("somethingChaned");
+
+//assign()方法
+function EventTarget() { /**/ }
+EventTarget.prototype = {
+    constructor: EventTarget,
+    emit: function() { /**/ },
+    on: function() { /**/ }
+}
+var myObject = {}
+Object.assign(myObject, EventTarget.prototype);
+myObject.emit("somethingChanged");
