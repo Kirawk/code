@@ -100,3 +100,19 @@ EventTarget.prototype = {
 var myObject = {}
 Object.assign(myObject, EventTarget.prototype);
 myObject.emit("somethingChanged");
+
+var recevier = {};
+object.assign(receiver, {
+    type: "js",
+    name: "file.js"
+}, {
+    type: 'css'
+});
+console.log(recevier.type); //"css"
+console.log(recevier.name); //"file.js"
+
+//重复的对象字面量属性
+var peoson = {
+    name: 'Nicholas',
+    name: 'Grag'
+}
