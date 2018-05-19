@@ -114,5 +114,12 @@ console.log(recevier.name); //"file.js"
 //重复的对象字面量属性
 var peoson = {
     name: 'Nicholas',
-    name: 'Grag'
+    name: 'Grag' //报错
 }
+console.log(peoson.name); //报错
+
+var peoson = {
+    name: 'Nicholas',
+    name: 'Grag' //es6
+}
+console.log(person.name); //打印出Grag
