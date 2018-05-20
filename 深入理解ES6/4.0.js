@@ -123,3 +123,15 @@ var peoson = {
     name: 'Grag' //es6
 }
 console.log(person.name); //打印出Grag
+
+//自有属性枚举顺序
+var obj = {
+    a: 1,
+    0: 1,
+    c: 1,
+    2: 1,
+    b: 1,
+    1: 1
+};
+obj.d = 1;
+console.log(Object.getOwnPropertyNames(obj).join()); //"012acbd"
