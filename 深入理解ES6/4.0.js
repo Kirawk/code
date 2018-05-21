@@ -135,3 +135,110 @@ var obj = {
 };
 obj.d = 1;
 console.log(Object.getOwnPropertyNames(obj).join()); //"012acbd"
+
+//改变对象的原型
+let person = {
+    getGreeting() {
+        return "Hello"
+    }
+};
+let dog = {
+    getGreeting() {
+        return "Woof";
+    }
+};
+
+let friend = Object.create(peoson);
+console.log(friend.getGreeting()); //Hello
+console.log(Object.getPrototypeOf(friend) === peoson); //true
+
+//将原型设置为dog
+Object.setPrototypeOf(friend, dog);
+console.log(friend.getGreeting()); //"Woof"
+console.log(Object.getPrototypeOf(friend) === dog); //true
+
+//Super引用
+let person = {
+    getGreeting() {
+        return "Hello"
+    }
+};
+let dog = {
+    getGreeting() {
+        return "Woof";
+    }
+};
+let friend = {
+        getGreeting() {
+            return Object.getPrototypeOf(this).getGreeting.call(this) + ",hi!";
+        }
+    }
+    //原型设置成perosn
+Object.setPrototypeOf(friend, person);
+console.log(friend.getGreeting()); //"Hello,Hi!"
+console.log(Object.getPrototypeOf(friend) === peoson); //true
+
+//将原型设置成dog
+Object.setPrototypeOf(friend, dog);
+console.log(friend.getGreeting()); //"Woof,Hi"
+console.log(Object.getPrototypeOf(friend) === dog); //true
+
+//使用super改写上述代码
+let friend = {
+    getGreeting() {
+        return super.getGreeting() + ",Hi!";
+    }
+};
+
+let person = {
+    getGreeting() {
+        return "Hello"
+    }
+};
+//以person对象为原型
+let friend = {
+    getGreeting() {
+        return Object.getPrototypeOf(this).getGreeting.call(this) + ",hi!";
+    }
+};
+Object.setPrototypeOf(friend, person);
+
+let relative = Object.create(friend);
+console.log(peoson.getGreeting()); //"Hello"
+console.log(friend.getGreeting()); //"Hello,Hi"
+console.log(relative.getGreeting()); //error
+
+let person = {
+    getGreeting() {
+        return "Hello"
+    }
+};
+let friend = {
+    getGreeting() {
+        return super.getGreeting() + ',hi!';
+    }
+};
+Object.setPrototypeOf(friend, person);
+
+let relative = Object.create(friend);
+console.log(peoson.getGreeting()); //"Hello"
+console.log(friend.getGreeting()); //"Hello,Hi"
+console.log(relative.getGreeting()); //"Hello,Hi"
+
+//正式的方法定义
+let person = {
+    getGreeting() {
+        return "Hello"
+    }
+};
+
+function shareGreeting() {
+    return "Hi!";
+}
+let friend = {
+    getGreeting() {
+        return super.getGreeting() + ",hi!";
+    }
+};
+Object.setPrototypeOf(friend, person);
+console.log(friend.getGreeting()); //"Hello,hi!"
