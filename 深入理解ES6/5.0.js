@@ -30,3 +30,18 @@ let node = {
 ({ type, name } = node);
 console.log(type); //"Identifier"
 console.log(name); //"foo"
+
+function outputInfo(value) {
+    console.log(value === node); //true
+}
+outputInfo({ type, name } = node);
+
+//默认值
+let node = {
+    type: 'Identifier',
+    name: 'foo'
+};
+let { type, name, value } = node;
+console.log(type); //Identifier
+console.log(name); //foo
+console.log(value); //undefined
