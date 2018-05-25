@@ -45,3 +45,12 @@ let { type, name, value } = node;
 console.log(type); //Identifier
 console.log(name); //foo
 console.log(value); //undefined
+
+let node = {
+    type: 'Identifier',
+    name: 'foo'
+};
+let { type, name, value = true } = node;
+console.log(type);
+console.log(name);
+console.log(value); //true
