@@ -54,3 +54,20 @@ let { type, name, value = true } = node;
 console.log(type);
 console.log(name);
 console.log(value); //true
+
+//非同名局部变量赋值
+let node = {
+    type: "Identifier",
+    name: 'foo'
+}
+let { type: localType, name: localName } = node;
+console.log(localType);
+console.log(localName);
+
+let node = {
+    type: "Identifier"
+};
+
+let { type: localType, name: localName = "bar" } = node;
+console.log(localType);
+console.log(localName);
