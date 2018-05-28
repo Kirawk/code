@@ -71,3 +71,25 @@ let node = {
 let { type: localType, name: localName = "bar" } = node;
 console.log(localType);
 console.log(localName);
+
+//嵌套对象解构
+let node = {
+    type: 'Identifier',
+    name: 'foo',
+    loc: {
+        start: {
+            line: 1,
+            column: ''
+        },
+        end: {
+            line: 1,
+            column: 4
+        }
+    }
+}
+let { loc: { start } } = node;
+console.log(start.line); //1
+console.log(start.column); //1
+let { loc: { start: localStart } } = node;
+console.log(localStart.line);
+console.log(localStart.column);
