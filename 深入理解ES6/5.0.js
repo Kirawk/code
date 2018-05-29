@@ -93,3 +93,11 @@ console.log(start.column); //1
 let { loc: { start: localStart } } = node;
 console.log(localStart.line);
 console.log(localStart.column);
+
+//数组解构
+let colors = ['red', 'green', 'blue'];
+let [firstColor, secondColor] = colors;
+console.log(firstColor); //'red'
+console.log(secondColor); //'green'
+let [, , thirdColor] = colors;
+console.log(thirdColor);
