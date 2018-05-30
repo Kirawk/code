@@ -101,3 +101,11 @@ console.log(firstColor); //'red'
 console.log(secondColor); //'green'
 let [, , thirdColor] = colors;
 console.log(thirdColor);
+
+//解构赋值
+let colors = ['red', 'green', 'blue'],
+    firstColor = 'black',
+    secondColor = 'purple';
+[firstColor, secondColor] = colors;
+console.log(firstColor); //'red'
+console.log(secondColor); //'green'
