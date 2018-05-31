@@ -109,3 +109,10 @@ let colors = ['red', 'green', 'blue'],
 [firstColor, secondColor] = colors;
 console.log(firstColor); //'red'
 console.log(secondColor); //'green'
+
+//es6交换变量
+let a = 1,
+    b = 2;
+[a, b] = [b, a];
+console.log(a); //2
+console.log(b); //1
