@@ -116,3 +116,9 @@ let a = 1,
 [a, b] = [b, a];
 console.log(a); //2
 console.log(b); //1
+
+//默认值
+let colors = ["red"];
+let [firstColor, secondColor = "green"] = colors;
+console.log(firstColor); //"red"
+console.log(secondColor); //"green"
