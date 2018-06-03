@@ -122,3 +122,23 @@ let colors = ["red"];
 let [firstColor, secondColor = "green"] = colors;
 console.log(firstColor); //"red"
 console.log(secondColor); //"green"
+
+//嵌套数组解构
+let colors = ["red", ["green", "lightgreen"], "bar"];
+let [firstColor, [secondColor]] = colors;
+console.log(firstColor);
+console.log(secondColor);
+
+//不定元素
+let colors = ["red", "green", "white"];
+let [firstColor, ...secondColor];
+console.log(secondColor.length); //2
+console.log(secondColor[0]); //"green"
+console.log(secondColor[1]); //"blue"
+
+//赋值元素
+let colors = ["red", "blue", "white"];
+let [...copyColors] = colors;
+console.log(copyColors);
+
+//混合解构
