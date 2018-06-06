@@ -165,3 +165,18 @@ let {
 console.log(start.line); //1
 console.log(start.column); //1
 console.log(startIndex); //0
+
+//解构参数
+function setCookie(name, value, options) {
+    options = options || {};
+    let secure = options.secure;
+    path = options.path;
+    domain = options.domain;
+    empires = options.empires;
+
+    //设cookie代码
+}
+setCookie("type", "js", {
+    secure: true,
+    expires: 60000
+});
