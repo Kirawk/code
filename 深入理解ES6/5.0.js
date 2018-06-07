@@ -180,3 +180,12 @@ setCookie("type", "js", {
     secure: true,
     expires: 60000
 });
+
+//改写上述代码
+function setCookie(name, value, { secure, path, domain, expires }) {
+    //设置cookies的值
+}
+setCookie("type", "js", {
+    secure: true,
+    expires: 60000
+});
