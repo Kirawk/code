@@ -189,3 +189,14 @@ setCookie("type", "js", {
     secure: true,
     expires: 60000
 });
+//解构参数的默认值
+function setCookie(name, value, {
+    secure = false,
+    path = "/",
+    domain = "example.com",
+    expires = new Date(Date.now() + 36000000)
+
+
+}) {
+
+}
