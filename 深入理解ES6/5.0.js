@@ -200,3 +200,19 @@ function setCookie(name, value, {
 }) {
 
 }
+
+const setCookieDefaults = {
+    secure: false,
+    path: '/',
+    domain: "example.com",
+    expires: new Date(Date.now() + 360000)
+};
+
+function setCookie(name, value, {
+    secure = setCookieDefaults.secure,
+    path = setCookieDefaults.path,
+    domain = setCookieDefaults.domain,
+    expires = setCookieDefaults.expires
+} = setCookieDefaults) {
+    //...
+}
