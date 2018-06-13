@@ -59,3 +59,28 @@ let o = {
         }
     }
 }
+
+//可迭代对象与for-of循环
+let values = [1, 2, 3];
+for (let num of values) {
+    console.log(num);
+}
+
+//访问默认的迭代器
+let values = [1, 2, 3];
+let iterator = values[Symbol.iterator]();
+console.log(iterator.next()); //1 false
+console.log(iterator.next()); //2 false
+console.log(iterator.next()); //3 false
+console.log(iterator.next()); //undefined false
+
+//检测对象是否是可迭代对象
+function isIterable(object) {
+    return typeof object[Symbol.iterator] == "function"
+}
+console.log(isIterable([1, 2, 3]));
+console.log(isIterable("hello"));
+console.log(isIterable(new Map()));
+console.log(isIterable(new Set()));
+console.log(isIterable(new WeakMap()));
+console.log(isIterable(new WeakSet()));
