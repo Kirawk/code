@@ -84,3 +84,30 @@ console.log(isIterable(new Map()));
 console.log(isIterable(new Set()));
 console.log(isIterable(new WeakMap()));
 console.log(isIterable(new WeakSet()));
+
+//创建可迭代对象
+let collections = {
+        items: [],
+        *[Symbol.iterator]() {
+            for (let item of this.items) {
+                yield item;
+            }
+        }
+    }
+    //等价于
+let collection = {
+    items: [],
+    [Symbol.iterator]: function*() {
+        for (let item of this.items) {
+            yield item;
+        }
+    }
+}
+collections.items.push(1);
+collections.items.push(2);
+collections.items.push(3);
+for (let x of collections) {
+    console.log(x);
+}
+
+//内建迭代器
