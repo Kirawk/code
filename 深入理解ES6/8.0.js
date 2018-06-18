@@ -111,3 +111,7 @@ for (let x of collections) {
 }
 
 //内建迭代器
+//enteries迭代器
+let colors = ["red", "green", "blue"];
+let tracking = new Set([1234, 5678, 9012]);
+let data = new Map();
