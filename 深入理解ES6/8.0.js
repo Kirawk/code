@@ -124,6 +124,23 @@ for (let entry of colors.entries()) {
 for (let entry of tracking.entries()) {
     console.log(entry);
 }
-for (let entry of data.entries) {
+for (let entry of data.entries()) {
     console.log(entry);
+}
+
+//values迭代器
+let colors = ["red", "green", "blue"];
+let tracking = new Set([1234, 5678, 9012]);
+let data = new Map();
+data.set("title", "es6");
+data.set("format", "ebook");
+
+for (let value of colors.values()) {
+    console.log(value);
+}
+for (let value of tracking.values()) {
+    console.log(value);
+}
+for (let value of data.values()) {
+    console.log(value);
 }
