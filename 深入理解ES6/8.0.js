@@ -144,3 +144,19 @@ for (let value of tracking.values()) {
 for (let value of data.values()) {
     console.log(value);
 }
+//keys（）迭代器
+let colors = ["red", "green", "blue"];
+let tracking = new Set([1234, 5678, 9012]);
+let data = new Map();
+data.set("title", "es6");
+data.set("format", "ebook");
+
+for (let key of colors.keys()) {
+    console.log(key);
+}
+for (let key of tracking.keys()) {
+    console.log(key);
+}
+for (let key of data.keys()) {
+    console.log(value);
+}
