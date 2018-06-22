@@ -160,3 +160,8 @@ for (let key of tracking.keys()) {
 for (let key of data.keys()) {
     console.log(value);
 }
+//字符串迭代器
+var message = "A 吉 B";
+for (var i = 0; i < message.length; i++) {
+    console.log(message[i]);
+}
