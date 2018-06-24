@@ -165,3 +165,15 @@ var message = "A 吉 B";
 for (var i = 0; i < message.length; i++) {
     console.log(message[i]);
 }
+
+var message = "A 吉 B";
+for (let c of message) {
+    console.log(c);
+}
+//A
+//(空)
+//吉
+//(空)
+//B
+
+//NodeList迭代器
