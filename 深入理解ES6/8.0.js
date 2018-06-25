@@ -177,3 +177,7 @@ for (let c of message) {
 //B
 
 //NodeList迭代器
+var divs = document.getElementsByTagName("div");
+for (let div of divs) {
+    console.log(div.id);
+}
