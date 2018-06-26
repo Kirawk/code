@@ -181,3 +181,8 @@ var divs = document.getElementsByTagName("div");
 for (let div of divs) {
     console.log(div.id);
 }
+
+//展开运算符
+let set = new Set([1, 2, 3, 4, 2, 5]);
+arry = [...set];
+console.log(arry); //
