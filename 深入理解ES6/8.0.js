@@ -186,3 +186,18 @@ for (let div of divs) {
 let set = new Set([1, 2, 3, 4, 2, 5]);
 arry = [...set];
 console.log(arry); //
+
+let map = new Map([
+    ["name", "Nicholas"],
+    ["age", 25]
+]);
+arry = [...map];
+console.log(arry);
+
+let smallNumbers = [1, 2, 3],
+    bigNumber = [100, 101, 102],
+    allNumber = [0, ...smallNumbers, ...bigNumber];
+console.log(allNumber.length); //7
+console.log(allNumber);
+
+//高级迭代器功能
