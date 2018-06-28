@@ -201,3 +201,13 @@ console.log(allNumber.length); //7
 console.log(allNumber);
 
 //高级迭代器功能
+function* createIterator() {
+    let first = yield 1;
+    let second = yield first + 2;
+    yield second + 3;
+}
+let iterator = createIterator();
+console.log(iterator.next());
+console.log(iterator.next(4));
+console.log(iterator.next(5));
+console.log(iterator.next());
