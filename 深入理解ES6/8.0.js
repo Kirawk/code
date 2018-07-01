@@ -222,3 +222,89 @@ console.log(iterator.next());
 console.log(iterator.next(4));
 console.log(iterator.throw(new Error("boom")));
 console.log(iterator.next());
+
+function* createIterator() {
+    let first = yield 1;
+    let second;
+    try {
+        second = yield first + 2;
+    } catch (ex) {
+        second = 6;
+    }
+    yield second + 3;
+}
+let iterator = createIterator();
+console.log(iterator.next());
+console.log(iterator.next(4));
+console.log(iterator.throw(new Error("Boom")));
+console.log(iterator.next());
+
+//生成器返回语句
+function* createIterator() {
+    yield 1;
+    return;
+    yield 2;
+    yield 3;
+}
+let iterator = createIterator();
+
+function* createIterator() {
+    yield 1;
+    return 42;
+}
+let iterator = createIterator();
+console.log(iterator.next()); //{value:1,done:false}
+console.log(iterator.next()); //{value:42,done:true}
+console.log(iterator.next()); //{value:undefined,done:true}
+
+//委托生成器
+function* createNumberIterator() {
+    yield 1;
+    yield 2;
+}
+
+function* createColorIterator() {
+    yield "red";
+    yield "green";
+}
+
+function* createCombinedIterator() {
+    yield* createNumberIterator();
+    yield* createColorIterator();
+    yield true;
+}
+var iterator = createCombinedIterator();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+function* createNumberIterator() {
+    yield 1;
+    yield 2;
+    return 3;
+}
+
+function* createRepeatingIterator(count) {
+    for (let i = 0; i < count; i++) {
+        yield "repeat";
+    }
+}
+
+function* createCombinedIterator() {
+    let result = yield* createNumberIterator();
+    //yiled result;
+    yield* createRepeatingIterator(result);
+}
+var iterator = createCombinedIterator();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+/**
+ * 异步任务执行
+ */
