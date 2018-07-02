@@ -308,3 +308,11 @@ console.log(iterator.next());
 /**
  * 异步任务执行
  */
+let fs = require('fs');
+fs.readFile("config.json", function(err, contents) {
+    if (err) {
+        throw err;
+    }
+    dosomething(contents);
+    console.log("Done");
+})
