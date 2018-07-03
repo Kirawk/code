@@ -316,3 +316,19 @@ fs.readFile("config.json", function(err, contents) {
     dosomething(contents);
     console.log("Done");
 })
+
+//简单任务执行器
+function run(taskDef) {
+    let task = taskDef();
+    //开始执行任务
+    let result = task.next();
+    //循环调用next（）的函数
+    function step() {
+        if (!result.done) {
+            result = task.next();
+            step();
+        }
+
+    }
+    step();
+}
