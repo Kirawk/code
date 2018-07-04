@@ -332,3 +332,83 @@ function run(taskDef) {
     }
     step();
 }
+run(function*() {
+    console.log(1);
+    yield;
+    console.log(2);
+    yield;
+    console.log(3);
+})
+
+//向任务执行器传递数据
+function run(taskDef) {
+    let task = taskDef();
+    let result = task.next();
+
+    function step() {
+        if (!result.done) {
+            result = task.next();
+            step();
+        }
+    }
+    step();
+}
+
+run(function*() {
+    let value = yield 1;
+    console.log(value);
+    value = yield value + 3;
+    console.log(value);
+});
+
+//异步任务执行器
+function fetchDate() {
+    return function(callback) {
+        callback(null, "Hi!");
+    }
+}
+
+function fetchDate() {
+    return function(callback) {
+        setTimeout(() => {
+            callback(null, "Hi!");
+        }, 50);
+    }
+}
+//改写任务执行器
+function run(tashDef) {
+    let task = taskDef();
+    let result = task.next();
+
+    function step() {
+        if (!result.done) {
+            if (typeof result.value === "function") {
+                result.value(function(err, data) {
+                    if (err) {
+                        result = task.throw(err);
+                        return;
+                    }
+                    result = task.next(data);
+                    step();
+                })
+            } else {
+                result = task.next(result.value);
+                step();
+            }
+        }
+    }
+}
+
+let fs = require('fs');
+
+function readFile(filename) {
+    return function(callback) {
+        fs.readFile(filename, callback);
+    };
+}
+
+run(function*() {
+    let contents = yield readFile("config.json");
+    doSomething(contents);
+    consolelog("Done!");
+})
