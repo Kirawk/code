@@ -12,3 +12,15 @@ var person = new Person("wukai");
 person.sayName();
 console.log(person instanceof Person);
 console.log(person instanceof Object);
+
+//类的声明
+class PersonClass {
+    constructor(name) {
+        this.name = name;
+    }
+    sayName() {
+        console.log(this.name);
+    }
+}
+let person = new PersonClass("wukai");
+peroson.sayName();
