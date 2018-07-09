@@ -24,3 +24,7 @@ class PersonClass {
 }
 let person = new PersonClass("wukai");
 peroson.sayName();
+console.log(person instanceof PersonClass) //true
+console.log(person instanceof Object); //true
+console.log(typeof PersonClass); //"function"
+console.log(typeof PersonClass.prototype.sayName); //"function"
