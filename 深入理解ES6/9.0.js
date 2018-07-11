@@ -28,3 +28,79 @@ console.log(person instanceof PersonClass) //true
 console.log(person instanceof Object); //true
 console.log(typeof PersonClass); //"function"
 console.log(typeof PersonClass.prototype.sayName); //"function"
+
+//等价于下面代码
+let personType2 = (function() {
+    "use strict";
+    const PersonType2 = function(name) {
+        if (typeof new.target === "undefined") {
+            throw new Error("必须通过关键字new调用构造函数")
+        }
+        this.name = name;
+    }
+    Object.defineProperty(PersonType2.prototype, "sayName", {
+        value: function() {
+            if (typeof new.target !== "undefined") {
+                throw new Error("不可以使用关键字new调用该方法");
+            }
+            console.log(this.name);
+        },
+        enumerable: false,
+        writable: true,
+        configurable: true
+    });
+    return PersonType2;
+}());
+
+//类表达式
+let PersonClass = class {
+    constructor(name) {
+        this.name = name;
+    }
+    sayName() {
+        console.log(this.name);
+    }
+};
+let person = new PersonClass("wk");
+person.sayName(); //wk
+console.log(person instanceof PersonClass); //true
+console.log(person instanceof Object) //true
+
+console.log(typeof PersonClass); //"function"
+console.log(typeof PersonClass.prototype.sayName); //"function"
+
+//命名类表达式
+let PeronClass = class PersonClass2 {
+    constructor(name) {
+        this.name = name;
+    }
+    sayName() {
+        console.log(this.name);
+    }
+};
+console.log(typeof PeronClass); //"function"
+console.log(typeof PersonClass2); //"undefined"
+
+//等价于命名类表达式
+let PersonClass = (function() {
+    'use strict';
+    const PersonClass2 = function(name) {
+        if (typeof new.target === "undefined") {
+            throw new Error("必须通过关键字new调用构造函数");
+        }
+        this.name = name;
+    }
+    Object.defineProperty(PersonClass2.prototype, "sayName", {
+        value: function() {
+            if (typeof new.target !== "undefined") {
+                throw new Error("必须通过关键字new调用构造函数");
+            }
+            console.log(this.name);
+        },
+        enumerable: false,
+        writable: true,
+        configurable: true
+    });
+    return PersonClass2;
+
+}());
