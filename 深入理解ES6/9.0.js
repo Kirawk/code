@@ -104,3 +104,14 @@ let PersonClass = (function() {
     return PersonClass2;
 
 }());
+
+//作为一等公民的类
+function createObject(classDef) {
+    return new classDef();
+}
+let obj = createObject(class {
+    sayHi() {
+        console.log("Hi!");
+    }
+});
+obj.sayHi();
