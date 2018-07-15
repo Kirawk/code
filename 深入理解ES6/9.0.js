@@ -115,3 +115,13 @@ let obj = createObject(class {
     }
 });
 obj.sayHi();
+
+let person = new class {
+    construction(name) {
+        this.name = name;
+    }
+    sayName() {
+        console.log(this.name);
+    }
+}("Nicholas");
+peoson.sayName();
