@@ -125,3 +125,16 @@ let person = new class {
     }
 }("Nicholas");
 peoson.sayName();
+
+//访问器属性
+class CustomHTMLElement {
+    constructor(element) {
+        this.element = element;
+    }
+    get html() {
+        return this.element.innerHTML;
+    }
+    set html(value) {
+        this.element.innerHTML = value;
+    }
+}
