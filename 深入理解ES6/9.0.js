@@ -138,3 +138,26 @@ class CustomHTMLElement {
         this.element.innerHTML = value;
     }
 }
+
+//等价于上一个示例
+let CustomHTMLElement = (function() {
+
+    'use strict';
+    const CustomHTMLElement = function(element) {
+        if (typeof new.target === "undefined") {
+            throw new Error("必须通过new关键字调用构造函数");
+        }
+        this.element = element;
+    }
+    Object.defineProperty(CustomHTMLElement.prototype, "html", {
+        enumerable: false,
+        configurable: true,
+        get: function() {
+            return this.element.innerHTML;
+        },
+        set: function(element) {
+            this.element.innerHTML = value;
+        }
+    });
+    return CustomHTMLElement;
+}());
