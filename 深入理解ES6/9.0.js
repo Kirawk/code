@@ -161,3 +161,18 @@ let CustomHTMLElement = (function() {
     });
     return CustomHTMLElement;
 }());
+
+/**
+ * 可计算成员名称
+ */
+let methodName = "sayName";
+class PersonClass {
+    constructor(name) {
+            this.name = name;
+        }
+        [methodName]() {
+            console.log(this.name);
+        }
+};
+let me = new PeronClass("Nicholas");
+me.sayName();
