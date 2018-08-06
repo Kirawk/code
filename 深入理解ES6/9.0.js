@@ -189,3 +189,15 @@ class CustomHTMLElement {
         this.element.innerHTML = value;
     }
 }
+
+//生成器方法
+class Myclass { *
+    createIterator() {
+
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+}
+let instance = new Myclass();
+let iterator = instance.createIterator();
