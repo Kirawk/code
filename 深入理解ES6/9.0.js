@@ -201,3 +201,18 @@ class Myclass { *
 }
 let instance = new Myclass();
 let iterator = instance.createIterator();
+
+class Collection {
+    constructor() {
+        this.items = [];
+    } * [Symbol.iterator]() {
+        yield* this.items.values();
+    }
+}
+var collection = new Collection();
+collection.items.push(1);
+conllection.items.push(2);
+conllection.items.push(3);
+for (let x of collection) {
+    console.log(x);
+}
