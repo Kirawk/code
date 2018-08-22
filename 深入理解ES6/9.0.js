@@ -216,3 +216,19 @@ conllection.items.push(3);
 for (let x of collection) {
     console.log(x);
 }
+
+//静态成员
+function PersonType(name) {
+    this.name = name;
+}
+//静态方法
+PersonType.create = function(name) {
+    return new PersonType(name);
+}
+
+//实例方发
+PersonType.prototype.sayName = function() {
+    console.log(this.name);
+}
+
+var person = PersonType.create("wukai");
